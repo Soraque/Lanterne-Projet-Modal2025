@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://byw2g851srwgo" path="res://scripts/lvl.gd" id="1_vqknd"]
 [ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="2_0k3uw"]
 [ext_resource type="PackedScene" uid="uid://d12orr23b0dpt" path="res://scenes/player.tscn" id="2_ljibk"]
+[ext_resource type="PackedScene" uid="uid://bong1qn8o3kk8" path="res://scenes/lanterne.tscn" id="4_w245d"]
+[ext_resource type="PackedScene" uid="uid://bryg1hif3f1sx" path="res://scenes/campfire.tscn" id="5_h0c7m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
 texture = ExtResource("2_0k3uw")
@@ -130,7 +132,7 @@ sources/0 = SubResource("TileSetAtlasSource_ljibk")
 script = ExtResource("1_vqknd")
 
 [node name="player" parent="." unique_id=1012986859 instance=ExtResource("2_ljibk")]
-position = Vector2(14, 0)
+position = Vector2(15, 1)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=202274615]
 tile_set = SubResource("TileSet_s2dgo")
@@ -139,3 +141,10 @@ layer_0/tile_data = PackedInt32Array(196604, 131072, 2, 196605, 131072, 2, 19660
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=9725013]
 color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+
+[node name="lanterne" parent="." unique_id=1652586517 instance=ExtResource("4_w245d")]
+position = Vector2(66, -127)
+
+[node name="Campfire" parent="." unique_id=617779468 instance=ExtResource("5_h0c7m")]
+position = Vector2(-245, -29.999998)
+scale = Vector2(2.605, 2.605)

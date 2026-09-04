@@ -1,29 +1,51 @@
 [gd_scene format=3 uid="uid://bong1qn8o3kk8"]
 
-[ext_resource type="Texture2D" uid="uid://euam7k4lqxta" path="res://assets/lanterne/sprite-no-bg-980x980(2).png" id="1_3do4g"]
+[ext_resource type="Script" uid="uid://cg2hc42ewlvif" path="res://scripts/lanterne.gd" id="1_kto68"]
+[ext_resource type="Texture2D" uid="uid://dk7ridg3n104x" path="res://assets/lanterne/sprite-pixel-art.png" id="2_kto68"]
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="3_kto68"]
+
+[sub_resource type="Curve" id="Curve_kto68"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6296296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_s2dgo"]
+colors = PackedColorArray(0.23921569, 0.12941177, 0.15686275, 1, 0.9843137, 0.42745098, 0.14117648, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
-
-[sub_resource type="Gradient" id="Gradient_3do4g"]
-offsets = PackedFloat32Array(0.12349398, 0.63554215)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_kto68"]
-gradient = SubResource("Gradient_3do4g")
-fill = 1
-fill_from = Vector2(0.5, 0.51086956)
+radius = 4.0
+height = 14.0
 
 [node name="lanterne" type="RigidBody2D" unique_id=1652586517]
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_kto68")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749460890]
 modulate = Color(1, 0.6862745, 1, 1)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_3do4g")
+texture = ExtResource("2_kto68")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=237163542]
+[node name="player_light" parent="." unique_id=656477510 instance=ExtResource("3_kto68")]
+position = Vector2(0, -10)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1613387428]
+emitting = false
+amount = 10
+lifetime = 1.73
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_kto68")
+color_ramp = SubResource("Gradient_s2dgo")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=773809846]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=237163542]
 shape = SubResource("CapsuleShape2D_s2dgo")
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=761940775]
-position = Vector2(0, 0.5)
-scale = Vector2(1, 1.015625)
-texture = SubResource("GradientTexture2D_kto68")
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

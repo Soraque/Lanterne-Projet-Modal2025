@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c5l1h0x57sh6g"]
+
+[ext_resource type="Script" uid="uid://cox2y7unq0b5o" path="res://scripts/player_light.gd" id="1_ah2g6"]
+
+[sub_resource type="Gradient" id="Gradient_w245d"]
+offsets = PackedFloat32Array(0, 0.9879518)
+colors = PackedColorArray(0.9518072, 0.9518072, 0.9518072, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o6ufw"]
+gradient = SubResource("Gradient_w245d")
+fill = 1
+fill_from = Vector2(0.5, 0.49130434)
+fill_to = Vector2(0.19565217, 0.92608696)
+
+[node name="Fire_light" type="PointLight2D" unique_id=656477510]
+color = Color(1, 0.94509804, 0.19215687, 1)
+energy = 1.6
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_o6ufw")
+texture_scale = 4.75
+script = ExtResource("1_ah2g6")
