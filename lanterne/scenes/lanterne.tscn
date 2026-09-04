@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bong1qn8o3kk8"]
 
 [ext_resource type="Texture2D" uid="uid://euam7k4lqxta" path="res://assets/lanterne/sprite-no-bg-980x980(2).png" id="1_3do4g"]
+[ext_resource type="Script" uid="uid://cox2y7unq0b5o" path="res://scripts/player_light.gd" id="2_7yjj4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
 
@@ -12,6 +13,16 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_3do4g")
 fill = 1
 fill_from = Vector2(0.5, 0.51086956)
+
+[sub_resource type="Gradient" id="Gradient_w245d"]
+offsets = PackedFloat32Array(0, 0.9879518)
+colors = PackedColorArray(0.9518072, 0.9518072, 0.9518072, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o6ufw"]
+gradient = SubResource("Gradient_w245d")
+fill = 1
+fill_from = Vector2(0.5, 0.49130434)
+fill_to = Vector2(0.19565217, 0.92608696)
 
 [node name="lanterne" type="RigidBody2D" unique_id=1652586517]
 
@@ -27,3 +38,11 @@ shape = SubResource("CapsuleShape2D_s2dgo")
 position = Vector2(0, 0.5)
 scale = Vector2(1, 1.015625)
 texture = SubResource("GradientTexture2D_kto68")
+
+[node name="player_light" type="PointLight2D" parent="." unique_id=176367596]
+position = Vector2(0, -10)
+color = Color(0.9372549, 0.85882354, 0.24313726, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_o6ufw")
+texture_scale = 8.02
+script = ExtResource("2_7yjj4")
