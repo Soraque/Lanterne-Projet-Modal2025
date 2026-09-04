@@ -356,7 +356,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
-height = 34.0
+height = 32.0
 
 [node name="player" type="CharacterBody2D" unique_id=1012986859]
 script = ExtResource("1_g2els")

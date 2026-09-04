@@ -6,7 +6,7 @@ extends RigidBody2D
 var isLit := true
 var is_destroying := false
 
-func destroy() -> void:
+func destroy(body: Node2D) -> void:
 	$Sprite2D.hide()
 	if is_destroying: return
 	is_destroying = true
@@ -22,4 +22,4 @@ func destroy() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		return
-	if not is_destroying: destroy()
+	if not is_destroying: destroy(body)
