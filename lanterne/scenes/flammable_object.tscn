@@ -1,18 +1,6 @@
 [gd_scene format=3 uid="uid://daja0n8kndgk"]
 
 [ext_resource type="Script" uid="uid://cbbl2x678u32u" path="res://scripts/flammable_object.gd" id="1_auaby"]
-[ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="1_gnt03"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
-size = Vector2(8, 32)
-
-[node name="flammable object" type="StaticBody2D" unique_id=1436862721]
+[node name="flammable_object" type="StaticBody2D" unique_id=1436862721]
 script = ExtResource("1_auaby")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1753517842]
-texture = ExtResource("1_gnt03")
-region_enabled = true
-region_rect = Rect2(348, 144, 8, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=667303257]
-shape = SubResource("RectangleShape2D_s2dgo")

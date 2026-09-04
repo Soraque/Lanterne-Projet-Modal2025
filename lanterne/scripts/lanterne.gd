@@ -1,12 +1,15 @@
 extends RigidBody2D
 
-@onready var point_light_2d: PointLight2D = $PointLight2D
+@onready var player_light: PointLight2D = $player_light
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 
 var isLit := true
 var is_destroying := false
 
 func destroy(body: Node2D) -> void:
+	if body is FlammableObject:
+		body.embrase()
+	
 	$Sprite2D.hide()
 	if is_destroying: return
 	is_destroying = true

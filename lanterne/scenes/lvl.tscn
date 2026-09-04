@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d12orr23b0dpt" path="res://scenes/player.tscn" id="2_ljibk"]
 [ext_resource type="PackedScene" uid="uid://bong1qn8o3kk8" path="res://scenes/lanterne.tscn" id="4_w245d"]
 [ext_resource type="PackedScene" uid="uid://bryg1hif3f1sx" path="res://scenes/campfire.tscn" id="5_h0c7m"]
+[ext_resource type="PackedScene" uid="uid://dg30b2fr88sfm" path="res://scenes/porte.tscn" id="6_nuvjs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
 texture = ExtResource("2_0k3uw")
@@ -148,3 +149,6 @@ position = Vector2(66, -127)
 [node name="Campfire" parent="." unique_id=617779468 instance=ExtResource("5_h0c7m")]
 position = Vector2(-245, -29.999998)
 scale = Vector2(2.605, 2.605)
+
+[node name="porte" parent="." unique_id=749672723 instance=ExtResource("6_nuvjs")]
+position = Vector2(67, -61)
