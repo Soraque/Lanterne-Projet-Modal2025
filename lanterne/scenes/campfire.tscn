@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bryg1hif3f1sx"]
+
+[ext_resource type="Script" uid="uid://cgx5gtrsvl1i7" path="res://scripts/campfire.gd" id="1_1v5ef"]
+[ext_resource type="Texture2D" uid="uid://qcrp1kst7n33" path="res://assets/campfire/campfire-faded_1.png" id="1_yfrnb"]
+[ext_resource type="Texture2D" uid="uid://ra7j3fls1jf" path="res://assets/campfire/campfire-faded_2.png" id="2_8pk5p"]
+[ext_resource type="Texture2D" uid="uid://b7lgrdxc4favn" path="res://assets/campfire/campfire-faded_3.png" id="3_m6xh0"]
+[ext_resource type="Texture2D" uid="uid://dbcdtm72514vk" path="res://assets/campfire/campfire-without-fire.png" id="4_8pk5p"]
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="5_m6xh0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m47ar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yfrnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8pk5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_m6xh0")
+}],
+"loop": 1,
+"name": &"Fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8pk5p")
+}],
+"loop": 1,
+"name": &"No fire",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_m6xh0"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1v5ef"]
+gradient = SubResource("Gradient_m6xh0")
+width = 2
+height = 2
+fill = 1
+fill_from = Vector2(0.5, 0.50869566)
+fill_to = Vector2(0, 1)
+
+[node name="Campfire" type="Node2D" unique_id=617779468]
+script = ExtResource("1_1v5ef")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1893489764]
+sprite_frames = SubResource("SpriteFrames_m47ar")
+animation = &"Fire"
+frame_progress = 0.72893625
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=489164490]
+position = Vector2(-1, 23)
+amount = 4
+texture = SubResource("GradientTexture2D_1v5ef")
+lifetime = 0.65
+randomness = 0.43
+emission_shape = 2
+emission_sphere_radius = 3.53
+direction = Vector2(0, -0.93)
+spread = 49.65
+gravity = Vector2(0, -10.435)
+initial_velocity_min = 29.7
+initial_velocity_max = 39.6
+color = Color(0.1882353, 0.1882353, 0.1882353, 0.5647059)
+
+[node name="player_light" parent="CPUParticles2D" unique_id=656477510 instance=ExtResource("5_m6xh0")]
+position = Vector2(1, 0)
+color = Color(1, 0.52156866, 0.19215687, 1)

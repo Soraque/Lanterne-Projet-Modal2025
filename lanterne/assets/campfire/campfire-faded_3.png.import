@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjfkfnw3qee2f"
-path="res://.godot/imported/sprite-no-bg-980x980(2).png-e07fc50726725fac7e48c9ec5869fc87.ctex"
+uid="uid://b7lgrdxc4favn"
+path="res://.godot/imported/campfire-faded_3.png-85a83c93299b9b9629eb9dfbd136c2ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/lanterne/sprite-no-bg-980x980(2).png"
-dest_files=["res://.godot/imported/sprite-no-bg-980x980(2).png-e07fc50726725fac7e48c9ec5869fc87.ctex"]
+source_file="res://assets/campfire/campfire-faded_3.png"
+dest_files=["res://.godot/imported/campfire-faded_3.png-85a83c93299b9b9629eb9dfbd136c2ca.ctex"]
 
 [params]
 

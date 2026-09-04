@@ -1,18 +1,8 @@
 [gd_scene format=3 uid="uid://bong1qn8o3kk8"]
 
 [ext_resource type="Script" uid="uid://cg2hc42ewlvif" path="res://scripts/lanterne.gd" id="1_kto68"]
-[ext_resource type="Script" uid="uid://cox2y7unq0b5o" path="res://scripts/player_light.gd" id="2_7yjj4"]
 [ext_resource type="Texture2D" uid="uid://dk7ridg3n104x" path="res://assets/lanterne/sprite-pixel-art.png" id="2_kto68"]
-
-[sub_resource type="Gradient" id="Gradient_w245d"]
-offsets = PackedFloat32Array(0, 0.9879518)
-colors = PackedColorArray(0.9518072, 0.9518072, 0.9518072, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_o6ufw"]
-gradient = SubResource("Gradient_w245d")
-fill = 1
-fill_from = Vector2(0.5, 0.49130434)
-fill_to = Vector2(0.19565217, 0.92608696)
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="3_kto68"]
 
 [sub_resource type="Curve" id="Curve_kto68"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6296296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -34,14 +24,8 @@ script = ExtResource("1_kto68")
 modulate = Color(1, 0.6862745, 1, 1)
 texture = ExtResource("2_kto68")
 
-[node name="player_light" type="PointLight2D" parent="." unique_id=176367596]
+[node name="player_light" parent="." unique_id=656477510 instance=ExtResource("3_kto68")]
 position = Vector2(0, -10)
-color = Color(1, 0.94509804, 0.19215687, 1)
-energy = 1.6
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_o6ufw")
-texture_scale = 8.02
-script = ExtResource("2_7yjj4")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1613387428]
 emitting = false
