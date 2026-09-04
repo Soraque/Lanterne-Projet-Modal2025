@@ -441,7 +441,7 @@ animation = &"run"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932072989]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 

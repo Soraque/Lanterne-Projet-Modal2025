@@ -12,6 +12,7 @@ func destroy(body: Node2D) -> void:
 	if body is FlammableObject:
 		body.embrase()
 	
+	player_light.enabled = false
 	$Sprite2D.hide()
 	if is_destroying: return
 	is_destroying = true
