@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cnbcvij17js7e"]
+
+[ext_resource type="Script" uid="uid://byw2g851srwgo" path="res://scripts/lvl.gd" id="1_vqknd"]
+
+[node name="lvl" type="Node2D" unique_id=19222889]
+script = ExtResource("1_vqknd")
