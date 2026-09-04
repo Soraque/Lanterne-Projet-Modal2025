@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var camera_2d: Camera2D = $Camera2D
 
 const SPEED = 400.0
-const JUMP_VELOCITY = -600.0
+const JUMP_VELOCITY = -500.0
 const ACCELERATION = 6000.0
 const FRICTION = 13000.0
 const AIR_CONTROL = 7000.0
@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite.play("run")
 	else:
-		if velocity.y < 0:
+		if velocity.y <= 0:
 			animated_sprite.play("jump")
 		else:
 			# Empêche de relancer "fall" si on est déjà en "fall" ou "chute longue"
