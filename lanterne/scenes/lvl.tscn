@@ -146,5 +146,5 @@ color = Color(0.038397167, 0.038397167, 0.03839716, 1)
 position = Vector2(66, -127)
 
 [node name="Campfire" parent="." unique_id=617779468 instance=ExtResource("5_h0c7m")]
-position = Vector2(-245, -29.999998)
-scale = Vector2(2.605, 2.605)
+position = Vector2(-245.16, -17.47)
+scale = Vector2(2.06, 2.06)

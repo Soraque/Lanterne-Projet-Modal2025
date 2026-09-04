@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@onready var point_light_2d: PointLight2D = $PointLight2D
+@onready var point_light_2d: PointLight2D = $player_light
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 
 var isLit := true
