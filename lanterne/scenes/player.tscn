@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://lr0kynsde3j1" path="res://assets/character/male_hero-fall.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://b1kbhwcjee2nj" path="res://assets/character/male_hero-jump.png" id="5_smehm"]
 [ext_resource type="PackedScene" uid="uid://bong1qn8o3kk8" path="res://scenes/lanterne.tscn" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://cox2y7unq0b5o" path="res://scripts/player_light.gd" id="8_smehm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
 atlas = ExtResource("2_tuyoq")
@@ -282,6 +283,16 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
 height = 34.0
 
+[sub_resource type="Gradient" id="Gradient_w245d"]
+offsets = PackedFloat32Array(0, 0.9879518)
+colors = PackedColorArray(0.9518072, 0.9518072, 0.9518072, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ur7pv"]
+gradient = SubResource("Gradient_w245d")
+fill = 1
+fill_from = Vector2(0.5, 0.49130434)
+fill_to = Vector2(0.19565217, 0.92608696)
+
 [node name="player" type="CharacterBody2D" unique_id=1012986859]
 script = ExtResource("1_g2els")
 
@@ -304,5 +315,13 @@ one_shot = true
 
 [node name="lanterne" parent="." unique_id=1652586517 instance=ExtResource("7_fjrip")]
 position = Vector2(32, -5)
+
+[node name="player_light" type="PointLight2D" parent="lanterne" unique_id=203679154]
+position = Vector2(0, -10)
+color = Color(0.9372549, 0.85882354, 0.24313726, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ur7pv")
+texture_scale = 8.02
+script = ExtResource("8_smehm")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

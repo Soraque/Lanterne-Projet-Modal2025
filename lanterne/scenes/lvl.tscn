@@ -3,17 +3,6 @@
 [ext_resource type="Script" uid="uid://byw2g851srwgo" path="res://scripts/lvl.gd" id="1_vqknd"]
 [ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="2_0k3uw"]
 [ext_resource type="PackedScene" uid="uid://d12orr23b0dpt" path="res://scenes/player.tscn" id="2_ljibk"]
-[ext_resource type="Script" uid="uid://cox2y7unq0b5o" path="res://scenes/player_light.gd" id="3_w245d"]
-
-[sub_resource type="Gradient" id="Gradient_w245d"]
-offsets = PackedFloat32Array(0, 0.9879518)
-colors = PackedColorArray(0.9518072, 0.9518072, 0.9518072, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_d78l5"]
-gradient = SubResource("Gradient_w245d")
-fill = 1
-fill_from = Vector2(0.5, 0.49130434)
-fill_to = Vector2(0.19565217, 0.92608696)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
 texture = ExtResource("2_0k3uw")
@@ -141,23 +130,12 @@ sources/0 = SubResource("TileSetAtlasSource_ljibk")
 script = ExtResource("1_vqknd")
 
 [node name="player" parent="." unique_id=1012986859 instance=ExtResource("2_ljibk")]
-
-[node name="player_light" type="PointLight2D" parent="player" unique_id=1951205827]
-position = Vector2(0, -10)
-color = Color(0.9372549, 0.85882354, 0.24313726, 1)
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_d78l5")
-texture_scale = 12.22
-script = ExtResource("3_w245d")
+position = Vector2(14, 0)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=202274615]
 tile_set = SubResource("TileSet_s2dgo")
 format = 2
 layer_0/tile_data = PackedInt32Array(196604, 131072, 2, 196605, 131072, 2, 196606, 131072, 2, 196607, 131072, 2, 131072, 131072, 2, 131073, 131072, 2, 196599, 131072, 2, 196600, 131072, 2, 196601, 131072, 2, 196602, 131072, 2, 196603, 131072, 2, 131074, 131072, 2, 131075, 131072, 2, 131076, 131072, 2, 131077, 131072, 2, 131078, 131072, 2, 131079, 131072, 2, 131080, 131072, 2, 131081, 131072, 2, 131082, 131072, 2, 131083, 131072, 2, 131084, 131072, 2, 131085, 131072, 2, 196598, 131072, 2, 196597, 131072, 2, 196596, 131072, 2, 196595, 131072, 2, 196594, 131072, 2, 196593, 131072, 2, 196592, 131072, 2, 196591, 131072, 2, 196590, 131072, 2, 196589, 131072, 2, 131086, 131072, 2, 131087, 131072, 2, 131088, 131072, 2, 262125, 131072, 3, 262126, 131072, 3, 262127, 131072, 3, 262128, 131072, 3, 262129, 131072, 3, 262130, 131072, 3, 262131, 131072, 3, 262132, 131072, 3, 262133, 131072, 3, 262134, 131072, 3, 262135, 131072, 3, 262136, 131072, 3, 262137, 131072, 3, 262138, 131072, 3, 262139, 131072, 3, 262140, 131072, 3, 262141, 131072, 3, 262142, 131072, 3, 262143, 131072, 3, 196608, 131072, 3, 196609, 131072, 3, 196610, 131072, 3, 196611, 131072, 3, 196612, 131072, 3, 196613, 131072, 3, 196614, 131072, 3, 196615, 131072, 3, 196616, 131072, 3, 196617, 131072, 3, 196618, 131072, 3, 196619, 131072, 3, 196620, 131072, 3, 196621, 131072, 3, 196622, 131072, 3, 196623, 131072, 3, 196624, 131072, 3)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=223293682]
-position = Vector2(4, 2)
-limit_smoothed = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=9725013]
 color = Color(0.038397167, 0.038397167, 0.03839716, 1)
