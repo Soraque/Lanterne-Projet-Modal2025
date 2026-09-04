@@ -152,3 +152,5 @@ scale = Vector2(2.605, 2.605)
 
 [node name="porte" parent="." unique_id=749672723 instance=ExtResource("6_nuvjs")]
 position = Vector2(67, -61)
+
+
