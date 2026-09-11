@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cuwb7x53whj74"]
+
+[ext_resource type="Script" uid="uid://bmapt7p3bt7to" path="res://scripts/flamme.gd" id="1_y0j2j"]
+
+[node name="flamme" type="Area2D" unique_id=2108698432]
+script = ExtResource("1_y0j2j")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
