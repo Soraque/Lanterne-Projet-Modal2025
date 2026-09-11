@@ -3,17 +3,21 @@ extends StaticBody2D
 
 @export var size = 1
 @onready var sprite: Sprite2D = $sprite
-@onready var flamme: Flamme = $Flamme
+@onready var flamme: Node2D = $Flamme
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
 @onready var collision: CollisionShape2D = $collision
-
+@onready var anim: AnimatedSprite2D = $Flamme/anim
 
 
 func embrase() -> void:
-	#s'appelle peut importe l'objet inflammable et fait apparaitre
-	#une flamme récupérable
-	collisionflamme.disabled = false
+	collision.set_deferred("disabled", true)
+	collisionflamme.set_deferred("disabled", false)
+	
+	# Gestion du visuel
 	flamme.visible = true
-	sprite.visible = false
-	collision.disabled = true
-	print("feu")
+	sprite.modulate = Color(0.459, 0.193, 0.115, 1.0)
+	anim.play("allumage")
+
+
+func _on_anim_animation_finished() -> void:
+	if anim.animation == "allumage": anim.play("feu")

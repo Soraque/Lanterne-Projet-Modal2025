@@ -146,7 +146,7 @@ layer_0/tile_data = PackedInt32Array(196604, 131072, 2, 196605, 131072, 2, 19660
 color = Color(1, 0.7154118, 0.60468745, 1)
 
 [node name="lanterne" parent="." unique_id=1652586517 instance=ExtResource("4_w245d")]
-position = Vector2(66, -127)
+position = Vector2(66, -301)
 
 [node name="Campfire" parent="." unique_id=617779468 instance=ExtResource("5_h0c7m")]
 position = Vector2(-157, -29.999998)
