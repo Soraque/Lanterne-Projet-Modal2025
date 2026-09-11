@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dcy5ddbccpikf" path="res://assets/feu/allumage/Group 5 - 2_1.png" id="7_63fia"]
 [ext_resource type="Texture2D" uid="uid://j0gkbulfigeo" path="res://assets/feu/allumage/Group 4 - 2_1.png" id="8_qo6xs"]
 [ext_resource type="Texture2D" uid="uid://5lqcsneuav44" path="res://assets/feu/Group 4 - 2.png" id="9_dum7g"]
+[ext_resource type="Texture2D" uid="uid://cy0rs5rfi34fp" path="res://assets/feu/Group 4 - 1.png" id="10_63fia"]
 [ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_w22ea"]
+[ext_resource type="Texture2D" uid="uid://ifj067msp2nf" path="res://assets/feu/Group 6 - 3.png" id="11_qo6xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
 size = Vector2(8, 26)
@@ -45,6 +47,70 @@ region = Rect2(192, 0, 32, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7c7fq"]
 atlas = ExtResource("9_dum7g")
 region = Rect2(224, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dum7g"]
+atlas = ExtResource("10_63fia")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xloc"]
+atlas = ExtResource("10_63fia")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfj78"]
+atlas = ExtResource("10_63fia")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de7ey"]
+atlas = ExtResource("10_63fia")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmw51"]
+atlas = ExtResource("10_63fia")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnbv2"]
+atlas = ExtResource("10_63fia")
+region = Rect2(160, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhk8t"]
+atlas = ExtResource("10_63fia")
+region = Rect2(192, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nbka"]
+atlas = ExtResource("10_63fia")
+region = Rect2(224, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d1oo"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4srrt"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shrrl"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb0gb"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldq5d"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cy6j"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrddm"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(96, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2pld"]
+atlas = ExtResource("11_qo6xs")
+region = Rect2(112, 0, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a2tin"]
 animations = [{
@@ -96,6 +162,64 @@ animations = [{
 "loop": 1,
 "name": &"feu",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dum7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xloc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfj78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de7ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmw51")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnbv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhk8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nbka")
+}],
+"loop": 1,
+"name": &"feu2",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d1oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4srrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shrrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb0gb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldq5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cy6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrddm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2pld")
+}],
+"loop": 1,
+"name": &"feu3",
+"speed": 10.0
 }]
 
 [node name="porte" type="StaticBody2D" unique_id=749672723]
@@ -123,8 +247,7 @@ light_mask = 2
 position = Vector2(0.9999995, -2)
 scale = Vector2(0.65625, 0.7916666)
 sprite_frames = SubResource("SpriteFrames_a2tin")
-animation = &"allumage"
-autoplay = "feu"
+animation = &"feu3"
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=968661200]
 light_mask = 2
