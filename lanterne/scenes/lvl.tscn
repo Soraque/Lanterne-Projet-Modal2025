@@ -149,7 +149,7 @@ color = Color(1, 0.7154118, 0.60468745, 1)
 position = Vector2(66, -127)
 
 [node name="Campfire" parent="." unique_id=617779468 instance=ExtResource("5_h0c7m")]
-position = Vector2(-245, -29.999998)
+position = Vector2(-157, -29.999998)
 scale = Vector2(2.605, 2.605)
 
 [node name="porte" parent="." unique_id=749672723 instance=ExtResource("6_nuvjs")]
@@ -159,8 +159,15 @@ position = Vector2(67, -61)
 
 [node name="Parallax2D" type="Parallax2D" parent="parallaxe" unique_id=1471772432]
 z_index = -2
-scroll_scale = Vector2(0.02, 0.02)
+scroll_scale = Vector2(0.01, 0.01)
 scroll_offset = Vector2(600, 317)
+
+[node name="Sprite2D2" type="Sprite2D" parent="parallaxe/Parallax2D" unique_id=1156198286]
+position = Vector2(3.8146973e-06, -292)
+scale = Vector2(2.0027778, 2.0027778)
+texture = ExtResource("7_mwg2j")
+region_enabled = true
+region_rect = Rect2(0, 67, 360, 113)
 
 [node name="Sprite2D" type="Sprite2D" parent="parallaxe/Parallax2D" unique_id=544957505]
 scale = Vector2(2, 2)
@@ -168,9 +175,28 @@ texture = ExtResource("7_mwg2j")
 
 [node name="Parallax2D2" type="Parallax2D" parent="parallaxe" unique_id=312675934]
 z_index = -1
-scroll_scale = Vector2(0.2, 0.2)
+scroll_scale = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="parallaxe/Parallax2D2" unique_id=936627760]
-position = Vector2(477, 216)
-scale = Vector2(2, 2)
+position = Vector2(283, 213)
+scale = Vector2(3, 3)
+texture = ExtResource("8_0o530")
+
+[node name="Sprite2D2" type="Sprite2D" parent="parallaxe/Parallax2D2" unique_id=1792315503]
+position = Vector2(1362, 213.00002)
+scale = Vector2(3, 3)
+texture = ExtResource("8_0o530")
+
+[node name="Parallax2D3" type="Parallax2D" parent="parallaxe" unique_id=2035172988]
+z_index = -2
+scroll_scale = Vector2(0.05, 0.05)
+
+[node name="Sprite2D" type="Sprite2D" parent="parallaxe/Parallax2D3" unique_id=1346179075]
+position = Vector2(314, 139)
+scale = Vector2(-2, 2)
+texture = ExtResource("8_0o530")
+
+[node name="Sprite2D2" type="Sprite2D" parent="parallaxe/Parallax2D3" unique_id=638908029]
+position = Vector2(1034, 138)
+scale = Vector2(-2, 2)
 texture = ExtResource("8_0o530")
