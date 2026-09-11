@@ -19,6 +19,7 @@ const DASH_COOLDOWN = 0.35
 var can_dash = true
 var dash_timer := 0.0
 var vitesse_debut = 0
+var looking_direction = 0
 
 # Jump
 var jump_buffer = false
@@ -59,8 +60,6 @@ func _physics_process(delta: float) -> void:
 	# 1. Gestion du Dash en cours
 	if dash_timer > 0.0:
 		dash_timer -= delta
-		var looking_direction := 0 
-		looking_direction = -int(animated_sprite.flip_h)*2+1
 		velocity.x = vitesse_debut + looking_direction * DASH_SPEED
 		
 		if animated_sprite.animation != "dash"+anim_str:
@@ -87,6 +86,7 @@ func _physics_process(delta: float) -> void:
 		can_dash = false
 		dash_timer = DASH_DURATION
 		vitesse_debut = velocity.x
+		looking_direction = -int(animated_sprite.flip_h)*2+1
 		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
 	
