@@ -40,7 +40,7 @@ var invincible_time = 1.0
 var was_on_floor = false
 var was_on_wall = false
 var collision_boost_cooldown = 0.1
-const max_boost_speed = 200
+const max_boost_speed = 500
 var previous_velocity = Vector2(0,0)
 
 func _ready() -> void:
@@ -162,10 +162,12 @@ func _physics_process(delta: float) -> void:
 			var collision = get_slide_collision(i)
 			var normal = collision.get_normal()
 			var tangent = Vector2(-normal.y, normal.x)
+			
+			#A MODIFIERRR !!
 			if ((is_on_wall() and not was_on_wall ) ) and collision_boost_cooldown<=0.0 and tangent.dot(velocity)<0:
-				var boost_speed = max_boost_speed*(1-exp(-abs(normal.dot(previous_velocity))))
+				var boost_speed = max_boost_speed*(abs(normal.dot(previous_velocity)))/DASH_SPEED*(-JUMP_VELOCITY-previous_velocity.y)/JUMP_VELOCITY
 				print(normal.dot(velocity))
-				var collision_boost = -boost_speed/tangent.length()*tangent
+				var collision_boost = boost_speed/tangent.length()*tangent
 				print("collision_boost :", collision_boost)
 				velocity += collision_boost
 				collision_boost_cooldown = 0.1
