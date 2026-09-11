@@ -11,9 +11,10 @@ const FRICTION = 13000.0
 const AIR_CONTROL = 7000.0
 
 # Dash
-const DASH_SPEED = 1500.0
+const DASH_SPEED_H = 1500.0
+const DASH_SPEED_V = 1000.0
 const DASH_DURATION = 0.09
-const DASH_COOLDOWN = 1
+const DASH_COOLDOWN = 0.35
 var dash_timer := 0.0
 
 # Jump
@@ -43,20 +44,24 @@ func jump() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var direction := Input.get_axis("left", "right")
-
+	var direction_h := Input.get_axis("left", "right")
+	var direction_v := Input.get_axis("up", "down")
+	var direction_lancer_h := Input.get_axis("lancer left", "lancer right")
+	var direction_lancer_v := Input.get_axis("lancer up", "lancer down")
+	
 	# 1. Gestion du Dash en cours
 	if dash_timer > 0.0:
 		dash_timer -= delta
-		var looking_direction := -1.0 if animated_sprite.flip_h else 1.0
-		velocity.x = looking_direction * DASH_SPEED
-		velocity.y = 0
+		var looking_direction := Vector2(direction_h,direction_v).normalized()
+		velocity.x = looking_direction.x * DASH_SPEED_H
+		velocity.y = looking_direction.y * DASH_SPEED_V
 		
 		if animated_sprite.animation != "dash":
 			animated_sprite.play("dash")
 		
 		if dash_timer <= 0.0:
-			velocity.x = looking_direction * SPEED
+			velocity.x = looking_direction.x * SPEED
+			velocity.y = looking_direction.y * SPEED
 			
 		move_and_slide()
 		return
@@ -75,35 +80,39 @@ func _physics_process(delta: float) -> void:
 		dash_timer = DASH_DURATION
 		animated_sprite.play("dash")
 		dash_cd_timer.start(DASH_COOLDOWN)
-
-	# 4. Saut & Saut Variable
+	
+	# 4. Lancé de la lanterne
+	
+	
+	
+	# 5. Saut & Saut Variable
 	if Input.is_action_just_pressed("jump"):
 		jump()
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= 0.3
 
-	# 5. Mouvement horizontal
-	if direction != 0:
+	# 6. Mouvement horizontal
+	if direction_h != 0:
 		var accel = ACCELERATION if is_on_floor() else AIR_CONTROL
-		velocity.x = move_toward(velocity.x, direction * SPEED, accel * delta)
+		velocity.x = move_toward(velocity.x, direction_h * SPEED, accel * delta)
 	else:
 		var friction = FRICTION if is_on_floor() else AIR_CONTROL * 0.5
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 
-	# 6. Orientation du Sprite
-	if direction > 0:
+	# 7. Orientation du Sprite
+	if direction_h > 0:
 		animated_sprite.flip_h = false
-	elif direction < 0:
+	elif direction_h < 0:
 		animated_sprite.flip_h = true
 
-	# 7. Animations hors-dash
+	# 8. Animations hors-dash
 	if is_on_floor():
-		if direction == 0:
+		if direction_h == 0:
 			animated_sprite.play("idle")
-		elif abs(direction)<0.4:
-			animated_sprite.play("marche",1.0*abs(direction)/0.4)
+		elif abs(direction_h)<0.4:
+			animated_sprite.play("marche",1.0*abs(direction_h)/0.4)
 		else:
-			animated_sprite.play("run",1.0*abs(direction))
+			animated_sprite.play("run",1.0*abs(direction_h))
 	else:
 		if velocity.y <= 0:
 			animated_sprite.play("jump")
