@@ -141,7 +141,7 @@ func lancer_lanterne():
 	var lanterne = lanterne_scene.instantiate()
 	lanterne.global_position = global_position
 	get_parent().add_child(lanterne)
-	lanterne.lancer(direction_lancer)
+	lanterne.lancer(direction_lancer,velocity)
 
 
 func on_jump_buffer_timeout() -> void:

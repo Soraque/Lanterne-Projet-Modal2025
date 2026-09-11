@@ -139,7 +139,7 @@ script = ExtResource("1_vqknd")
 position = Vector2(15, 1)
 lanterne_scene = ExtResource("4_w245d")
 
-[node name="parallaxe" type="Node" parent="background" unique_id=1737142632]
+[node name="background#parallaxe" type="Node" parent="." unique_id=1737142632]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=9725013]
 color = Color(0.35400283, 0.21943897, 0.19316074, 1)
@@ -150,60 +150,60 @@ position = Vector2(66, -301)
 [node name="Campfire" parent="." unique_id=617779468 instance=ExtResource("5_h0c7m")]
 position = Vector2(-157, -16)
 
-[node name="parallaxe" type="Node" parent="." unique_id=1737142632]
+[node name="parallaxe" type="Node" parent="." unique_id=1804056554]
 
 [node name="Parallax2D" type="Parallax2D" parent="parallaxe" unique_id=1471772432]
 z_index = -2
 scroll_scale = Vector2(0.01, 0.01)
 scroll_offset = Vector2(600, 317)
 
-[node name="Sprite2D2" type="Sprite2D" parent="background/parallaxe/Parallax2D" unique_id=1156198286]
+[node name="background_parallaxe_Parallax2D#Sprite2D2" type="Sprite2D" parent="." unique_id=1156198286]
 position = Vector2(3.8146973e-06, -292)
 scale = Vector2(2.0027778, 2.0027778)
 texture = ExtResource("7_mwg2j")
 region_enabled = true
 region_rect = Rect2(0, 67, 360, 113)
 
-[node name="Sprite2D" type="Sprite2D" parent="background/parallaxe/Parallax2D" unique_id=544957505]
+[node name="background_parallaxe_Parallax2D#Sprite2D" type="Sprite2D" parent="." unique_id=544957505]
 scale = Vector2(2, 2)
 texture = ExtResource("7_mwg2j")
 
-[node name="Parallax2D2" type="Parallax2D" parent="background/parallaxe" unique_id=312675934]
+[node name="background_parallaxe#Parallax2D2" type="Parallax2D" parent="." unique_id=312675934]
 z_index = -1
 scroll_scale = Vector2(0.1, 0.1)
 
-[node name="Sprite2D" type="Sprite2D" parent="background/parallaxe/Parallax2D2" unique_id=936627760]
+[node name="background_parallaxe_Parallax2D2#Sprite2D" type="Sprite2D" parent="." unique_id=936627760]
 position = Vector2(283, 213)
 scale = Vector2(3, 3)
 texture = ExtResource("8_0o530")
 
-[node name="Sprite2D2" type="Sprite2D" parent="background/parallaxe/Parallax2D2" unique_id=1792315503]
+[node name="background_parallaxe_Parallax2D2#Sprite2D2" type="Sprite2D" parent="." unique_id=1792315503]
 position = Vector2(1362, 213.00002)
 scale = Vector2(3, 3)
 texture = ExtResource("8_0o530")
 
-[node name="Parallax2D3" type="Parallax2D" parent="background/parallaxe" unique_id=2035172988]
+[node name="background_parallaxe#Parallax2D3" type="Parallax2D" parent="." unique_id=2035172988]
 z_index = -2
 scroll_scale = Vector2(0.05, 0.05)
 
-[node name="Sprite2D" type="Sprite2D" parent="background/parallaxe/Parallax2D3" unique_id=1346179075]
+[node name="background_parallaxe_Parallax2D3#Sprite2D" type="Sprite2D" parent="." unique_id=1346179075]
 position = Vector2(314, 139)
 scale = Vector2(-2, 2)
 texture = ExtResource("8_0o530")
 
-[node name="Sprite2D2" type="Sprite2D" parent="background/parallaxe/Parallax2D3" unique_id=638908029]
+[node name="background_parallaxe_Parallax2D3#Sprite2D2" type="Sprite2D" parent="." unique_id=638908029]
 position = Vector2(1034, 138)
 scale = Vector2(-2, 2)
 texture = ExtResource("8_0o530")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="background" unique_id=278072720]
+[node name="background#CanvasModulate2" type="CanvasModulate" parent="." unique_id=278072720]
 color = Color(0.5370113, 0.5370113, 0.5370113, 1)
 
 [node name="foreground" type="CanvasLayer" parent="." unique_id=470620068]
 layer = 2
 follow_viewport_enabled = true
 
-[node name="player" parent="foreground" unique_id=1012986859 instance=ExtResource("2_ljibk")]
+[node name="player" parent="foreground" unique_id=787820922 instance=ExtResource("2_ljibk")]
 light_mask = 2
 position = Vector2(15, 1)
 
@@ -213,14 +213,14 @@ tile_set = SubResource("TileSet_s2dgo")
 format = 2
 layer_0/tile_data = PackedInt32Array(196604, 131072, 2, 196605, 131072, 2, 196606, 131072, 2, 196607, 131072, 2, 131072, 131072, 2, 131073, 131072, 2, 196599, 131072, 2, 196600, 131072, 2, 196601, 131072, 2, 196602, 131072, 2, 196603, 131072, 2, 131074, 131072, 2, 131075, 131072, 2, 131076, 131072, 2, 131077, 131072, 2, 131078, 131072, 2, 131079, 131072, 2, 131080, 131072, 2, 131081, 131072, 2, 131082, 131072, 2, 131083, 131072, 2, 131084, 131072, 2, 131085, 131072, 2, 196598, 131072, 2, 196597, 131072, 2, 196596, 131072, 2, 196595, 131072, 2, 196594, 131072, 2, 196593, 131072, 2, 196592, 131072, 2, 196591, 131072, 2, 196590, 131072, 2, 196589, 131072, 2, 131086, 131072, 2, 131087, 131072, 2, 131088, 131072, 2, 262125, 131072, 3, 262126, 131072, 3, 262127, 131072, 3, 262128, 131072, 3, 262129, 131072, 3, 262130, 131072, 3, 262131, 131072, 3, 262132, 131072, 3, 262133, 131072, 3, 262134, 131072, 3, 262135, 131072, 3, 262136, 131072, 3, 262137, 131072, 3, 262138, 131072, 3, 262139, 131072, 3, 262140, 131072, 3, 262141, 131072, 3, 262142, 131072, 3, 262143, 131072, 3, 196608, 131072, 3, 196609, 131072, 3, 196610, 131072, 3, 196611, 131072, 3, 196612, 131072, 3, 196613, 131072, 3, 196614, 131072, 3, 196615, 131072, 3, 196616, 131072, 3, 196617, 131072, 3, 196618, 131072, 3, 196619, 131072, 3, 196620, 131072, 3, 196621, 131072, 3, 196622, 131072, 3, 196623, 131072, 3, 196624, 131072, 3)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="foreground" unique_id=9725013]
+[node name="CanvasModulate" type="CanvasModulate" parent="foreground" unique_id=2067007216]
 color = Color(0.071739964, 0.13601565, 0.19321623, 1)
 
-[node name="lanterne" parent="foreground" unique_id=1652586517 instance=ExtResource("4_w245d")]
+[node name="lanterne" parent="foreground" unique_id=32453562 instance=ExtResource("4_w245d")]
 light_mask = 2
 position = Vector2(66, -301)
 
-[node name="Campfire" parent="foreground" unique_id=617779468 instance=ExtResource("5_h0c7m")]
+[node name="Campfire" parent="foreground" unique_id=269679548 instance=ExtResource("5_h0c7m")]
 light_mask = 2
 position = Vector2(-157, -16)
 
