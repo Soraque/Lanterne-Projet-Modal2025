@@ -83,6 +83,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y *= 0.3
 
 	# 5. Mouvement horizontal
+	print(direction)
 	if direction != 0:
 		var accel = ACCELERATION if is_on_floor() else AIR_CONTROL
 		velocity.x = move_toward(velocity.x, direction * SPEED, accel * delta)
