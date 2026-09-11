@@ -12,8 +12,8 @@ const AIR_CONTROL = 7000.0
 
 # Dash
 const DASH_SPEED = 1500.0
-const DASH_DURATION = 0.14
-const DASH_COOLDOWN = 0.5
+const DASH_DURATION = 0.09
+const DASH_COOLDOWN = 1
 var dash_timer := 0.0
 
 # Jump
@@ -100,8 +100,10 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if direction == 0:
 			animated_sprite.play("idle")
+		elif abs(direction)<0.4:
+			animated_sprite.play("marche",1.0*abs(direction)/0.4)
 		else:
-			animated_sprite.play("run")
+			animated_sprite.play("run",1.0*abs(direction))
 	else:
 		if velocity.y <= 0:
 			animated_sprite.play("jump")
