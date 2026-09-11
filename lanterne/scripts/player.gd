@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cd_timer: Timer = $DashCdTimer
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var lumiere: PointLight2D = $Fire_light
 @export var lanterne_scene: PackedScene
 
 const SPEED = 400.0
@@ -27,6 +28,7 @@ var jbuffertime = 0.1
 @export var is_lanterne = true #est ce que le joueur à la lanterne
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
+var anim_str = "" # Nom des animation avec ou sans lanterne
 
 # Degats
 var isInvincible = false
@@ -61,8 +63,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = looking_direction.x * DASH_SPEED_H
 		velocity.y = looking_direction.y * DASH_SPEED_V
 		
-		if animated_sprite.animation != "dash":
-			animated_sprite.play("dash")
+		if animated_sprite.animation != "dash"+anim_str:
+			animated_sprite.play("dash"+anim_str)
 		
 		if dash_timer <= 0.0:
 			velocity.x = looking_direction.x * SPEED
@@ -83,20 +85,27 @@ func _physics_process(delta: float) -> void:
 	# 3. Déclenchement du Dash
 	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped():
 		dash_timer = DASH_DURATION
-		animated_sprite.play("dash")
+		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
 	
 	# 4. Déclenchement lancer de lanterne
-	
-	if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
-		direction_lancer = input_lancer.normalized()
-		lantern_ready = true
-	elif lantern_ready: # Le joystick vient d'être relâché
-		lancer_lanterne()
-		lantern_ready = false
-		direction_lancer = Vector2.ZERO
+	if is_lanterne:
+		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
+			direction_lancer = input_lancer.normalized()
+			lantern_ready = true
+		elif lantern_ready: # Le joystick vient d'être relâché
+			lancer_lanterne()
+			is_lanterne = false
+			lantern_ready = false
+			direction_lancer = Vector2.ZERO
 
-
+	# 5. Màj des anims sans lanterne
+	if is_lanterne:
+		anim_str = ""
+		lumiere.visible = true
+	else:
+		anim_str = "_sans_lanterne"
+		lumiere.visible = false
 	
 	
 	# 5. Saut & Saut Variable
@@ -120,20 +129,21 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 
 	# 8. Animations hors-dash
+	
 	if is_on_floor() and dash_timer<=0.0:
 		if direction_h == 0:
-			animated_sprite.play("idle")
+			animated_sprite.play("idle"+anim_str)
 		elif abs(direction_h)<0.4:
-			animated_sprite.play("marche",1.0*abs(direction_h)/0.4)
+			animated_sprite.play("marche"+anim_str,1.0*abs(direction_h)/0.4)
 		else:
-			animated_sprite.play("run",1.0*abs(direction_h))
+			animated_sprite.play("run"+anim_str,1.0*abs(direction_h))
 	else:
 		if velocity.y <= 0:
-			animated_sprite.play("jump")
+			animated_sprite.play("jump"+anim_str)
 		else:
 			# Empêche de relancer "fall" si on est déjà en "fall" ou "chute longue"
-			if animated_sprite.animation != "fall" and animated_sprite.animation != "chute longue":
-				animated_sprite.play("fall")
+			if animated_sprite.animation != "fall"+anim_str and animated_sprite.animation != "chute longue":
+				animated_sprite.play("fall"+anim_str)
 
 	move_and_slide()
 
@@ -148,5 +158,5 @@ func on_jump_buffer_timeout() -> void:
 	jump_buffer = false
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite.animation == "fall":
-		animated_sprite.play("chute longue")
+	if animated_sprite.animation == "fall"+anim_str:
+		animated_sprite.play("chute longue"+anim_str)

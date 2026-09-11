@@ -7,7 +7,7 @@ extends RigidBody2D
 
 var isLit := true
 var is_destroying := false
-var force_lancer := 800
+var force_lancer := 600
 
 func lancer(direction: Vector2, vitesse: Vector2):
 	linear_velocity = direction * force_lancer + vitesse
