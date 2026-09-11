@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://jfvrqflgf5wo"]
+
+[ext_resource type="Texture2D" uid="uid://vg0l7sh75ls4" path="res://assets/ennemy/Mushroom_Reg.png" id="1_7waic"]
+[ext_resource type="Script" uid="uid://bcdqm5jsspqls" path="res://scripts/ennemy.gd" id="1_614tr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_614tr"]
+atlas = ExtResource("1_7waic")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsyu2"]
+atlas = ExtResource("1_7waic")
+region = Rect2(224, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4lfa"]
+atlas = ExtResource("1_7waic")
+region = Rect2(256, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_batjq"]
+atlas = ExtResource("1_7waic")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkdl5"]
+atlas = ExtResource("1_7waic")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxvsj"]
+atlas = ExtResource("1_7waic")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40eh0"]
+atlas = ExtResource("1_7waic")
+region = Rect2(224, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s2dgo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_614tr")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsyu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4lfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_batjq")
+}],
+"loop": 0,
+"name": &"dépique",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkdl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxvsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40eh0")
+}],
+"loop": 0,
+"name": &"pique",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2dgo"]
+radius = 62.201286
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_031as"]
+
+[node name="ennemy" type="StaticBody2D" unique_id=396322971]
+script = ExtResource("1_614tr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=479416857]
+position = Vector2(0, -10)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_s2dgo")
+autoplay = "default"
+
+[node name="lumiere" type="Area2D" parent="." unique_id=635032796]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lumiere" unique_id=1542486699]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_s2dgo")
+
+[node name="hitbox" type="Area2D" parent="." unique_id=1374924448]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=271148654]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_031as")
+disabled = true
+
+[connection signal="area_entered" from="lumiere" to="." method="_on_lumiere_area_entered"]
+[connection signal="area_exited" from="lumiere" to="." method="_on_lumiere_area_exited"]

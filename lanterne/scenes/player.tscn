@@ -706,11 +706,14 @@ height = 32.0
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1062298467]
+light_mask = 2
 sprite_frames = SubResource("SpriteFrames_u8vuu")
 animation = &"marche"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932072989]
+light_mask = 3
+visibility_layer = 3
 zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
