@@ -167,9 +167,6 @@ light_mask = 2
 position = Vector2(146, 0)
 scale = Vector2(1, 2)
 
-[node name="lanterne" parent="foreground/Obstacles" unique_id=1652586517 instance=ExtResource("4_w245d")]
-position = Vector2(144, -186)
-
 [node name="background" type="CanvasLayer" parent="." unique_id=1097940760]
 follow_viewport_enabled = true
 
