@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de1my5ctncalx"
-path="res://.godot/imported/male_hero_avec_lanterne - Copie.png-d7be1c5ba3efba3e7aaaa60fbe78361c.ctex"
+uid="uid://dvgyk2lc0gjsg"
+path="res://.godot/imported/male_hero__.png-bfdc5d8557c6960d42129e6b5d56f4cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character/male_hero_avec_lanterne - Copie.png"
-dest_files=["res://.godot/imported/male_hero_avec_lanterne - Copie.png-d7be1c5ba3efba3e7aaaa60fbe78361c.ctex"]
+source_file="res://assets/character/male_hero__.png"
+dest_files=["res://.godot/imported/male_hero__.png-bfdc5d8557c6960d42129e6b5d56f4cb.ctex"]
 
 [params]
 
