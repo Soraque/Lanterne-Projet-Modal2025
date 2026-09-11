@@ -13,11 +13,12 @@ const FRICTION = 13000.0
 const AIR_CONTROL = 7000.0
 
 # Dash
-const DASH_SPEED_H = 1500.0
-const DASH_SPEED_V = 1000.0
+const DASH_SPEED = 1100.0
 const DASH_DURATION = 0.09
 const DASH_COOLDOWN = 0.35
+var can_dash = true
 var dash_timer := 0.0
+var vitesse_debut = 0
 
 # Jump
 var jump_buffer = false
@@ -53,22 +54,20 @@ func jump() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction_h := Input.get_axis("left", "right")
-	var direction_v := Input.get_axis("up", "down")
 	var input_lancer := Input.get_vector("lancer left","lancer right","lancer up","lancer down")
 
 	# 1. Gestion du Dash en cours
 	if dash_timer > 0.0:
 		dash_timer -= delta
-		var looking_direction := Vector2(direction_h,direction_v).normalized()
-		velocity.x = looking_direction.x * DASH_SPEED_H
-		velocity.y = looking_direction.y * DASH_SPEED_V
+		var looking_direction := 0 
+		looking_direction = -int(animated_sprite.flip_h)*2+1
+		velocity.x = vitesse_debut + looking_direction * DASH_SPEED
 		
 		if animated_sprite.animation != "dash"+anim_str:
 			animated_sprite.play("dash"+anim_str)
 		
 		if dash_timer <= 0.0:
-			velocity.x = looking_direction.x * SPEED
-			velocity.y = looking_direction.y * SPEED
+			velocity.x = vitesse_debut
 			
 		move_and_slide()
 		return
@@ -78,13 +77,16 @@ func _physics_process(delta: float) -> void:
 		jump_available = false
 		velocity += get_gravity() * delta
 	else:
+		can_dash = true
 		jump_available = true
 		if jump_buffer:
 			jump()
 
 	# 3. Déclenchement du Dash
-	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped():
+	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
+		can_dash = false
 		dash_timer = DASH_DURATION
+		vitesse_debut = velocity.x
 		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
 	
