@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dcy5ddbccpikf" path="res://assets/feu/allumage/Group 5 - 2_1.png" id="7_63fia"]
 [ext_resource type="Texture2D" uid="uid://j0gkbulfigeo" path="res://assets/feu/allumage/Group 4 - 2_1.png" id="8_qo6xs"]
 [ext_resource type="Texture2D" uid="uid://5lqcsneuav44" path="res://assets/feu/Group 4 - 2.png" id="9_dum7g"]
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_w22ea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
 size = Vector2(8, 26)
@@ -111,6 +112,7 @@ region_enabled = true
 region_rect = Rect2(348, 144, 8, 32)
 
 [node name="Flamme" type="Area2D" parent="." unique_id=349905814]
+visible = false
 script = ExtResource("4_a2tin")
 metadata/_custom_type_script = "uid://bmapt7p3bt7to"
 
@@ -125,5 +127,9 @@ autoplay = "feu"
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_s2dgo")
 disabled = true
+
+[node name="light" parent="Flamme" unique_id=656477510 instance=ExtResource("10_w22ea")]
+position = Vector2(1.0000076, 2.0000076)
+scale = Vector2(1.8026316, 1.8026316)
 
 [connection signal="animation_finished" from="Flamme/anim" to="." method="_on_anim_animation_finished"]

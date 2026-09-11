@@ -151,9 +151,6 @@ position = Vector2(66, -301)
 [node name="Campfire" parent="." unique_id=617779468 instance=ExtResource("5_h0c7m")]
 position = Vector2(-157, -16)
 
-[node name="porte" parent="." unique_id=749672723 instance=ExtResource("6_nuvjs")]
-position = Vector2(67, -61)
-
 [node name="parallaxe" type="Node" parent="." unique_id=1737142632]
 
 [node name="Parallax2D" type="Parallax2D" parent="parallaxe" unique_id=1471772432]
@@ -199,3 +196,8 @@ texture = ExtResource("8_0o530")
 position = Vector2(1034, 138)
 scale = Vector2(-2, 2)
 texture = ExtResource("8_0o530")
+
+[node name="Obstacles" type="Node" parent="." unique_id=1613715365]
+
+[node name="porte" parent="Obstacles" unique_id=749672723 instance=ExtResource("6_nuvjs")]
+position = Vector2(67, -61)
