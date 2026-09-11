@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dg30b2fr88sfm" path="res://scenes/porte.tscn" id="6_nuvjs"]
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="7_mwg2j"]
 [ext_resource type="Texture2D" uid="uid://00rnssqg8td1" path="res://assets/tileset/clouds.png" id="8_0o530"]
+[ext_resource type="PackedScene" uid="uid://jfvrqflgf5wo" path="res://scenes/ennemy.tscn" id="9_s5vkl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
 texture = ExtResource("2_0k3uw")
@@ -201,3 +202,6 @@ texture = ExtResource("8_0o530")
 
 [node name="porte" parent="Obstacles" unique_id=749672723 instance=ExtResource("6_nuvjs")]
 position = Vector2(67, -61)
+
+[node name="ennemy" parent="." unique_id=396322971 instance=ExtResource("9_s5vkl")]
+position = Vector2(225, 10)
