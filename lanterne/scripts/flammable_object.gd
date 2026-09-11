@@ -20,6 +20,7 @@ func embrase() -> void:
 	anim.play("allumage")
 
 
+
 func _on_anim_animation_finished() -> void:
 	if anim.animation == "allumage":
 		_sequence_combustion()
@@ -41,3 +42,9 @@ func _sequence_combustion() -> void:
 	
 	# 4. Destruction du nœud
 	queue_free()
+
+
+func _on_flamme_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		if "is_lanterne" in body:
+			body.is_lanterne = true
