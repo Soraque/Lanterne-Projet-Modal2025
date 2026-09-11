@@ -8,9 +8,11 @@ extends RigidBody2D
 var isLit := true
 var is_destroying := false
 var force_lancer := 600
+var bien_lance = false # true lorsque la lanterne est sortie de l'hitbox du joueur
 
 func lancer(direction: Vector2, vitesse: Vector2):
 	linear_velocity = direction * force_lancer + vitesse
+	bien_lance = false
 
 
 func destroy(body: Node2D) -> void:
@@ -28,9 +30,15 @@ func destroy(body: Node2D) -> void:
 	queue_free()
 
 
-
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
+		if bien_lance:
+			body.is_lanterne = true
+			destroy(body)
 		return
 	if not is_destroying: destroy(body)
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body is CharacterBody2D and not bien_lance:
+		bien_lance = true

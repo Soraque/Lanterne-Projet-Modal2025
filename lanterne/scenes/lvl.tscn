@@ -140,7 +140,7 @@ layer = 2
 follow_viewport_enabled = true
 
 [node name="ennemy" parent="foreground" unique_id=396322971 instance=ExtResource("9_s5vkl")]
-position = Vector2(225, 10)
+position = Vector2(225, 18)
 
 [node name="player" parent="foreground" unique_id=289766074 instance=ExtResource("2_ljibk")]
 light_mask = 2
@@ -164,7 +164,8 @@ position = Vector2(-157, -16)
 
 [node name="porte" parent="foreground/Obstacles" unique_id=749672723 instance=ExtResource("6_nuvjs")]
 light_mask = 2
-position = Vector2(67, -61)
+position = Vector2(146, 0)
+scale = Vector2(1, 2)
 
 [node name="background" type="CanvasLayer" parent="." unique_id=1097940760]
 follow_viewport_enabled = true
