@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cd_timer: Timer = $DashCdTimer
 @onready var camera_2d: Camera2D = $Camera2D
+@export var lanterne_scene: PackedScene
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -500.0
@@ -21,6 +22,11 @@ var dash_timer := 0.0
 var jump_buffer = false
 var jump_available = false
 var jbuffertime = 0.1
+
+# Lanterne
+@export var is_lanterne = true #est ce que le joueur à la lanterne
+var lantern_ready = false
+var direction_lancer = Vector2.ZERO
 
 # Degats
 var isInvincible = false
@@ -46,9 +52,8 @@ func jump() -> void:
 func _physics_process(delta: float) -> void:
 	var direction_h := Input.get_axis("left", "right")
 	var direction_v := Input.get_axis("up", "down")
-	var direction_lancer_h := Input.get_axis("lancer left", "lancer right")
-	var direction_lancer_v := Input.get_axis("lancer up", "lancer down")
-	
+	var input_lancer := Input.get_vector("lancer left","lancer right","lancer up","lancer down")
+
 	# 1. Gestion du Dash en cours
 	if dash_timer > 0.0:
 		dash_timer -= delta
@@ -81,8 +86,17 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("dash")
 		dash_cd_timer.start(DASH_COOLDOWN)
 	
-	# 4. Lancé de la lanterne
+	# 4. Déclenchement lancer de lanterne
 	
+	if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
+		direction_lancer = input_lancer.normalized()
+		lantern_ready = true
+	elif lantern_ready: # Le joystick vient d'être relâché
+		lancer_lanterne()
+		lantern_ready = false
+		direction_lancer = Vector2.ZERO
+
+
 	
 	
 	# 5. Saut & Saut Variable
@@ -106,7 +120,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 
 	# 8. Animations hors-dash
-	if is_on_floor():
+	if is_on_floor() and dash_timer<=0.0:
 		if direction_h == 0:
 			animated_sprite.play("idle")
 		elif abs(direction_h)<0.4:
@@ -122,6 +136,12 @@ func _physics_process(delta: float) -> void:
 				animated_sprite.play("fall")
 
 	move_and_slide()
+
+func lancer_lanterne():
+	var lanterne = lanterne_scene.instantiate()
+	lanterne.global_position = global_position
+	get_parent().add_child(lanterne)
+	lanterne.lancer(direction_lancer)
 
 
 func on_jump_buffer_timeout() -> void:

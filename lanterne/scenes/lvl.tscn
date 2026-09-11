@@ -136,6 +136,7 @@ script = ExtResource("1_vqknd")
 
 [node name="player" parent="." unique_id=1012986859 instance=ExtResource("2_ljibk")]
 position = Vector2(15, 1)
+lanterne_scene = ExtResource("4_w245d")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=202274615]
 tile_set = SubResource("TileSet_s2dgo")

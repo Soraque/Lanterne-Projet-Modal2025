@@ -7,6 +7,11 @@ extends RigidBody2D
 
 var isLit := true
 var is_destroying := false
+var force_lancer := 500
+
+func lancer(direction: Vector2):
+	linear_velocity = direction * force_lancer
+
 
 func destroy(body: Node2D) -> void:
 	if body is FlammableObject:
