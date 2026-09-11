@@ -13,7 +13,7 @@ fill_from = Vector2(0.5, 0.49130434)
 fill_to = Vector2(0.19565217, 0.92608696)
 
 [node name="Fire_light" type="PointLight2D" unique_id=656477510]
-color = Color(1, 0.94509804, 0.19215687, 1)
+color = Color(1, 0.6800415, 0.5549349, 1)
 energy = 1.6
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_o6ufw")
