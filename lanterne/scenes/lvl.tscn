@@ -208,6 +208,7 @@ light_mask = 2
 position = Vector2(66, -301)
 
 [node name="Campfire" parent="foreground" unique_id=617779468 instance=ExtResource("5_h0c7m")]
+light_mask = 2
 position = Vector2(-157, -16)
 
 [node name="Obstacles" type="Node" parent="foreground" unique_id=1613715365]
