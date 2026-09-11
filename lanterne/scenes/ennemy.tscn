@@ -71,7 +71,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s2dgo"]
-radius = 62.201286
+radius = 10.049875
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_031as"]
 
@@ -79,6 +79,7 @@ radius = 62.201286
 script = ExtResource("1_614tr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=479416857]
+light_mask = 2
 position = Vector2(0, -10)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_s2dgo")

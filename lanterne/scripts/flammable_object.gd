@@ -7,6 +7,7 @@ extends StaticBody2D
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
 @onready var collision: CollisionShape2D = $collision
 @onready var anim: AnimatedSprite2D = $Flamme/anim
+@onready var light: PointLight2D = $Flamme/light
 
 
 func embrase() -> void:
@@ -35,7 +36,7 @@ func _sequence_combustion() -> void:
 	
 	# 3. Troisième étape : "feu3"
 	anim.play("feu3")
-	anim.position.y += 5
+	anim.position.y += 5*anim.scale.y
 	await get_tree().create_timer(1.0).timeout
 	
 	# 4. Destruction du nœud

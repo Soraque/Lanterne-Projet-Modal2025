@@ -244,10 +244,10 @@ metadata/_custom_type_script = "uid://bmapt7p3bt7to"
 
 [node name="anim" type="AnimatedSprite2D" parent="Flamme" unique_id=101357962]
 light_mask = 2
-position = Vector2(0.9999995, -2)
+position = Vector2(1, 0)
 scale = Vector2(0.65625, 0.7916666)
 sprite_frames = SubResource("SpriteFrames_a2tin")
-animation = &"feu3"
+animation = &"feu"
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=968661200]
 light_mask = 2
