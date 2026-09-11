@@ -66,6 +66,7 @@ fill_to = Vector2(0, 1)
 script = ExtResource("1_1v5ef")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1893489764]
+light_mask = 2
 sprite_frames = SubResource("SpriteFrames_m47ar")
 animation = &"Fire"
 
