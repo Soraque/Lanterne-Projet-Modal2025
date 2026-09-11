@@ -145,6 +145,7 @@ position = Vector2(225, 10)
 [node name="player" parent="foreground" unique_id=289766074 instance=ExtResource("2_ljibk")]
 light_mask = 2
 position = Vector2(15, 1)
+lanterne_scene = ExtResource("4_w245d")
 
 [node name="TileMap" type="TileMap" parent="foreground" unique_id=202274615]
 light_mask = 2
@@ -154,10 +155,6 @@ layer_0/tile_data = PackedInt32Array(196604, 131072, 2, 196605, 131072, 2, 19660
 
 [node name="CanvasModulate" type="CanvasModulate" parent="foreground" unique_id=1490258801]
 color = Color(0.071739964, 0.13601565, 0.19321623, 1)
-
-[node name="lanterne" parent="foreground" unique_id=592345473 instance=ExtResource("4_w245d")]
-light_mask = 2
-position = Vector2(66, -301)
 
 [node name="Campfire" parent="foreground" unique_id=951184604 instance=ExtResource("5_h0c7m")]
 light_mask = 2
@@ -222,4 +219,4 @@ scale = Vector2(2, 2)
 texture = ExtResource("7_mwg2j")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="background" unique_id=9725013]
-color = Color(0.35400283, 0.21943897, 0.19316074, 1)
+color = Color(0.6244094, 0.4194481, 0.3768441, 1)

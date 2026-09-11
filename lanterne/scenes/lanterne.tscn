@@ -16,13 +16,10 @@ radius = 4.0
 height = 14.0
 
 [node name="lanterne" type="RigidBody2D" unique_id=1652586517]
+light_mask = 2
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_kto68")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749460890]
-modulate = Color(1, 0.6862745, 1, 1)
-texture = ExtResource("2_kto68")
 
 [node name="player_light" parent="." unique_id=656477510 instance=ExtResource("3_kto68")]
 position = Vector2(0, -10)
@@ -46,6 +43,11 @@ color_ramp = SubResource("Gradient_s2dgo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=237163542]
 shape = SubResource("CapsuleShape2D_s2dgo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749460890]
+modulate = Color(1, 0.6862745, 1, 1)
+light_mask = 2
+texture = ExtResource("2_kto68")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

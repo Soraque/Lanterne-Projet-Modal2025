@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b6pxxlmkwgpyc" path="res://assets/character/male_hero_avec_lanterne.png" id="5_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://b4uht0cnko34o" path="res://assets/character/male_hero-fall-avec-lanterne.png" id="5_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://q2pc3cpoq4tw" path="res://assets/character/male_hero.png" id="9_ur7pv"]
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_y4r1p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
 atlas = ExtResource("5_ur7pv")
@@ -724,5 +725,7 @@ shape = SubResource("CapsuleShape2D_s2dgo")
 [node name="DashCdTimer" type="Timer" parent="." unique_id=1210733917]
 wait_time = 0.606
 one_shot = true
+
+[node name="Fire_light" parent="." unique_id=656477510 instance=ExtResource("10_y4r1p")]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
