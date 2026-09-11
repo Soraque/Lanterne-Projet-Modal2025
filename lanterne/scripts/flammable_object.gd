@@ -15,9 +15,28 @@ func embrase() -> void:
 	
 	# Gestion du visuel
 	flamme.visible = true
-	sprite.modulate = Color(0.459, 0.193, 0.115, 1.0)
+	sprite.visible = false
 	anim.play("allumage")
 
 
 func _on_anim_animation_finished() -> void:
-	if anim.animation == "allumage": anim.play("feu")
+	if anim.animation == "allumage":
+		_sequence_combustion()
+
+
+func _sequence_combustion() -> void:
+	# 1. Première étape : "feu"
+	anim.play("feu")
+	await get_tree().create_timer(1.0).timeout
+	
+	# 2. Deuxième étape : "feu2"
+	anim.play("feu2")
+	await get_tree().create_timer(1.0).timeout
+	
+	# 3. Troisième étape : "feu3"
+	anim.play("feu3")
+	anim.position.y += 5
+	await get_tree().create_timer(1.0).timeout
+	
+	# 4. Destruction du nœud
+	queue_free()
