@@ -34,6 +34,12 @@ var anim_str = "" # Nom des animation avec ou sans lanterne
 var isInvincible = false
 var invincible_time = 1.0
 
+#Collision_boost
+var was_on_floor = false
+var was_on_wall = false
+var collision_boost_cooldown = 0.1
+const max_boost_speed = 200
+var previous_velocity = Vector2(0,0)
 
 func _ready() -> void:
 	var mat = animated_sprite.material as ShaderMaterial
@@ -146,6 +152,25 @@ func _physics_process(delta: float) -> void:
 				animated_sprite.play("fall"+anim_str)
 
 	move_and_slide()
+	if collision_boost_cooldown>0 : collision_boost_cooldown -= delta
+	
+	var collision_count = get_slide_collision_count()
+	if collision_count>0:
+		for i in range(collision_count):
+			var collision = get_slide_collision(i)
+			var normal = collision.get_normal()
+			var tangent = Vector2(-normal.y, normal.x)
+			if ((is_on_wall() and not was_on_wall ) ) and collision_boost_cooldown<=0.0 and tangent.dot(velocity)<0:
+				var boost_speed = max_boost_speed*(1-exp(-abs(normal.dot(previous_velocity))))
+				print(normal.dot(velocity))
+				var collision_boost = -boost_speed/tangent.length()*tangent
+				print("collision_boost :", collision_boost)
+				velocity += collision_boost
+				collision_boost_cooldown = 0.1
+	was_on_floor = is_on_floor()
+	was_on_wall = is_on_wall()
+	previous_velocity=velocity
+
 
 func lancer_lanterne():
 	var lanterne = lanterne_scene.instantiate()
