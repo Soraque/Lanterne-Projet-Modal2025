@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cpavvcq050rv1" path="res://scripts/plateforme.gd" id="1_k4wc5"]
 [ext_resource type="Texture2D" uid="uid://cnkpshido1228" path="res://assets/plateforme.png" id="1_udknb"]
 [ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="2_ygx2q"]
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="4_gmhsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k4wc5"]
 size = Vector2(64, 8)
@@ -70,3 +71,11 @@ region_rect = Rect2(348, 145, 8, 36)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=305454114]
 libraries/ = SubResource("AnimationLibrary_gmhsp")
 autoplay = &"feu"
+
+[node name="light" parent="." unique_id=656477510 instance=ExtResource("4_gmhsp")]
+light_mask = 2
+position = Vector2(1.0000076, 2.0000076)
+scale = Vector2(1.8026316, 1.8026316)
+color = Color(1, 1, 1, 1)
+energy = 0.3
+texture_scale = 0.7

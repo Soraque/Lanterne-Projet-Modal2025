@@ -3,6 +3,7 @@ extends StaticBody2D
 
 @export var duration := 3.0 #-1 pour infini
 @export var destroyable := true
+@export var sanslancer := false
 @onready var sprite: Sprite2D = $sprite
 @onready var flamme: Node2D = $Flamme
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
@@ -46,6 +47,8 @@ func embrase() -> void:
 	if current_id != combustion_id: return # Si rallumé entre temps, on abandonne ce thread
 	
 	if duration != -1: _sequence_combustion(current_id)
+	else: 
+		anim.play("feu")
 
 
 func _sequence_combustion(current_id: int) -> void:
@@ -79,3 +82,6 @@ func _sequence_combustion(current_id: int) -> void:
 func _on_flamme_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and "is_lanterne" in body:
 		body.is_lanterne = true
+
+func _on_zone_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D and body.is_lanterne : embrase()
