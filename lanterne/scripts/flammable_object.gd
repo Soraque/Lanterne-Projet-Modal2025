@@ -1,7 +1,7 @@
 class_name FlammableObject
 extends StaticBody2D
 
-@export var duration := 3.0
+@export var duration := 3.0 #-1 pour infini
 @export var destroyable := true
 @onready var sprite: Sprite2D = $sprite
 @onready var flamme: Node2D = $Flamme
@@ -45,7 +45,7 @@ func embrase() -> void:
 	await anim.animation_finished
 	if current_id != combustion_id: return # Si rallumé entre temps, on abandonne ce thread
 	
-	_sequence_combustion(current_id)
+	if duration != -1: _sequence_combustion(current_id)
 
 
 func _sequence_combustion(current_id: int) -> void:
