@@ -6,14 +6,14 @@ extends CharacterBody2D
 @onready var lumiere: PointLight2D = $Fire_light
 @export var lanterne_scene: PackedScene
 
-const SPEED = 400.0
+const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
-const ACCELERATION = 6000.0
+const ACCELERATION = 4000.0
 const FRICTION = 13000.0
 const AIR_CONTROL = 7000.0
 
 # Dash
-const DASH_SPEED = 1100.0
+const DASH_SPEED = 900.0
 const DASH_DURATION = 0.09
 const DASH_COOLDOWN = 0.35
 var can_dash = true
@@ -44,6 +44,7 @@ var collision_boost_cooldown = 0.1
 const max_boost_speed = 380
 var previous_velocity = Vector2(0,0)
 
+
 func _ready() -> void:
 	var mat = animated_sprite.material as ShaderMaterial
 	if mat:
@@ -68,6 +69,7 @@ func _physics_process(delta: float) -> void:
 	if dash_timer > 0.0:
 		dash_timer -= delta
 		velocity.x = vitesse_debut + looking_direction * DASH_SPEED
+		velocity.y=0
 		
 		if animated_sprite.animation != "dash"+anim_str:
 			animated_sprite.play("dash"+anim_str)
@@ -93,6 +95,7 @@ func _physics_process(delta: float) -> void:
 		can_dash = false
 		dash_timer = DASH_DURATION
 		vitesse_debut = velocity.x
+		velocity.y=0
 		looking_direction = -int(animated_sprite.flip_h)*2+1
 		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
@@ -153,12 +156,20 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite.play("run"+anim_str,1.0*abs(direction_h))
 	else:
-		if velocity.y <= 0:
-			animated_sprite.play("jump"+anim_str)
+		if is_on_wall():
+			if velocity.y <= 0:
+				animated_sprite.play("wall_slide_jump"+anim_str)
+			else:
+				# Empêche de relancer "fall" si on est déjà en "fall" ou "chute longue"
+				if animated_sprite.animation != "wall_slide_fall"+anim_str and animated_sprite.animation != "wall_slide_grosse_chute":
+					animated_sprite.play("wall_slide_fall"+anim_str)
 		else:
-			# Empêche de relancer "fall" si on est déjà en "fall" ou "chute longue"
-			if animated_sprite.animation != "fall"+anim_str and animated_sprite.animation != "chute longue":
-				animated_sprite.play("fall"+anim_str)
+			if velocity.y <= 0:
+				animated_sprite.play("jump"+anim_str)
+			else:
+				# Empêche de relancer "fall" si on est déjà en "fall" ou "chute longue"
+				if animated_sprite.animation != "fall"+anim_str and animated_sprite.animation != "chute longue":
+					animated_sprite.play("fall"+anim_str)
 
 	move_and_slide()
 	if collision_boost_cooldown>0 : collision_boost_cooldown -= delta
@@ -172,14 +183,6 @@ func _physics_process(delta: float) -> void:
 			
 			#A MODIFIERRR !!
 			if ((is_on_wall() and not was_on_wall ) ) and collision_boost_cooldown<=0.0:
-				#var boost_speed = ((abs(normal.dot(previous_velocity)))*(100)/(DASH_SPEED-SPEED) + max_boost_speed)
-				#if boost_speed>max_boost_speed : boost_speed = max_boost_speed
-				#var collision_boost = -max_boost_speed*tangent
-				#print("collision_boost :", collision_boost)
-				#print((boost_speed - previous_velocity.y))
-				#if previous_velocity.y <= max_boost_speed:
-					#velocity += -(boost_speed +  previous_velocity.y) * tangent
-					#collision_boost_cooldown = 0.1
 				if -previous_velocity.y<max_boost_speed and previous_velocity.y<0:
 					velocity.y = -max_boost_speed
 					print("go")
@@ -203,3 +206,5 @@ func on_jump_buffer_timeout() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "fall"+anim_str:
 		animated_sprite.play("chute longue"+anim_str)
+	if animated_sprite.animation == "wall_slide_fall"+anim_str:
+		animated_sprite.play("wall_slide_grosse_chute"+anim_str)

@@ -11,6 +11,7 @@ extends StaticBody2D
 @onready var light: PointLight2D = $Flamme/light
 
 var anim_initial_y: float
+var combustion_id := 0
 
 
 func _ready() -> void:
@@ -18,13 +19,18 @@ func _ready() -> void:
 
 
 func embrase() -> void:
+	# Chaque appel génère un nouvel ID unique qui annule tout 'await' en cours
+	combustion_id += 1
+	var current_id = combustion_id
+	
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	
 	if name == "Bouton" and has_node("plateforme"):
 		$plateforme.activer()
 	
-	# Réinitialisation du visuel
+	# Réinitialisation forcée du visuel
+	anim.stop() # Arrête l'animation en cours
 	anim.position.y = anim_initial_y
 	anim.visible = true
 	flamme.visible = true
@@ -32,28 +38,33 @@ func embrase() -> void:
 	if destroyable:
 		sprite.visible = false
 		
+	# Jouer l'animation depuis la frame 0
 	anim.play("allumage")
+	
+	# On attend la fin de l'allumage manuellement pour ne pas dépendre du signal
+	await anim.animation_finished
+	if current_id != combustion_id: return # Si rallumé entre temps, on abandonne ce thread
+	
+	_sequence_combustion(current_id)
 
 
-func _on_anim_animation_finished() -> void:
-	if anim.animation == "allumage":
-		_sequence_combustion()
-
-
-func _sequence_combustion() -> void:
+func _sequence_combustion(current_id: int) -> void:
 	var step_time := duration / 3.0
 	
 	anim.play("feu")
 	await get_tree().create_timer(step_time).timeout
+	if current_id != combustion_id: return
 	
 	anim.play("feu2")
 	await get_tree().create_timer(step_time).timeout
+	if current_id != combustion_id: return
 	
 	anim.play("feu3")
-	anim.position.y += 5.0 * anim.scale.y
+	anim.position.y = anim_initial_y + (5.0 * anim.scale.y)
 	await get_tree().create_timer(step_time).timeout
+	if current_id != combustion_id: return
 	
-	# Fin de combustion
+	# Extinction (uniquement si le timer n'a pas été interrompu par un nouveau lancer)
 	anim.visible = false
 	if name == "Bouton" and has_node("plateforme"):
 		$plateforme.desactiver()

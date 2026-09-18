@@ -23,6 +23,7 @@ script = ExtResource("1_kto68")
 
 [node name="player_light" parent="." unique_id=656477510 instance=ExtResource("3_kto68")]
 position = Vector2(0, -10)
+texture_scale = 5.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1613387428]
 emitting = false
