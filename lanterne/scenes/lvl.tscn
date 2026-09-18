@@ -179,7 +179,7 @@ position = Vector2(362, -16)
 
 [node name="plateforme" parent="foreground/Obstacles/Bouton" unique_id=754697394 instance=ExtResource("7_4nwc7")]
 light_mask = 3
-position = Vector2(0, 64)
+position = Vector2(26, 62)
 scale = Vector2(1.5, 1.5)
 
 [node name="Bouton" parent="foreground/Obstacles/Bouton" unique_id=1261865386 instance=ExtResource("8_d474t")]
@@ -188,7 +188,7 @@ position = Vector2(230, -2)
 
 [node name="plateforme" parent="foreground/Obstacles/Bouton/Bouton" unique_id=1126889436 instance=ExtResource("7_4nwc7")]
 light_mask = 3
-position = Vector2(0, 64)
+position = Vector2(29, 64)
 scale = Vector2(1.5, 1.5)
 
 [node name="player" parent="foreground" unique_id=289766074 instance=ExtResource("2_ljibk")]

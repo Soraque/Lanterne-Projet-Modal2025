@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b36bgn88ntjjl" path="res://assets/character/WallSlide/Male_Hero_Fall_WallSlide.png" id="7_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://d01hnlwjuvx52" path="res://assets/character/WallSlide/Male_Hero_Grande_chute_WallSlide.png" id="8_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://q2pc3cpoq4tw" path="res://assets/character/male_hero.png" id="9_ur7pv"]
+[ext_resource type="Script" uid="uid://bc8team0xihdq" path="res://scenes/camera_2d.gd" id="9_y4r1p"]
 [ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_y4r1p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
@@ -803,6 +804,7 @@ visibility_layer = 3
 zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+script = ExtResource("9_y4r1p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1991956763]
 shape = SubResource("CapsuleShape2D_s2dgo")

@@ -10,6 +10,7 @@ extends StaticBody2D
 @onready var collision: CollisionShape2D = $collision
 @onready var anim: AnimatedSprite2D = $Flamme/anim
 @onready var light: PointLight2D = $Flamme/light
+@onready var animation: AnimationPlayer = $Flamme/AnimationPlayer
 
 var anim_initial_y: float
 var combustion_id := 0
@@ -22,8 +23,9 @@ func _ready() -> void:
 func embrase() -> void:
 	# Chaque appel génère un nouvel ID unique qui annule tout 'await' en cours
 	combustion_id += 1
-	var current_id = combustion_id
 	
+	var current_id = combustion_id
+	animation.play("allumage")
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	
@@ -84,4 +86,5 @@ func _on_flamme_body_entered(body: Node2D) -> void:
 		body.is_lanterne = true
 
 func _on_zone_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D and body.is_lanterne : embrase()
+	if body is CharacterBody2D and body.is_lanterne and not flamme.visible: 
+		embrase()
