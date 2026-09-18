@@ -67,6 +67,7 @@ func _physics_process(delta: float) -> void:
 	if dash_timer > 0.0:
 		dash_timer -= delta
 		velocity.x = vitesse_debut + looking_direction * DASH_SPEED
+		velocity.y=0
 		
 		if animated_sprite.animation != "dash"+anim_str:
 			animated_sprite.play("dash"+anim_str)
@@ -92,6 +93,7 @@ func _physics_process(delta: float) -> void:
 		can_dash = false
 		dash_timer = DASH_DURATION
 		vitesse_debut = velocity.x
+		velocity.y=0
 		looking_direction = -int(animated_sprite.flip_h)*2+1
 		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
