@@ -225,8 +225,9 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [node name="Bouton" type="StaticBody2D" unique_id=1821600727]
+collision_layer = 2
 script = ExtResource("1_fxul5")
-duration = 6
+destroyable = false
 metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
 [node name="Flamme" type="Area2D" parent="." unique_id=442774060]
@@ -237,7 +238,7 @@ light_mask = 2
 position = Vector2(0.9999999, -8.5)
 scale = Vector2(0.8125, 0.89583325)
 sprite_frames = SubResource("SpriteFrames_clkgq")
-animation = &"feu"
+animation = &"feu3"
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=1246040307]
 light_mask = 2
@@ -260,3 +261,4 @@ texture = ExtResource("11_m1s75")
 region_rect = Rect2(348, 144, 8, 32)
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
+[connection signal="animation_finished" from="Flamme/anim" to="." method="_on_anim_animation_finished"]
