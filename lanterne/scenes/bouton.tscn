@@ -219,7 +219,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmkd7"]
-size = Vector2(8, 26)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bmx5"]
 size = Vector2(32, 32)
@@ -241,7 +241,6 @@ animation = &"feu"
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=1246040307]
 light_mask = 2
-position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_kmkd7")
 disabled = true
 
