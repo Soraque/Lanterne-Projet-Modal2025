@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var hb_coll: CollisionShape2D = $hitbox/CollisionShape2D
+@onready var hb_coll: CollisionShape2D = $Killzone/CollisionShape2D
 
 var is_angry = false
 # Compteur de lumières actuellement dans la zone
