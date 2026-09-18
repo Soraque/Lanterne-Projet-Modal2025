@@ -31,6 +31,7 @@ var jbuffertime = 0.1
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
 var anim_str = "" # Nom des animation avec ou sans lanterne
+const time_dilatation_strength = 0.5
 
 # Degats
 var isInvincible = false
@@ -101,7 +102,13 @@ func _physics_process(delta: float) -> void:
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
 			lantern_ready = true
+			Global.time_dilatation = 1-time_dilatation_strength*input_lancer.length()
+			Engine.time_scale = Global.time_dilatation
+			print(Global.time_dilatation)
 		elif lantern_ready: # Le joystick vient d'être relâché
+			Global.time_dilatation = 1
+			Engine.time_scale = Global.time_dilatation
+
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
