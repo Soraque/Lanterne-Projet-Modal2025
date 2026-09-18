@@ -221,6 +221,27 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmkd7"]
 size = Vector2(32, 32)
 
+[sub_resource type="Animation" id="Animation_73d8c"]
+resource_name = "allumage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("light:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.67]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m1s75"]
+_data = {
+&"allumage": SubResource("Animation_73d8c")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bmx5"]
 size = Vector2(32, 32)
 
@@ -248,7 +269,11 @@ disabled = true
 [node name="light" parent="Flamme" unique_id=656477510 instance=ExtResource("10_1rery")]
 light_mask = 2
 position = Vector2(1.0000076, 2.0000076)
-scale = Vector2(1.8026316, 1.8026316)
+energy = 0.0
+texture_scale = 7.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Flamme" unique_id=1711283810]
+libraries/ = SubResource("AnimationLibrary_m1s75")
 
 [node name="collision" type="CollisionShape2D" parent="." unique_id=1120555952]
 light_mask = 2
