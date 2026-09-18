@@ -363,44 +363,44 @@ atlas = ExtResource("9_ur7pv")
 region = Rect2(1152, 384, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fr8ja"]
-atlas = ExtResource("6_ur7pv")
-region = Rect2(0, 0, 128, 128)
+atlas = ExtResource("7_y4r1p")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvmy4"]
-atlas = ExtResource("6_ur7pv")
-region = Rect2(128, 0, 128, 128)
+atlas = ExtResource("7_y4r1p")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcu33"]
-atlas = ExtResource("6_ur7pv")
-region = Rect2(256, 0, 128, 128)
+atlas = ExtResource("7_y4r1p")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmsq4"]
 atlas = ExtResource("7_y4r1p")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5vs2b"]
-atlas = ExtResource("7_y4r1p")
-region = Rect2(128, 0, 128, 128)
+atlas = ExtResource("8_d2wvv")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7i4v"]
-atlas = ExtResource("7_y4r1p")
+atlas = ExtResource("8_d2wvv")
 region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b5l0c"]
-atlas = ExtResource("7_y4r1p")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2a33p"]
-atlas = ExtResource("8_d2wvv")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_reqs7"]
 atlas = ExtResource("8_d2wvv")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yjfb"]
-atlas = ExtResource("8_d2wvv")
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a33p"]
+atlas = ExtResource("6_ur7pv")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reqs7"]
+atlas = ExtResource("6_ur7pv")
 region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yjfb"]
+atlas = ExtResource("6_ur7pv")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u8vuu"]
 animations = [{
@@ -750,7 +750,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qmsq4")
+}],
+"loop": 1,
+"name": &"wall_slide_fall",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5vs2b")
 }, {
@@ -761,7 +766,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_b5l0c")
 }],
 "loop": 1,
-"name": &"wall_slide",
+"name": &"wall_slide_grosse_chute",
 "speed": 5.0
 }, {
 "frames": [{
@@ -775,11 +780,12 @@ animations = [{
 "texture": SubResource("AtlasTexture_2yjfb")
 }],
 "loop": 1,
-"name": &"wall_slide_chute",
+"name": &"wall_slide_jump",
 "speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
+radius = 8.0
 height = 32.0
 
 [node name="player" type="CharacterBody2D" unique_id=1012986859]
@@ -788,7 +794,7 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1062298467]
 light_mask = 2
 sprite_frames = SubResource("SpriteFrames_u8vuu")
-animation = &"wall_slide_chute"
+animation = &"wall_slide_jump"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932072989]
