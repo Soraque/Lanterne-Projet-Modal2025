@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://vg0l7sh75ls4" path="res://assets/ennemy/Mushroom_Reg.png" id="1_7waic"]
 [ext_resource type="Script" uid="uid://bcdqm5jsspqls" path="res://scripts/ennemy.gd" id="1_614tr"]
+[ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="3_rsyu2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_614tr"]
 atlas = ExtResource("1_7waic")
@@ -91,9 +92,11 @@ autoplay = "default"
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_s2dgo")
 
-[node name="hitbox" type="Area2D" parent="." unique_id=1374924448]
+[node name="Killzone" type="Area2D" parent="." unique_id=1965018959]
+script = ExtResource("3_rsyu2")
+metadata/_custom_type_script = "uid://bg3yg1v1ill4h"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=271148654]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=784543694]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_031as")
 disabled = true

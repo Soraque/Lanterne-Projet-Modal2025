@@ -812,6 +812,7 @@ wait_time = 0.606
 one_shot = true
 
 [node name="Fire_light" parent="." unique_id=656477510 instance=ExtResource("10_y4r1p")]
-color = Color(0.98469335, 1, 0.89323574, 1)
+color = Color(1, 0.6784314, 0.5568628, 1)
+texture_scale = 5.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -134,6 +134,8 @@ texture = ExtResource("2_0k3uw")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ljibk")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_s2dgo"]
+
 [node name="lvl" type="Node2D" unique_id=19222889]
 script = ExtResource("1_vqknd")
 
@@ -156,27 +158,37 @@ position = Vector2(-157, -16)
 
 [node name="Obstacles" type="Node" parent="foreground" unique_id=1613715365]
 
-[node name="ennemy2" parent="foreground/Obstacles" unique_id=2002421994 instance=ExtResource("9_s5vkl")]
-modulate = Color(1, 0.5529412, 1, 1)
-light_mask = 2
-position = Vector2(326, 18)
-
 [node name="ennemy" parent="foreground/Obstacles" unique_id=396322971 instance=ExtResource("9_s5vkl")]
-light_mask = 2
-position = Vector2(225, 18)
+position = Vector2(815, -78)
+
+[node name="ennemy2" parent="foreground/Obstacles" unique_id=1064598142 instance=ExtResource("9_s5vkl")]
+position = Vector2(880, -78)
+
+[node name="ennemy3" parent="foreground/Obstacles" unique_id=1274386190 instance=ExtResource("9_s5vkl")]
+position = Vector2(848, -78)
 
 [node name="porte" parent="foreground/Obstacles" unique_id=749672723 instance=ExtResource("6_nuvjs")]
 light_mask = 2
-position = Vector2(304, 1)
+position = Vector2(804, 0)
 scale = Vector2(1, 2)
 
 [node name="Bouton" parent="foreground/Obstacles" unique_id=1821600727 instance=ExtResource("8_d474t")]
 light_mask = 2
-position = Vector2(447, -1)
+position = Vector2(362, -16)
 
 [node name="plateforme" parent="foreground/Obstacles/Bouton" unique_id=754697394 instance=ExtResource("7_4nwc7")]
 light_mask = 3
-position = Vector2(24, -69)
+position = Vector2(0, 64)
+scale = Vector2(1.5, 1.5)
+
+[node name="Bouton" parent="foreground/Obstacles/Bouton" unique_id=1261865386 instance=ExtResource("8_d474t")]
+light_mask = 2
+position = Vector2(230, -2)
+
+[node name="plateforme" parent="foreground/Obstacles/Bouton/Bouton" unique_id=1126889436 instance=ExtResource("7_4nwc7")]
+light_mask = 3
+position = Vector2(0, 64)
+scale = Vector2(1.5, 1.5)
 
 [node name="player" parent="foreground" unique_id=289766074 instance=ExtResource("2_ljibk")]
 light_mask = 2
@@ -241,3 +253,11 @@ texture = ExtResource("7_mwg2j")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="background" unique_id=9725013]
 color = Color(0.6244094, 0.4194481, 0.3768441, 1)
+
+[node name="killzone" type="Area2D" parent="." unique_id=49619134]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=1149683389]
+position = Vector2(0, 400)
+shape = SubResource("WorldBoundaryShape2D_s2dgo")
+
+[connection signal="body_entered" from="killzone" to="." method="_on_killzone_body_entered"]

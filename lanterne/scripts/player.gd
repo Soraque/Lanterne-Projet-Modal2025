@@ -6,14 +6,14 @@ extends CharacterBody2D
 @onready var lumiere: PointLight2D = $Fire_light
 @export var lanterne_scene: PackedScene
 
-const SPEED = 400.0
+const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
-const ACCELERATION = 6000.0
+const ACCELERATION = 4000.0
 const FRICTION = 13000.0
 const AIR_CONTROL = 7000.0
 
 # Dash
-const DASH_SPEED = 1100.0
+const DASH_SPEED = 900.0
 const DASH_DURATION = 0.09
 const DASH_COOLDOWN = 0.35
 var can_dash = true
