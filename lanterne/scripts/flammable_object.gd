@@ -2,6 +2,7 @@ class_name FlammableObject
 extends StaticBody2D
 
 @export var duration := 3.0 #-1 pour infini
+@export var bouton := false
 @export var destroyable := true
 @export var sanslancer := false
 @onready var sprite: Sprite2D = $sprite
@@ -29,7 +30,7 @@ func embrase() -> void:
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	
-	if name == "Bouton" and has_node("plateforme"):
+	if bouton and has_node("plateforme"):
 		$plateforme.activer()
 	
 	# Réinitialisation forcée du visuel

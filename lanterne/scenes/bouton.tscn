@@ -269,8 +269,8 @@ disabled = true
 [node name="light" parent="Flamme" unique_id=656477510 instance=ExtResource("10_1rery")]
 light_mask = 2
 position = Vector2(1.0000076, 2.0000076)
-scale = Vector2(1.8026316, 1.8026316)
 energy = 0.0
+texture_scale = 7.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Flamme" unique_id=1711283810]
 libraries/ = SubResource("AnimationLibrary_m1s75")
