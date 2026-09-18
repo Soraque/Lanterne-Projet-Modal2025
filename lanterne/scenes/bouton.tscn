@@ -252,7 +252,6 @@ scale = Vector2(1.8026316, 1.8026316)
 [node name="collision" type="CollisionShape2D" parent="." unique_id=1120555952]
 light_mask = 2
 shape = SubResource("RectangleShape2D_8bmx5")
-disabled = true
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1875495316]
 light_mask = 2
