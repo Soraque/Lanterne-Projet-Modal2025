@@ -21,6 +21,13 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/dpi/allow_hidpi=false
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "green",
+"res://scripts/": "red"
+}
+
 [input]
 
 dash={
