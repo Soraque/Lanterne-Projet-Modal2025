@@ -12,7 +12,7 @@ point_count = 3
 colors = PackedColorArray(0.23921569, 0.12941177, 0.15686275, 1, 0.9843137, 0.42745098, 0.14117648, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
-radius = 8.0
+radius = 6.0
 height = 22.0
 
 [node name="lanterne" type="RigidBody2D" unique_id=1652586517]
