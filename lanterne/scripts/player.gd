@@ -31,7 +31,6 @@ var jbuffertime = 0.1
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
 var anim_str = "" # Nom des animation avec ou sans lanterne
-const time_dilatation_strength = 0.5
 
 # Degats
 var isInvincible = false
@@ -44,11 +43,17 @@ var collision_boost_cooldown = 0.1
 const max_boost_speed = 380
 var previous_velocity = Vector2(0,0)
 
+#Time dilatation
+signal joystick_on
+signal joystick_off
+@onready var filter_rect = $"../../Overall/grey_filter"
 
 func _ready() -> void:
 	var mat = animated_sprite.material as ShaderMaterial
 	if mat:
 		mat.set_shader_parameter("flash_modifier", 0.0)
+		
+
 
 
 func jump() -> void:
@@ -102,21 +107,25 @@ func _physics_process(delta: float) -> void:
 	
 	# 4. Déclenchement lancer de lanterne
 	if is_lanterne:
+		
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
+			
+			if not lantern_ready:
+				joystick_on.emit()
 			lantern_ready = true
-			Global.time_dilatation = 1-time_dilatation_strength*input_lancer.length()
-			Engine.time_scale = Global.time_dilatation
-			print(Global.time_dilatation)
-		elif lantern_ready: # Le joystick vient d'être relâché
-			Global.time_dilatation = 1
-			Engine.time_scale = Global.time_dilatation
 
+		elif lantern_ready: # Le joystick vient d'être relâché
+			joystick_off.emit()
+			
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
 			direction_lancer = Vector2.ZERO
+	print(Global.time_dilatation)
+	Engine.time_scale = Global.time_dilatation
 
+		
 	# 5. Màj des anims sans lanterne
 	if is_lanterne:
 		anim_str = ""
@@ -172,6 +181,11 @@ func _physics_process(delta: float) -> void:
 					animated_sprite.play("fall"+anim_str)
 
 	move_and_slide()
+	
+	if filter_rect and filter_rect.material:
+			filter_rect.material.set_shader_parameter("desaturation_amount", 1-Global.time_dilatation)
+			
+			
 	if collision_boost_cooldown>0 : collision_boost_cooldown -= delta
 	
 	var collision_count = get_slide_collision_count()
