@@ -5,11 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://b6pxxlmkwgpyc" path="res://assets/character/male_hero_avec_lanterne.png" id="5_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://b4uht0cnko34o" path="res://assets/character/male_hero-fall-avec-lanterne.png" id="5_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://bao86r1gbx8le" path="res://assets/character/WallSlide/Male_Hero_Montée_WallSlide.png" id="6_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://h6kjw37v8i6j" path="res://assets/character/WallSlide/Male_Hero_Fall_WallSlide - sans_lanterne.png" id="7_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://b36bgn88ntjjl" path="res://assets/character/WallSlide/Male_Hero_Fall_WallSlide.png" id="7_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://d01hnlwjuvx52" path="res://assets/character/WallSlide/Male_Hero_Grande_chute_WallSlide.png" id="8_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://s4jieh77r0fs" path="res://assets/character/WallSlide/Male_Hero_Grande_chute_WallSlide_sans_lanterne.png" id="9_jej6c"]
 [ext_resource type="Texture2D" uid="uid://q2pc3cpoq4tw" path="res://assets/character/male_hero.png" id="9_ur7pv"]
 [ext_resource type="Script" uid="uid://bc8team0xihdq" path="res://scenes/camera_2d.gd" id="9_y4r1p"]
 [ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://b1kp8646re6q2" path="res://assets/character/WallSlide/Male_Hero_Montée_WallSlide_sans_lanterne.png" id="11_f1ej7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
 atlas = ExtResource("5_ur7pv")
@@ -379,6 +382,22 @@ region = Rect2(128, 0, 128, 128)
 atlas = ExtResource("7_y4r1p")
 region = Rect2(0, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnnjp"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqna8"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7gmo"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kft7l"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(0, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5vs2b"]
 atlas = ExtResource("8_d2wvv")
 region = Rect2(384, 0, 128, 128)
@@ -391,6 +410,18 @@ region = Rect2(256, 0, 128, 128)
 atlas = ExtResource("8_d2wvv")
 region = Rect2(128, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s4os"]
+atlas = ExtResource("9_jej6c")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2em0j"]
+atlas = ExtResource("9_jej6c")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe2k6"]
+atlas = ExtResource("9_jej6c")
+region = Rect2(128, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a33p"]
 atlas = ExtResource("6_ur7pv")
 region = Rect2(384, 0, 128, 128)
@@ -401,6 +432,18 @@ region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yjfb"]
 atlas = ExtResource("6_ur7pv")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edwuo"]
+atlas = ExtResource("11_f1ej7")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5eiju"]
+atlas = ExtResource("11_f1ej7")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uukdq"]
+atlas = ExtResource("11_f1ej7")
 region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u8vuu"]
@@ -758,6 +801,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dnnjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqna8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7gmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kft7l")
+}],
+"loop": 1,
+"name": &"wall_slide_fall_sans_lanterne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5vs2b")
 }, {
 "duration": 1.0,
@@ -768,6 +828,20 @@ animations = [{
 }],
 "loop": 1,
 "name": &"wall_slide_grosse_chute",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s4os")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2em0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe2k6")
+}],
+"loop": 1,
+"name": &"wall_slide_grosse_chute_sans_lanterne",
 "speed": 5.0
 }, {
 "frames": [{
@@ -783,6 +857,20 @@ animations = [{
 "loop": 1,
 "name": &"wall_slide_jump",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edwuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5eiju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uukdq")
+}],
+"loop": 1,
+"name": &"wall_slide_jump_sans_lanterne",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
@@ -795,7 +883,7 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1062298467]
 light_mask = 2
 sprite_frames = SubResource("SpriteFrames_u8vuu")
-animation = &"wall_slide_jump"
+animation = &"wall_slide_jump_sans_lanterne"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932072989]

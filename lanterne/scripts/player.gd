@@ -14,6 +14,14 @@ const ACCELERATION = 4000.0
 const FRICTION = 13000.0
 const AIR_CONTROL = 7000.0
 
+# --- Wall Jump ---
+const WALL_JUMP_HORIZONTAL_SPEED = 500.0
+const WALL_JUMP_VERTICAL_SPEED = -350.0
+const WALL_JUMP_LOCK_TIME = 0.18
+
+var wall_jump_lock_timer := 0.0
+var wall_jump_direction := 0
+
 # --- Dash ---
 
 const DASH_SPEED = 900.0
@@ -75,6 +83,7 @@ func jump() -> void:
 		jump_buffer = true
 		get_tree().create_timer(jbuffertime).timeout.connect(on_jump_buffer_timeout)
 
+
 func _physics_process(delta: float) -> void:
 	var direction_h := Input.get_axis("left", "right")
 	var input_lancer := Input.get_vector("lancer left","lancer right","lancer up","lancer down")
@@ -109,16 +118,24 @@ func _physics_process(delta: float) -> void:
 		# on l'exécute immédiatement.
 		if jump_buffer:
 			jump()
-
+	
+	# --- Wall Jump ---
+	if wall_jump_lock_timer > 0.0:
+		wall_jump_lock_timer -= delta
+	
 	# --- 3. Déclenchement du Dash ---
 	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
 		can_dash = false
 		dash_timer = DASH_DURATION
-		vitesse_debut = velocity.x
 		velocity.y=0
 		
 		# La direction du dash dépend de l'orientation actuelle du sprite.
-		looking_direction = -int(animated_sprite.flip_h)*2+1
+		if is_on_wall() and not is_on_floor():
+			vitesse_debut = 0
+			looking_direction = get_wall_normal().x / abs(get_wall_normal().x)
+		else:
+			vitesse_debut = velocity.x
+			looking_direction = -int(animated_sprite.flip_h)*2+1
 		
 		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
@@ -163,10 +180,28 @@ func _physics_process(delta: float) -> void:
 		# Relâcher rapidement le bouton coupe la montée et permet
 		# de contrôler la hauteur du saut.
 		velocity.y *= 0.3
-
+	
+	# --- Wall Jump ---
+	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
+		# get_wall_normal() pointe dans la direction opposée au mur.
+		var wall_normal = get_wall_normal()
+		
+		velocity.x = wall_normal.x * WALL_JUMP_HORIZONTAL_SPEED
+		velocity.y = WALL_JUMP_VERTICAL_SPEED
+		
+		# Pendant quelques frames, le contrôle horizontal est bloqué.
+		wall_jump_lock_timer = WALL_JUMP_LOCK_TIME
+		
+		jump_buffer = false
+		jump_available = false
+	
 	# --- 7. Mouvement horizontal ---
-	if direction_h != 0:
-		# Le joueur contrôle davantage son déplacement au sol qu'en l'air.
+	if wall_jump_lock_timer > 0.0:
+		# Pendant le début du wall jump, on conserve la vitesse imposée
+		# pour empêcher le joueur de revenir immédiatement vers le mur.
+		pass
+	elif direction_h != 0:
+			# Le joueur contrôle davantage son déplacement au sol qu'en l'air.
 		var accel = ACCELERATION if is_on_floor() else AIR_CONTROL
 		velocity.x = move_toward(velocity.x, direction_h * SPEED, accel * delta)
 	else:
