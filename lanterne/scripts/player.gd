@@ -4,7 +4,9 @@ extends CharacterBody2D
 @onready var dash_cd_timer: Timer = $DashCdTimer
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var lumiere: PointLight2D = $Fire_light
+@onready var aim_line: Line2D = $Aim_line
 @export var lanterne_scene: PackedScene
+
 
 # --- Mouvement général ---
 
@@ -144,12 +146,12 @@ func _physics_process(delta: float) -> void:
 	if is_lanterne:
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
+			aim_line.tracer(delta, direction_lancer)
 			lantern_ready = true
 			
 			# Plus le joystick est incliné, plus le temps ralentit.
 			Global.time_dilatation = 1-time_dilatation_strength*input_lancer.length()
 			Engine.time_scale = Global.time_dilatation
-			print(Global.time_dilatation)
 			
 		elif lantern_ready: # Le joystick vient d'être relâché
 			# On rétablit le temps normal avant de lancer la lanterne.
