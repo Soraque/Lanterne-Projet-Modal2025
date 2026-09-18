@@ -908,10 +908,20 @@ texture_scale = 5.0
 
 [node name="Aim_line" type="Line2D" parent="." unique_id=1517530146]
 width = 2.0
+default_color = Color(1, 0.27380127, 0.21500143, 1)
 script = ExtResource("13_jej6c")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=2064235577]
-position = Vector2(226, 1)
-target_position = Vector2(99, 0)
+position = Vector2(-34, -26)
+target_position = Vector2(148, 68)
+collision_mask = 3
+
+[node name="Pointeur" type="Polygon2D" parent="." unique_id=676364191]
+visible = false
+position = Vector2(81, 14)
+color = Color(1, 0, 0, 1)
+offset = Vector2(20, 0)
+polygon = PackedVector2Array(-18.000002, 5, -21, 5, -21, 4, -22.000002, 4, -22.000002, 3, -23.000002, 3, -23.000002, 2.000001, -24, 2.000001, -24, -1.0000001, -23.000002, -1.0000001, -23.000002, -2, -22.000002, -2, -22.000002, -3, -21, -3, -21, -4, -18.000002, -4, -18.000002, -3, -17, -3, -17, -2, -16.000002, -2, -16.000002, -1.0000001, -15.000001, -1.0000001, -15.000001, 2.000001, -16.000002, 2.000001, -16.000002, 3, -17, 3, -17, 4, -18.000002, 4)
+uv = PackedVector2Array(-19.000002, 4, -22, 4, -22, 3, -23.000002, 3, -23.000002, 2, -24.000002, 2, -24.000002, 1.000001, -25, 1.000001, -25, -2, -24.000002, -2, -24.000002, -3, -23.000002, -3, -23.000002, -3.9999998, -22, -3.9999998, -22, -5, -19.000002, -5, -19.000002, -3.9999998, -18, -3.9999998, -18, -3, -17.000002, -3, -17.000002, -2, -16.000002, -2, -16.000002, 1.000001, -17.000002, 1.000001, -17.000002, 2, -18, 2, -18, 3, -19.000002, 3)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

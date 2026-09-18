@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var lumiere: PointLight2D = $Fire_light
 @onready var aim_line: Line2D = $Aim_line
+@onready var pointeur: Polygon2D = $Pointeur
 @export var lanterne_scene: PackedScene
 
 
@@ -146,7 +147,7 @@ func _physics_process(delta: float) -> void:
 	if is_lanterne:
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
-			aim_line.tracer(delta, direction_lancer)
+			aim_line.tracer(delta / Engine.time_scale, direction_lancer)
 			lantern_ready = true
 			
 			# Plus le joystick est incliné, plus le temps ralentit.
@@ -157,6 +158,8 @@ func _physics_process(delta: float) -> void:
 			# On rétablit le temps normal avant de lancer la lanterne.
 			Global.time_dilatation = 1
 			Engine.time_scale = Global.time_dilatation
+			aim_line.clear_points()
+			pointeur.visible = false
 
 			lancer_lanterne()
 			is_lanterne = false
