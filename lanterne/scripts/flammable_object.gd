@@ -1,7 +1,7 @@
 class_name FlammableObject
 extends StaticBody2D
 
-@export var size = 1
+@export var duration = 3
 @onready var sprite: Sprite2D = $sprite
 @onready var flamme: Node2D = $Flamme
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
@@ -29,16 +29,16 @@ func _on_anim_animation_finished() -> void:
 func _sequence_combustion() -> void:
 	# 1. Première étape : "feu"
 	anim.play("feu")
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(duration/3).timeout
 	
 	# 2. Deuxième étape : "feu2"
 	anim.play("feu2")
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(duration/3).timeout
 	
 	# 3. Troisième étape : "feu3"
 	anim.play("feu3")
 	anim.position.y += 5*anim.scale.y
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(duration/3).timeout
 	
 	# 4. Destruction du nœud
 	queue_free()

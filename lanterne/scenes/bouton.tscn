@@ -1,130 +1,130 @@
-[gd_scene format=3 uid="uid://dg30b2fr88sfm"]
+[gd_scene format=3 uid="uid://m41ye2yy606u"]
 
-[ext_resource type="Script" uid="uid://cbbl2x678u32u" path="res://scripts/flammable_object.gd" id="1_cbvu1"]
-[ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="2_m0o0n"]
-[ext_resource type="Texture2D" uid="uid://lvemktsfiwpb" path="res://assets/feu/allumage/Group 7 - 3_1.png" id="4_8mmy4"]
-[ext_resource type="Texture2D" uid="uid://ovl3q4vruprs" path="res://assets/feu/allumage/Group 4 - 1_1.png" id="5_w22ea"]
-[ext_resource type="Texture2D" uid="uid://cxfc781gx7a2g" path="res://assets/feu/allumage/Group 4 - 4_1.png" id="6_ew7ks"]
-[ext_resource type="Texture2D" uid="uid://dcy5ddbccpikf" path="res://assets/feu/allumage/Group 5 - 2_1.png" id="7_63fia"]
-[ext_resource type="Texture2D" uid="uid://j0gkbulfigeo" path="res://assets/feu/allumage/Group 4 - 2_1.png" id="8_qo6xs"]
-[ext_resource type="Texture2D" uid="uid://5lqcsneuav44" path="res://assets/feu/Group 4 - 2.png" id="9_dum7g"]
-[ext_resource type="Texture2D" uid="uid://cy0rs5rfi34fp" path="res://assets/feu/Group 4 - 1.png" id="10_63fia"]
-[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_w22ea"]
-[ext_resource type="Texture2D" uid="uid://ifj067msp2nf" path="res://assets/feu/Group 6 - 3.png" id="11_qo6xs"]
+[ext_resource type="Script" uid="uid://cbbl2x678u32u" path="res://scripts/flammable_object.gd" id="1_fxul5"]
+[ext_resource type="Texture2D" uid="uid://lvemktsfiwpb" path="res://assets/feu/allumage/Group 7 - 3_1.png" id="2_m1s75"]
+[ext_resource type="Texture2D" uid="uid://ovl3q4vruprs" path="res://assets/feu/allumage/Group 4 - 1_1.png" id="3_8bmx5"]
+[ext_resource type="Texture2D" uid="uid://cxfc781gx7a2g" path="res://assets/feu/allumage/Group 4 - 4_1.png" id="4_p7gq0"]
+[ext_resource type="Texture2D" uid="uid://dcy5ddbccpikf" path="res://assets/feu/allumage/Group 5 - 2_1.png" id="5_ab7vk"]
+[ext_resource type="Texture2D" uid="uid://j0gkbulfigeo" path="res://assets/feu/allumage/Group 4 - 2_1.png" id="6_b8kui"]
+[ext_resource type="Texture2D" uid="uid://5lqcsneuav44" path="res://assets/feu/Group 4 - 2.png" id="7_172p2"]
+[ext_resource type="Texture2D" uid="uid://cy0rs5rfi34fp" path="res://assets/feu/Group 4 - 1.png" id="8_5aah7"]
+[ext_resource type="Texture2D" uid="uid://ifj067msp2nf" path="res://assets/feu/Group 6 - 3.png" id="9_kt6ch"]
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_1rery"]
+[ext_resource type="Texture2D" uid="uid://4jr2pyj02j0v" path="res://assets/bouton.png" id="11_m1s75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lx15h"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(0, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vntco"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(32, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kyeqd"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(64, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkhhl"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(96, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ve4f0"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(128, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ij3tv"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(160, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjp78"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(192, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7c7fq"]
-atlas = ExtResource("9_dum7g")
+atlas = ExtResource("7_172p2")
 region = Rect2(224, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dum7g"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(0, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xloc"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(32, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfj78"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(64, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_de7ey"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(96, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gmw51"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(128, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tnbv2"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(160, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dhk8t"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(192, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4nbka"]
-atlas = ExtResource("10_63fia")
+atlas = ExtResource("8_5aah7")
 region = Rect2(224, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3d1oo"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4srrt"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(16, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_shrrl"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kb0gb"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(48, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldq5d"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(64, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cy6j"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(80, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrddm"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(96, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2pld"]
-atlas = ExtResource("11_qo6xs")
+atlas = ExtResource("9_kt6ch")
 region = Rect2(112, 0, 16, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_a2tin"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_clkgq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_8mmy4")
+"texture": ExtResource("2_m1s75")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_w22ea")
+"texture": ExtResource("3_8bmx5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ew7ks")
+"texture": ExtResource("4_p7gq0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_63fia")
+"texture": ExtResource("5_ab7vk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_qo6xs")
+"texture": ExtResource("6_b8kui")
 }],
 "loop": 0,
 "name": &"allumage",
@@ -218,43 +218,47 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmkd7"]
 size = Vector2(8, 26)
 
-[node name="porte" type="StaticBody2D" unique_id=749672723]
-script = ExtResource("1_cbvu1")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bmx5"]
+size = Vector2(32, 32)
+
+[node name="Bouton" type="StaticBody2D" unique_id=1821600727]
+script = ExtResource("1_fxul5")
+duration = 6
 metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
-[node name="Flamme" type="Area2D" parent="." unique_id=1187537714]
+[node name="Flamme" type="Area2D" parent="." unique_id=442774060]
 visible = false
 
-[node name="anim" type="AnimatedSprite2D" parent="Flamme" unique_id=101357962]
+[node name="anim" type="AnimatedSprite2D" parent="Flamme" unique_id=1748977251]
 light_mask = 2
-position = Vector2(1, 0)
-scale = Vector2(0.65625, 0.7916666)
-sprite_frames = SubResource("SpriteFrames_a2tin")
+position = Vector2(0.9999999, -8.5)
+scale = Vector2(0.8125, 0.89583325)
+sprite_frames = SubResource("SpriteFrames_clkgq")
 animation = &"feu"
 
-[node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=968661200]
+[node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=1246040307]
 light_mask = 2
 position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_s2dgo")
+shape = SubResource("RectangleShape2D_kmkd7")
 disabled = true
 
-[node name="light" parent="Flamme" unique_id=656477510 instance=ExtResource("10_w22ea")]
+[node name="light" parent="Flamme" unique_id=656477510 instance=ExtResource("10_1rery")]
 light_mask = 2
 position = Vector2(1.0000076, 2.0000076)
 scale = Vector2(1.8026316, 1.8026316)
 
-[node name="collision" type="CollisionShape2D" parent="." unique_id=851503516]
+[node name="collision" type="CollisionShape2D" parent="." unique_id=1120555952]
 light_mask = 2
-shape = SubResource("RectangleShape2D_s2dgo")
+shape = SubResource("RectangleShape2D_8bmx5")
+disabled = true
 
-[node name="sprite" type="Sprite2D" parent="." unique_id=2097250574]
+[node name="sprite" type="Sprite2D" parent="." unique_id=1875495316]
 light_mask = 2
-texture = ExtResource("2_m0o0n")
-region_enabled = true
+position = Vector2(2.3841858e-07, 2.3841858e-07)
+texture = ExtResource("11_m1s75")
 region_rect = Rect2(348, 144, 8, 32)
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
-[connection signal="animation_finished" from="Flamme/anim" to="." method="_on_anim_animation_finished"]
