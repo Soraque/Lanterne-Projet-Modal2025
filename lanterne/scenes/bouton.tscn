@@ -260,13 +260,5 @@ position = Vector2(2.3841858e-07, 2.3841858e-07)
 texture = ExtResource("11_m1s75")
 region_rect = Rect2(348, 144, 8, 32)
 
-[node name="light" parent="." unique_id=1317522052 instance=ExtResource("10_1rery")]
-light_mask = 2
-position = Vector2(1.0000076, 2.0000076)
-scale = Vector2(1.8026316, 1.8026316)
-color = Color(1, 1, 1, 1)
-energy = 0.3
-texture_scale = 0.7
-
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="animation_finished" from="Flamme/anim" to="." method="_on_anim_animation_finished"]
