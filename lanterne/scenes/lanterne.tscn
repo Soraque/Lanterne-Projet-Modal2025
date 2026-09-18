@@ -12,8 +12,8 @@ point_count = 3
 colors = PackedColorArray(0.23921569, 0.12941177, 0.15686275, 1, 0.9843137, 0.42745098, 0.14117648, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2dgo"]
-radius = 4.0
-height = 14.0
+radius = 8.0
+height = 22.0
 
 [node name="lanterne" type="RigidBody2D" unique_id=1652586517]
 light_mask = 2
@@ -49,6 +49,14 @@ modulate = Color(1, 0.6862745, 1, 1)
 light_mask = 2
 texture = ExtResource("2_kto68")
 
+[node name="Area2D_grande" type="Area2D" parent="Sprite2D" unique_id=1199797304]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D_grande" unique_id=1729314461]
+shape = SubResource("CapsuleShape2D_s2dgo")
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="area_entered" from="Sprite2D/Area2D_grande" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Sprite2D/Area2D_grande" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Sprite2D/Area2D_grande" to="." method="_on_area_2d_body_exited"]
