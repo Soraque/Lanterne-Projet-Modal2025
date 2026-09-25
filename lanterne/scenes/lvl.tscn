@@ -210,7 +210,6 @@ follow_viewport_enabled = true
 [node name="parallaxe" type="Node" parent="background" unique_id=864156185]
 
 [node name="background_parallaxe#Parallax2D3" type="Parallax2D" parent="background/parallaxe" unique_id=2035172988]
-visible = false
 light_mask = 3
 z_index = -2
 scroll_scale = Vector2(0.05, 0.05)
@@ -230,7 +229,6 @@ scale = Vector2(2, -2)
 texture = ExtResource("8_0o530")
 
 [node name="background_parallaxe#Parallax2D2" type="Parallax2D" parent="background/parallaxe" unique_id=312675934]
-visible = false
 z_index = -1
 scroll_scale = Vector2(0.1, 0.1)
 
@@ -245,7 +243,6 @@ scale = Vector2(3, 3)
 texture = ExtResource("8_0o530")
 
 [node name="Parallax2D" type="Parallax2D" parent="background/parallaxe" unique_id=1471772432]
-visible = false
 z_index = -3
 scroll_scale = Vector2(0.01, 0.01)
 scroll_offset = Vector2(600, 317)

@@ -33,6 +33,10 @@ folder_colors={
 "res://scripts/": "red"
 }
 
+[gui]
+
+theme/custom="uid://cptu0dxjvd5dc"
+
 [input]
 
 dash={
