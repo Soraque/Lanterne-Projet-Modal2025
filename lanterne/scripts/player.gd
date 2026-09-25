@@ -49,7 +49,8 @@ var jbuffertime = 0.1
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
 var anim_str = "" # Suffixe utilisé pour choisir les animations avec/sans lanterne.
-
+var force_lancer = 600
+var impact_vitesse_initiale = 0.4
 # --- Dégâts / Invincibilité ---
 
 var isInvincible = false
@@ -154,7 +155,7 @@ func _physics_process(delta: float) -> void:
 		
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
-			aim_line.tracer(delta / Engine.time_scale, direction_lancer)
+			aim_line.tracer(delta / Engine.time_scale, direction_lancer,force_lancer,impact_vitesse_initiale)
 			if not lantern_ready:
 				joystick_on.emit()
 			lantern_ready = true
@@ -290,7 +291,7 @@ func lancer_lanterne():
 	var lanterne = lanterne_scene.instantiate()
 	lanterne.global_position = global_position
 	get_parent().add_child(lanterne)
-	lanterne.lancer(direction_lancer,velocity)
+	lanterne.lancer(direction_lancer,velocity,force_lancer,impact_vitesse_initiale)
 
 func on_jump_buffer_timeout() -> void:
 	# Si le joueur n'a pas pu sauter pendant la durée du buffer,

@@ -5,7 +5,6 @@ extends Node
 	set(value):
 		time_dilatation = value
 		Engine.time_scale = value
-		print(value)
 const time_dilatation_strength: float = 0.1
 var tween_time: Tween
 
