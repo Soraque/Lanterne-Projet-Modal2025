@@ -96,7 +96,11 @@ func _sequence_combustion(current_id: int) -> void:
 func _on_flamme_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and "is_lanterne" in body:
 		body.is_lanterne = true
+		if spawn:
+			body.allumer_lanterne(100)
 
 func _on_zone_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.is_lanterne and not flamme.visible: 
 		embrase()
+		if spawn:
+			body.allumer_lanterne(100)

@@ -309,3 +309,7 @@ func get_game_manager() -> Node:
 func get_coef_usure() -> float:
 	var x = lantern_usure/100
 	return (400*x**3 - 600*x**2 + 319*x)/119
+	
+func allumer_lanterne(value) :
+	var tween = create_tween()
+	tween.tween_property(self, "lantern_usure", value, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
