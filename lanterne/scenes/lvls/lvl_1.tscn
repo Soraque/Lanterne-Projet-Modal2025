@@ -17,6 +17,11 @@
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="15_dqy87"]
 [ext_resource type="PackedScene" uid="uid://4w7q8p78tc2o" path="res://scenes/lvls/changelvl.tscn" id="16_ni4wm"]
 
+[sub_resource type="Environment" id="Environment_031as"]
+glow_enabled = true
+glow_intensity = 2.38
+glow_bloom = 0.5
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1tlce"]
 texture = ExtResource("2_ni4wm")
 11:1/0 = 0
@@ -143,13 +148,16 @@ sources/0 = SubResource("TileSetAtlasSource_1tlce")
 shader = ExtResource("13_c7g6b")
 shader_parameter/desaturation_amount = 0.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
 size = Vector2(205, 40)
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
+
 [node name="lvl_1" type="Node2D" unique_id=19222889]
 script = ExtResource("1_e32sx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=942912795]
+environment = SubResource("Environment_031as")
 
 [node name="foreground" type="CanvasLayer" parent="." unique_id=470620068]
 layer = 2
@@ -303,6 +311,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="zones" type="Node" parent="." unique_id=1485321476]
 
+[node name="changelvl" parent="zones" unique_id=425453321 instance=ExtResource("16_ni4wm")]
+position = Vector2(1568, -342)
+fairesauterjoueur = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/changelvl" unique_id=787401105]
+position = Vector2(11.5, 81)
+shape = SubResource("RectangleShape2D_s2dgo")
+
 [node name="Killzone" type="Area2D" parent="zones" unique_id=304904487]
 script = ExtResource("15_dqy87")
 metadata/_custom_type_script = "uid://bg3yg1v1ill4h"
@@ -310,13 +326,6 @@ metadata/_custom_type_script = "uid://bg3yg1v1ill4h"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zones/Killzone" unique_id=989161551]
 position = Vector2(133, 283)
 shape = SubResource("WorldBoundaryShape2D_rsyu2")
-
-[node name="changelvl" parent="." unique_id=425453321 instance=ExtResource("16_ni4wm")]
-position = Vector2(1568, -342)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="changelvl" unique_id=787401105]
-position = Vector2(11.5, 81)
-shape = SubResource("RectangleShape2D_s2dgo")
 
 [connection signal="joystick_off" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_off"]
 [connection signal="joystick_on" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_on"]

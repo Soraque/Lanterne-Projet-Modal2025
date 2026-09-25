@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var lumiere: PointLight2D = $Fire_light
 @onready var aim_line: Line2D = $Aim_line
 @onready var pointeur: Polygon2D = $Pointeur
-@onready var canvas_modulate_back : CanvasModulate = $background/CanvasModulate
 @export var lanterne_scene: PackedScene
 
 # --- Mouvement général ---
@@ -66,13 +65,12 @@ signal joystick_off
 
 func _ready() -> void:
 	# Téléportation au feu de camp si un checkpoint existe
-	var gm = get_game_manager()
-	if gm.has_respawn_point and gm.respawn_scene == get_tree().current_scene.scene_file_path:
-		global_position = gm.respawn_position
-
 	var mat = animated_sprite.material as ShaderMaterial
 	if mat:
 		mat.set_shader_parameter("flash_modifier", 0.0)
+	
+	if GameManager.PlayerJumpOnEnter:
+		velocity.y = 6*JUMP_VELOCITY
 
 
 func jump() -> void:
@@ -280,31 +278,18 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 	if animated_sprite.animation == "wall_slide_fall" + anim_str:
 		animated_sprite.play("wall_slide_grosse_chute" + anim_str)
-
+	# Même logique pour la chute contre un mur.
+	if animated_sprite.animation == "wall_slide_fall"+anim_str:
+		animated_sprite.play("wall_slide_grosse_chute"+anim_str)
 
 func die() -> void:
-	var gm = get_game_manager()
+	var gm = GameManager
 	if gm.has_respawn_point and gm.respawn_scene != get_tree().current_scene.scene_file_path:
 		get_tree().change_scene_to_file.call_deferred(gm.respawn_scene)
 	else:
 		get_tree().reload_current_scene.call_deferred()
 	is_lanterne = true;
 
-
-# --- Gestion du GameManager sans Autoload ---
-func get_game_manager() -> Node:
-	var root = get_tree().root
-	var gm = root.get_node_or_null("GameManager")
-	if not gm:
-		# Crée le nœud GameManager s'il n'existe pas encore sous la racine
-		gm = Node.new()
-		gm.set_script(load("res://scripts/game_manager.gd"))
-		gm.name = "GameManager"
-		root.add_child.call_deferred(gm)
-	return gm
-	# Même logique pour la chute contre un mur.
-	if animated_sprite.animation == "wall_slide_fall"+anim_str:
-		animated_sprite.play("wall_slide_grosse_chute"+anim_str)
 
 func get_coef_usure() -> float:
 	var x = lantern_usure/100
