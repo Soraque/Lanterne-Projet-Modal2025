@@ -907,6 +907,7 @@ color = Color(1, 0.6784314, 0.5568628, 1)
 texture_scale = 5.0
 
 [node name="Aim_line" type="Line2D" parent="." unique_id=1517530146]
+light_mask = 0
 width = 2.0
 default_color = Color(1, 0.27380127, 0.21500143, 1)
 script = ExtResource("13_jej6c")
