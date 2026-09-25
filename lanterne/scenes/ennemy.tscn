@@ -92,14 +92,14 @@ autoplay = "default"
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_s2dgo")
 
-[node name="Killzone" type="Area2D" parent="." unique_id=1965018959]
+[node name="Killzone" type="Area2D" parent="." unique_id=2125716424]
 script = ExtResource("3_rsyu2")
-metadata/_custom_type_script = "uid://bg3yg1v1ill4h"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=784543694]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=756813774]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_031as")
 disabled = true
 
 [connection signal="area_entered" from="lumiere" to="." method="_on_lumiere_area_entered"]
 [connection signal="area_exited" from="lumiere" to="." method="_on_lumiere_area_exited"]
+[connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]

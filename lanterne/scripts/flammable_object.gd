@@ -1,14 +1,17 @@
 class_name FlammableObject
 extends StaticBody2D
 
-@export var duration := 3.0
+@export var duration := 3.0 #-1 pour infini
+@export var bouton := false
 @export var destroyable := true
+@export var sanslancer := false
 @onready var sprite: Sprite2D = $sprite
 @onready var flamme: Node2D = $Flamme
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
 @onready var collision: CollisionShape2D = $collision
 @onready var anim: AnimatedSprite2D = $Flamme/anim
 @onready var light: PointLight2D = $Flamme/light
+@onready var animation: AnimationPlayer = $Flamme/AnimationPlayer
 
 var anim_initial_y: float
 var combustion_id := 0
@@ -21,12 +24,13 @@ func _ready() -> void:
 func embrase() -> void:
 	# Chaque appel génère un nouvel ID unique qui annule tout 'await' en cours
 	combustion_id += 1
-	var current_id = combustion_id
 	
+	var current_id = combustion_id
+	animation.play("allumage")
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	
-	if name == "Bouton" and has_node("plateforme"):
+	if bouton and has_node("plateforme"):
 		$plateforme.activer()
 	
 	# Réinitialisation forcée du visuel
@@ -45,7 +49,9 @@ func embrase() -> void:
 	await anim.animation_finished
 	if current_id != combustion_id: return # Si rallumé entre temps, on abandonne ce thread
 	
-	_sequence_combustion(current_id)
+	if duration != -1: _sequence_combustion(current_id)
+	else: 
+		anim.play("feu")
 
 
 func _sequence_combustion(current_id: int) -> void:
@@ -79,3 +85,7 @@ func _sequence_combustion(current_id: int) -> void:
 func _on_flamme_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and "is_lanterne" in body:
 		body.is_lanterne = true
+
+func _on_zone_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D and body.is_lanterne and not flamme.visible: 
+		embrase()
