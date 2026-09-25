@@ -91,6 +91,7 @@ func _sequence_combustion(current_id: int) -> void:
 func _on_flamme_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and "is_lanterne" in body:
 		body.is_lanterne = true
+		body.lantern_usure += 0.1
 		if spawn:
 			body.allumer_lanterne(100)
 
