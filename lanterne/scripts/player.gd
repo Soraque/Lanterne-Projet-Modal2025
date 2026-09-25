@@ -264,9 +264,17 @@ func _physics_process(delta: float) -> void:
 	# --- 10. Actualisation usure lanterne ---
 	if lantern_usure>0:
 		lantern_usure-=delta*5
+	else:
+		is_lanterne = false
 	
 	# --- 11. Lumière lanterne ---
-	lumiere.set_texture_scale(1.5 + 6.5*get_coef_usure())
+	var coef = get_coef_usure()
+	if coef >0.1:
+		lumiere.set_texture_scale(1.5 + 6.5*(coef-0.1))
+	else:
+		lumiere.base_energy=coef*10
+	
+	
 	if filter_rect and filter_rect.material:
 			filter_rect.material.set_shader_parameter("desaturation_amount", 1-Global.time_dilatation)
 			
