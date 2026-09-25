@@ -47,7 +47,6 @@ var jbuffertime = 0.1
 @export var is_lanterne = true # Le joueur possède-t-il actuellement la lanterne ?
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
-var anim_str = "" # Nom des animation avec ou sans lanterne
 var anim_str = "" # Suffixe utilisé pour choisir les animations avec/sans lanterne.
 const time_dilatation_strength = 0.5
 

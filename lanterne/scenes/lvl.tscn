@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://00rnssqg8td1" path="res://assets/tileset/clouds.png" id="8_0o530"]
 [ext_resource type="PackedScene" uid="uid://m41ye2yy606u" path="res://scenes/bouton.tscn" id="8_d474t"]
 [ext_resource type="PackedScene" uid="uid://jfvrqflgf5wo" path="res://scenes/ennemy.tscn" id="9_s5vkl"]
-[ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://scenes/time_dilatation_shader.gdshader" id="12_h8j34"]
-[ext_resource type="Script" uid="uid://c6h5bnvum7hb" path="res://scripts/global.gd" id="13_rv0fw"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="12_h8j34"]
+[ext_resource type="Script" uid="uid://c6h5bnvum7hb" path="res://scripts/global.gd" id="13_rv0fw"]
+[ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://scenes/time_dilatation_shader.gdshader" id="13_upgc2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
 texture = ExtResource("2_0k3uw")
@@ -140,7 +140,7 @@ sources/0 = SubResource("TileSetAtlasSource_ljibk")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4nwc7"]
-shader = ExtResource("12_h8j34")
+shader = ExtResource("13_upgc2")
 shader_parameter/desaturation_amount = 0.0
 
 [node name="lvl" type="Node2D" unique_id=19222889]
@@ -269,9 +269,12 @@ color = Color(0.6244094, 0.4194481, 0.3768441, 1)
 script = ExtResource("12_h8j34")
 metadata/_custom_type_script = "uid://bg3yg1v1ill4h"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=1149683389]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=989161551]
+position = Vector2(133, 283)
+shape = SubResource("WorldBoundaryShape2D_rsyu2")
+
+[node name="killzone#CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1149683389]
 position = Vector2(0, 400)
-shape = SubResource("WorldBoundaryShape2D_s2dgo")
 
 [node name="Overall" type="CanvasLayer" parent="." unique_id=436792102]
 layer = 10
@@ -288,7 +291,3 @@ script = ExtResource("13_rv0fw")
 
 [connection signal="joystick_off" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_off"]
 [connection signal="joystick_on" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_on"]
-[connection signal="body_entered" from="killzone" to="." method="_on_killzone_body_entered"]
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=989161551]
-position = Vector2(133, 283)
-shape = SubResource("WorldBoundaryShape2D_rsyu2")
