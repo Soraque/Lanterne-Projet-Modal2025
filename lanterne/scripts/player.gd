@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var lumiere: PointLight2D = $Fire_light
 @onready var aim_line: Line2D = $Aim_line
 @onready var pointeur: Polygon2D = $Pointeur
+@onready var canvas_modulate_back : CanvasModulate = $background/CanvasModulate
 @export var lanterne_scene: PackedScene
 
 # --- Mouvement général ---
@@ -40,6 +41,7 @@ var jbuffertime = 0.1
 # --- Lanterne ---
 @export var is_lanterne = true
 var lantern_ready = false
+@export var lantern_usure = 100 # Valeur de d'usure de la lanterne de 0 : éteinds à 100 : complètement allumé
 var direction_lancer = Vector2.ZERO
 var anim_str = ""
 var force_lancer = 1000
@@ -214,10 +216,24 @@ func _physics_process(delta: float) -> void:
 			if velocity.y <= 0:
 				animated_sprite.play("jump" + anim_str)
 			else:
-				if animated_sprite.animation != "fall" + anim_str and animated_sprite.animation != "chute longue":
-					animated_sprite.play("fall" + anim_str)
-
+				# Même principe ici : on laisse l'animation de chute
+				# se terminer avant de passer à la chute longue.
+				if animated_sprite.animation != "fall"+anim_str and animated_sprite.animation != "chute longue":
+					animated_sprite.play("fall"+anim_str)
+	
 	move_and_slide()
+	
+	# --- 10. Actualisation usure lanterne ---
+	if lantern_usure>0:
+		lantern_usure-=delta*5
+	
+	# --- 11. Lumière lanterne ---
+	lumiere.set_texture_scale(1.5 + 6.5*get_coef_usure())
+	if filter_rect and filter_rect.material:
+			filter_rect.material.set_shader_parameter("desaturation_amount", 1-Global.time_dilatation)
+			
+	if collision_boost_cooldown>0 : collision_boost_cooldown -= delta
+	
 
 	if filter_rect and filter_rect.material:
 		filter_rect.material.set_shader_parameter("desaturation_amount", 1 - Global.time_dilatation)
@@ -278,3 +294,10 @@ func get_game_manager() -> Node:
 		gm.name = "GameManager"
 		root.add_child.call_deferred(gm)
 	return gm
+	# Même logique pour la chute contre un mur.
+	if animated_sprite.animation == "wall_slide_fall"+anim_str:
+		animated_sprite.play("wall_slide_grosse_chute"+anim_str)
+
+func get_coef_usure() -> float:
+	var x = lantern_usure/100
+	return (400*x**3 - 600*x**2 + 319*x)/119

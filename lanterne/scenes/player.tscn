@@ -895,7 +895,6 @@ one_shot = true
 
 [node name="Fire_light" parent="." unique_id=656477510 instance=ExtResource("10_y4r1p")]
 color = Color(1, 0.6784314, 0.5568628, 1)
-texture_scale = 5.0
 
 [node name="Aim_line" type="Line2D" parent="." unique_id=1517530146]
 light_mask = 4
