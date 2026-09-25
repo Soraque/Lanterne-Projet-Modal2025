@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bc8team0xihdq" path="res://scripts/camera_2d.gd" id="9_y4r1p"]
 [ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://b1kp8646re6q2" path="res://assets/character/WallSlide/Male_Hero_Montée_WallSlide_sans_lanterne.png" id="11_f1ej7"]
+[ext_resource type="Script" uid="uid://b0nvbxjnqqcc" path="res://scripts/aim_line.gd" id="13_jej6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
 atlas = ExtResource("5_ur7pv")
@@ -904,5 +905,13 @@ one_shot = true
 [node name="Fire_light" parent="." unique_id=656477510 instance=ExtResource("10_y4r1p")]
 color = Color(1, 0.6784314, 0.5568628, 1)
 texture_scale = 5.0
+
+[node name="Aim_line" type="Line2D" parent="." unique_id=1517530146]
+width = 2.0
+script = ExtResource("13_jej6c")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=2064235577]
+position = Vector2(226, 1)
+target_position = Vector2(99, 0)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

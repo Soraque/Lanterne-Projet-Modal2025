@@ -4,7 +4,9 @@ extends CharacterBody2D
 @onready var dash_cd_timer: Timer = $DashCdTimer
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var lumiere: PointLight2D = $Fire_light
+@onready var aim_line: Line2D = $Aim_line
 @export var lanterne_scene: PackedScene
+
 
 # --- Mouvement général ---
 
@@ -45,6 +47,7 @@ var jbuffertime = 0.1
 @export var is_lanterne = true # Le joueur possède-t-il actuellement la lanterne ?
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
+var anim_str = "" # Nom des animation avec ou sans lanterne
 var anim_str = "" # Suffixe utilisé pour choisir les animations avec/sans lanterne.
 const time_dilatation_strength = 0.5
 
@@ -65,11 +68,18 @@ var collision_boost_cooldown = 0.1
 const max_boost_speed = 380
 var previous_velocity = Vector2(0,0)
 
+#Time dilatation
+signal joystick_on
+signal joystick_off
+@onready var filter_rect = $"../../Overall/grey_filter"
+
 func _ready() -> void:
 	# Initialise le paramètre du shader utilisé pour le flash du personnage.
 	var mat = animated_sprite.material as ShaderMaterial
 	if mat:
 		mat.set_shader_parameter("flash_modifier", 0.0)
+		
+
 
 func jump() -> void:
 	if jump_available:
@@ -142,24 +152,34 @@ func _physics_process(delta: float) -> void:
 
 	# --- 4. Lancer de la lanterne ---
 	if is_lanterne:
+		
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
+			
+			if not lantern_ready:
+				joystick_on.emit()
+			lantern_ready = true
+			aim_line.tracer(delta, direction_lancer)
 			lantern_ready = true
 			
 			# Plus le joystick est incliné, plus le temps ralentit.
 			Global.time_dilatation = 1-time_dilatation_strength*input_lancer.length()
 			Engine.time_scale = Global.time_dilatation
-			print(Global.time_dilatation)
 			
 		elif lantern_ready: # Le joystick vient d'être relâché
 			# On rétablit le temps normal avant de lancer la lanterne.
 			Global.time_dilatation = 1
 			Engine.time_scale = Global.time_dilatation
 
+		elif lantern_ready: # Le joystick vient d'être relâché
+			joystick_off.emit()
+			
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
 			direction_lancer = Vector2.ZERO
+	print(Global.time_dilatation)
+	Engine.time_scale = Global.time_dilatation
 
 	# --- 5. Mise à jour de l'état de la lanterne et des animations ---
 	# Plutôt que de modifier chaque nom d'animation individuellement,
@@ -244,6 +264,13 @@ func _physics_process(delta: float) -> void:
 					animated_sprite.play("fall"+anim_str)
 
 	move_and_slide()
+	
+	if filter_rect and filter_rect.material:
+			filter_rect.material.set_shader_parameter("desaturation_amount", 1-Global.time_dilatation)
+			
+			
+	if collision_boost_cooldown>0 : collision_boost_cooldown -= delta
+	
 
 	# --- 10. Boost lors d'une collision avec un mur ---
 	if collision_boost_cooldown>0 :
