@@ -143,6 +143,9 @@ sources/0 = SubResource("TileSetAtlasSource_ljibk")
 shader = ExtResource("13_yq6wr")
 shader_parameter/desaturation_amount = 0.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ib21a"]
+size = Vector2(2157, 460)
+
 [node name="lvl" type="Node2D" unique_id=19222889]
 script = ExtResource("1_ib21a")
 
@@ -291,6 +294,8 @@ mouse_filter = 2
 script = ExtResource("14_103p8")
 
 [node name="ReferenceRect" type="CollisionShape2D" parent="." unique_id=696998399]
+position = Vector2(742.5, -8)
+shape = SubResource("RectangleShape2D_ib21a")
 
 [connection signal="joystick_off" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_off"]
 [connection signal="joystick_on" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_on"]
