@@ -7,11 +7,10 @@ extends RigidBody2D
 
 var isLit := true
 var is_destroying := false
-var force_lancer := 600
 var bien_lance = false # true lorsque la lanterne est sortie de l'hitbox du joueur
 
-func lancer(direction: Vector2, vitesse: Vector2):
-	linear_velocity = direction * force_lancer + vitesse
+func lancer(direction: Vector2, vitesse: Vector2,force_lancer = 1000,impact_vitesse_initiale = 0.2):
+	linear_velocity = direction * force_lancer + vitesse*impact_vitesse_initiale
 	bien_lance = false
 
 

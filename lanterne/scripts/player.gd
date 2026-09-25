@@ -49,8 +49,8 @@ var jbuffertime = 0.1
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
 var anim_str = "" # Suffixe utilisé pour choisir les animations avec/sans lanterne.
-const time_dilatation_strength = 0.5
-
+var force_lancer = 600
+var impact_vitesse_initiale = 0.4
 # --- Dégâts / Invincibilité ---
 
 var isInvincible = false
@@ -138,14 +138,18 @@ func _physics_process(delta: float) -> void:
 		can_dash = false
 		dash_timer = DASH_DURATION
 		velocity.y=0
+		wall_jump_lock_timer=0
 		
 		# La direction du dash dépend de l'orientation actuelle du sprite.
 		if is_on_wall() and not is_on_floor():
 			vitesse_debut = 0
 			looking_direction = get_wall_normal().x / abs(get_wall_normal().x)
 		else:
-			vitesse_debut = velocity.x
 			looking_direction = -int(animated_sprite.flip_h)*2+1
+			if velocity.x*looking_direction>0: # Si dash dans le sens du mouvement
+				vitesse_debut = velocity.x # On conserve la vitesse
+			else:
+				vitesse_debut = 0 #Sinon non
 		
 		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
@@ -155,20 +159,16 @@ func _physics_process(delta: float) -> void:
 		
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
-			aim_line.tracer(delta / Engine.time_scale, direction_lancer)
+			aim_line.tracer(delta / Engine.time_scale, direction_lancer,force_lancer,impact_vitesse_initiale)
+			if not lantern_ready:
+				joystick_on.emit()
 			lantern_ready = true
-			
-			# Plus le joystick est incliné, plus le temps ralentit.
-			Global.time_dilatation = 1-time_dilatation_strength*input_lancer.length()
-			Engine.time_scale = Global.time_dilatation
-			
 		elif lantern_ready: # Le joystick vient d'être relâché
 			# On rétablit le temps normal avant de lancer la lanterne.
-			Global.time_dilatation = 1
-			Engine.time_scale = Global.time_dilatation
+			joystick_off.emit()
 			aim_line.clear_points()
 			pointeur.visible = false
-
+			
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
@@ -212,7 +212,7 @@ func _physics_process(delta: float) -> void:
 	# --- 7. Mouvement horizontal ---
 	if wall_jump_lock_timer > 0.0:
 		# Pendant le début du wall jump, on conserve la vitesse imposée
-		# pour empêcher le joueur de revenir immédiatement vers le mur.
+		# pour empêcher le joueur de revenir im	médiatement vers le mur.
 		pass
 	elif direction_h != 0:
 			# Le joueur contrôle davantage son déplacement au sol qu'en l'air.
@@ -295,7 +295,7 @@ func lancer_lanterne():
 	var lanterne = lanterne_scene.instantiate()
 	lanterne.global_position = global_position
 	get_parent().add_child(lanterne)
-	lanterne.lancer(direction_lancer,velocity)
+	lanterne.lancer(direction_lancer,velocity,force_lancer,impact_vitesse_initiale)
 
 func on_jump_buffer_timeout() -> void:
 	# Si le joueur n'a pas pu sauter pendant la durée du buffer,
