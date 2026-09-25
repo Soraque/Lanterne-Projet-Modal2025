@@ -15,6 +15,7 @@
 [ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://scenes/time_dilatation_shader.gdshader" id="13_c7g6b"]
 [ext_resource type="Script" uid="uid://c6h5bnvum7hb" path="res://scripts/global.gd" id="14_23bhx"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="15_dqy87"]
+[ext_resource type="PackedScene" uid="uid://4w7q8p78tc2o" path="res://scenes/lvls/changelvl.tscn" id="16_ni4wm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1tlce"]
 texture = ExtResource("2_ni4wm")
@@ -143,6 +144,9 @@ shader = ExtResource("13_c7g6b")
 shader_parameter/desaturation_amount = 0.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
+size = Vector2(205, 40)
 
 [node name="lvl_1" type="Node2D" unique_id=19222889]
 script = ExtResource("1_e32sx")
@@ -306,6 +310,13 @@ metadata/_custom_type_script = "uid://bg3yg1v1ill4h"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zones/Killzone" unique_id=989161551]
 position = Vector2(133, 283)
 shape = SubResource("WorldBoundaryShape2D_rsyu2")
+
+[node name="changelvl" parent="." unique_id=425453321 instance=ExtResource("16_ni4wm")]
+position = Vector2(1568, -342)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="changelvl" unique_id=787401105]
+position = Vector2(11.5, 81)
+shape = SubResource("RectangleShape2D_s2dgo")
 
 [connection signal="joystick_off" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_off"]
 [connection signal="joystick_on" from="foreground/player" to="Overall/grey_filter" method="_on_player_joystick_on"]
