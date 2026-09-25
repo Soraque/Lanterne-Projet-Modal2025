@@ -138,14 +138,18 @@ func _physics_process(delta: float) -> void:
 		can_dash = false
 		dash_timer = DASH_DURATION
 		velocity.y=0
+		wall_jump_lock_timer=0
 		
 		# La direction du dash dépend de l'orientation actuelle du sprite.
 		if is_on_wall() and not is_on_floor():
 			vitesse_debut = 0
 			looking_direction = get_wall_normal().x / abs(get_wall_normal().x)
 		else:
-			vitesse_debut = velocity.x
 			looking_direction = -int(animated_sprite.flip_h)*2+1
+			if velocity.x*looking_direction>0: # Si dash dans le sens du mouvement
+				vitesse_debut = velocity.x # On conserve la vitesse
+			else:
+				vitesse_debut = 0 #Sinon non
 		
 		animated_sprite.play("dash"+anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
@@ -208,7 +212,7 @@ func _physics_process(delta: float) -> void:
 	# --- 7. Mouvement horizontal ---
 	if wall_jump_lock_timer > 0.0:
 		# Pendant le début du wall jump, on conserve la vitesse imposée
-		# pour empêcher le joueur de revenir immédiatement vers le mur.
+		# pour empêcher le joueur de revenir im	médiatement vers le mur.
 		pass
 	elif direction_h != 0:
 			# Le joueur contrôle davantage son déplacement au sol qu'en l'air.
