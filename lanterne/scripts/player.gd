@@ -68,11 +68,18 @@ var collision_boost_cooldown = 0.1
 const max_boost_speed = 380
 var previous_velocity = Vector2(0,0)
 
+#Time dilatation
+signal joystick_on
+signal joystick_off
+@onready var filter_rect = $"../../Overall/grey_filter"
+
 func _ready() -> void:
 	# Initialise le paramètre du shader utilisé pour le flash du personnage.
 	var mat = animated_sprite.material as ShaderMaterial
 	if mat:
 		mat.set_shader_parameter("flash_modifier", 0.0)
+		
+
 
 func jump() -> void:
 	if jump_available:
@@ -145,6 +152,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 4. Lancer de la lanterne ---
 	if is_lanterne:
+		
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer)
@@ -165,6 +173,7 @@ func _physics_process(delta: float) -> void:
 			is_lanterne = false
 			lantern_ready = false
 			direction_lancer = Vector2.ZERO
+	Engine.time_scale = Global.time_dilatation
 
 	# --- 5. Mise à jour de l'état de la lanterne et des animations ---
 	# Plutôt que de modifier chaque nom d'animation individuellement,
@@ -249,6 +258,13 @@ func _physics_process(delta: float) -> void:
 					animated_sprite.play("fall"+anim_str)
 
 	move_and_slide()
+	
+	if filter_rect and filter_rect.material:
+			filter_rect.material.set_shader_parameter("desaturation_amount", 1-Global.time_dilatation)
+			
+			
+	if collision_boost_cooldown>0 : collision_boost_cooldown -= delta
+	
 
 	# --- 10. Boost lors d'une collision avec un mur ---
 	if collision_boost_cooldown>0 :
@@ -259,15 +275,12 @@ func _physics_process(delta: float) -> void:
 		for i in range(collision_count):
 			var collision = get_slide_collision(i)
 			var normal = collision.get_normal()
-			var tangent = Vector2(-normal.y, normal.x)
-			
 			# A MODIFIER !!
 			# Si on vient de toucher un mur, on peut appliquer un boost
 			# vers le haut en fonction de la vitesse précédente.
 			if ((is_on_wall() and not was_on_wall ) ) and collision_boost_cooldown<=0.0:
 				if -previous_velocity.y<max_boost_speed and previous_velocity.y<0:
 					velocity.y = -max_boost_speed
-					print("go")
 					collision_boost_cooldown = 0.1
 
 	# Sauvegarde de l'état actuel pour pouvoir le comparer

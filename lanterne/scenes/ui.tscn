@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://v7svns5m00ma"]
+
+[ext_resource type="Theme" uid="uid://cptu0dxjvd5dc" path="res://assets/main_theme.tres" id="1_nt7q6"]
+[ext_resource type="Texture2D" uid="uid://bjubop1dt01gn" path="res://assets/Capture d’écran 2026-09-11 à 16.58.48.png" id="2_x4jx1"]
+
+[sub_resource type="Curve" id="Curve_s2dgo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25925925, 1), 0.0, 0.0, 0, 0, Vector2(0.73809516, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_x4jx1"]
+offsets = PackedFloat32Array(0.012345679, 1)
+colors = PackedColorArray(0.9843137, 0.6784314, 0.5019608, 1, 0.9411765, 0.28235295, 0.07450981, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1825621296]
+
+[node name="CaptureD’écran20260911À16_58_48" type="Sprite2D" parent="." unique_id=307476169]
+z_index = -2
+position = Vector2(587.03845, 323.5)
+scale = Vector2(0.42628208, 0.42628205)
+texture = ExtResource("2_x4jx1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1692812941]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.148
+anchor_right = 0.952
+anchor_bottom = 0.36
+offset_left = 0.3999977
+offset_top = -34.904
+offset_right = 0.2960205
+offset_bottom = -35.280014
+grow_horizontal = 2
+theme = ExtResource("1_nt7q6")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "LANTERNE"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=2144967154]
+anchors_preset = -1
+anchor_left = 0.324
+anchor_top = 0.46500003
+anchor_right = 0.67700005
+anchor_bottom = 0.605
+offset_left = -0.24798584
+offset_top = -56.320007
+offset_right = 0.095947266
+offset_bottom = -56.04001
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="Button2" type="Button" parent="." unique_id=720743127]
+anchors_preset = -1
+anchor_left = 0.324
+anchor_top = 0.637
+anchor_right = 0.679
+anchor_bottom = 0.76900005
+offset_left = -0.24798584
+offset_top = -55.776
+offset_right = -0.20800781
+offset_bottom = -56.312042
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=680372840]
+z_index = -1
+position = Vector2(577, 262)
+amount = 20
+lifetime = 4.0
+emission_shape = 3
+emission_rect_extents = Vector2(570, 260)
+gravity = Vector2(0, 0)
+initial_velocity_min = 19.8
+initial_velocity_max = 34.65
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_s2dgo")
+color_ramp = SubResource("Gradient_x4jx1")
