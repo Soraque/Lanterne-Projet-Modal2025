@@ -19,6 +19,5 @@ func tracer(delta: float,dir_lancer: Vector2)->void:
 	for i in range(10):
 		vit += player.get_gravity() * delta
 		pos += vit
-		print(pos)
 		add_point(pos)
 	
