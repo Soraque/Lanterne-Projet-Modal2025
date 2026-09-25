@@ -166,18 +166,12 @@ func _physics_process(delta: float) -> void:
 			Engine.time_scale = Global.time_dilatation
 			
 		elif lantern_ready: # Le joystick vient d'être relâché
-			# On rétablit le temps normal avant de lancer la lanterne.
-			Global.time_dilatation = 1
-			Engine.time_scale = Global.time_dilatation
-
-		elif lantern_ready: # Le joystick vient d'être relâché
 			joystick_off.emit()
-			
+			print("lancer")
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
 			direction_lancer = Vector2.ZERO
-	print(Global.time_dilatation)
 	Engine.time_scale = Global.time_dilatation
 
 	# --- 5. Mise à jour de l'état de la lanterne et des animations ---
@@ -280,15 +274,12 @@ func _physics_process(delta: float) -> void:
 		for i in range(collision_count):
 			var collision = get_slide_collision(i)
 			var normal = collision.get_normal()
-			var tangent = Vector2(-normal.y, normal.x)
-			
 			# A MODIFIER !!
 			# Si on vient de toucher un mur, on peut appliquer un boost
 			# vers le haut en fonction de la vitesse précédente.
 			if ((is_on_wall() and not was_on_wall ) ) and collision_boost_cooldown<=0.0:
 				if -previous_velocity.y<max_boost_speed and previous_velocity.y<0:
 					velocity.y = -max_boost_speed
-					print("go")
 					collision_boost_cooldown = 0.1
 
 	# Sauvegarde de l'état actuel pour pouvoir le comparer

@@ -1,11 +1,7 @@
 extends Node
 
 # Forcer le type float (1.0 au lieu de 1)
-@export var time_dilatation: float = 1.0:
-	set(value):
-		time_dilatation = value
-		print(value)
-		
+@export var time_dilatation: float = 1.0
 const time_dilatation_strength: float = 0.3
 var tween_time: Tween
 

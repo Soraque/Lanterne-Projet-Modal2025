@@ -907,10 +907,13 @@ color = Color(1, 0.6784314, 0.5568628, 1)
 texture_scale = 5.0
 
 [node name="Aim_line" type="Line2D" parent="." unique_id=1517530146]
+light_mask = 4
+z_index = -10
 width = 2.0
 script = ExtResource("13_jej6c")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=2064235577]
+light_mask = 4
 position = Vector2(226, 1)
 target_position = Vector2(99, 0)
 
