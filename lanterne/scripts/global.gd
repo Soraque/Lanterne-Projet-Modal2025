@@ -1,8 +1,12 @@
 extends Node
 
 # Forcer le type float (1.0 au lieu de 1)
-@export var time_dilatation: float = 1.0
-const time_dilatation_strength: float = 0.3
+@export var time_dilatation: float = 1.0:
+	set(value):
+		time_dilatation = value
+		Engine.time_scale = value
+		print(value)
+const time_dilatation_strength: float = 0.1
 var tween_time: Tween
 
 func _ready() -> void:

@@ -49,7 +49,6 @@ var jbuffertime = 0.1
 var lantern_ready = false
 var direction_lancer = Vector2.ZERO
 var anim_str = "" # Suffixe utilisé pour choisir les animations avec/sans lanterne.
-const time_dilatation_strength = 0.5
 
 # --- Dégâts / Invincibilité ---
 
@@ -156,19 +155,15 @@ func _physics_process(delta: float) -> void:
 		if input_lancer.length() > 0.2: # Le joystick est suffisamment incliné
 			direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer)
+			if not lantern_ready:
+				joystick_on.emit()
 			lantern_ready = true
-			
-			# Plus le joystick est incliné, plus le temps ralentit.
-			Global.time_dilatation = 1-time_dilatation_strength*input_lancer.length()
-			Engine.time_scale = Global.time_dilatation
-			
 		elif lantern_ready: # Le joystick vient d'être relâché
 			# On rétablit le temps normal avant de lancer la lanterne.
-			Global.time_dilatation = 1
-			Engine.time_scale = Global.time_dilatation
+			joystick_off.emit()
 			aim_line.clear_points()
 			pointeur.visible = false
-
+			
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
