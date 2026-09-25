@@ -5,6 +5,7 @@ extends StaticBody2D
 @export var bouton := false
 @export var destroyable := true
 @export var sanslancer := false
+@export var spawn := false
 @onready var sprite: Sprite2D = $sprite
 @onready var flamme: Node2D = $Flamme
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
@@ -52,6 +53,16 @@ func embrase() -> void:
 	if duration != -1: _sequence_combustion(current_id)
 	else: 
 		anim.play("feu")
+	
+	if spawn:
+		var root = get_tree().root
+		var gm = root.get_node_or_null("GameManager")
+		if not gm:
+			gm = load("res://scripts/game_manager.gd").new()
+			gm.name = "GameManager"
+			root.add_child(gm)
+		var current_scene_path := get_tree().current_scene.scene_file_path
+		gm.set_respawn_point(global_position, current_scene_path)
 
 
 func _sequence_combustion(current_id: int) -> void:
