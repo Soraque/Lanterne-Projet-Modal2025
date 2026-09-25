@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://4w7q8p78tc2o"]
+
+[ext_resource type="Script" uid="uid://26dh2rmue2vc" path="res://scripts/changelvl.gd" id="1_8bj44"]
+
+[node name="changelvl" type="Area2D" unique_id=425453321]
+script = ExtResource("1_8bj44")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
