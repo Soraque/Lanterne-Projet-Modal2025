@@ -72,7 +72,7 @@ func _sequence_combustion(current_id: int) -> void:
 	
 	# Extinction (uniquement si le timer n'a pas été interrompu par un nouveau lancer)
 	anim.visible = false
-	if name == "Bouton" and has_node("plateforme"):
+	if bouton and has_node("plateforme"):
 		$plateforme.desactiver()
 		
 	if destroyable:
