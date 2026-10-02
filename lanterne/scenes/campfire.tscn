@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://cy0rs5rfi34fp" path="res://assets/feu/Group 4 - 1.png" id="9_sdndd"]
 [ext_resource type="Texture2D" uid="uid://ifj067msp2nf" path="res://assets/feu/Group 6 - 3.png" id="10_k3mv4"]
 [ext_resource type="Texture2D" uid="uid://dbcdtm72514vk" path="res://assets/campfire/campfire-without-fire.png" id="11_sbayf"]
+[ext_resource type="AudioStream" uid="uid://ccj51s00ejy1d" path="res://assets/sonore/FIREBurn_Grand feu de branches 1 (ID 0987)_LaSonotheque.fr.mp3" id="12_73d8c"]
+[ext_resource type="AudioStream" uid="uid://6vcbukhr00j3" path="res://assets/sonore/FIREIgn_Essence prend feu 1 (ID 1340)_LaSonotheque.fr.mp3" id="13_tdo0i"]
+[ext_resource type="AudioStream" uid="uid://dkp6xb52yi76u" path="res://assets/sonore/koiroylers-correct-356013.mp3" id="14_03221"]
 
 [sub_resource type="Gradient" id="Gradient_m6xh0"]
 
@@ -253,6 +256,14 @@ _data = {
 &"allumage": SubResource("Animation_73d8c")
 }
 
+[sub_resource type="Curve" id="Curve_sbayf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25925925, 1), 0.0, 0.0, 0, 0, Vector2(0.73809516, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_73d8c"]
+offsets = PackedFloat32Array(0.012345679, 1)
+colors = PackedColorArray(0.9843137, 0.6784314, 0.5019608, 1, 0.9411765, 0.28235295, 0.07450981, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mg5w5"]
 size = Vector2(31, 61)
 
@@ -313,6 +324,21 @@ disabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Flamme" unique_id=14838440]
 libraries/ = SubResource("AnimationLibrary_tdo0i")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Flamme" unique_id=1330601590]
+light_mask = 2
+z_index = -1
+position = Vector2(0, -50)
+amount = 10
+lifetime = 4.0
+emission_shape = 3
+emission_rect_extents = Vector2(120, 100)
+gravity = Vector2(0, 0)
+initial_velocity_min = 19.8
+initial_velocity_max = 34.65
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_sbayf")
+color_ramp = SubResource("Gradient_73d8c")
+
 [node name="collision" type="CollisionShape2D" parent="." unique_id=19254757]
 light_mask = 2
 use_parent_material = true
@@ -332,6 +358,20 @@ use_parent_material = true
 use_parent_material = true
 position = Vector2(-1, 17)
 shape = SubResource("CapsuleShape2D_s2dgo")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=349597897]
+stream = ExtResource("12_73d8c")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=1246563507]
+stream = ExtResource("13_tdo0i")
+volume_db = 1.0
+attenuation = 1.3195065
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." unique_id=541738288]
+stream = ExtResource("14_03221")
+volume_db = 2.0
+pitch_scale = 0.5
+attenuation = 27.857557
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="body_entered" from="zone" to="." method="_on_zone_body_entered"]
