@@ -60,7 +60,6 @@ var previous_velocity = Vector2(0, 0)
 # Time dilatation
 signal joystick_on
 signal joystick_off
-@onready var filter_rect = $"../../Overall/grey_filter"
 
 
 func _ready() -> void:
@@ -234,15 +233,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		lumiere.base_energy=coef*10
 	
-	
-	if filter_rect and filter_rect.material:
-			filter_rect.material.set_shader_parameter("desaturation_amount", 1-Global.time_dilatation)
 			
 	if collision_boost_cooldown>0 : collision_boost_cooldown -= delta
 	
-
-	if filter_rect and filter_rect.material:
-		filter_rect.material.set_shader_parameter("desaturation_amount", 1 - Global.time_dilatation)
 
 	if collision_boost_cooldown > 0:
 		collision_boost_cooldown -= delta

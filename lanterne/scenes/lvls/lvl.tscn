@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://00rnssqg8td1" path="res://assets/tileset/clouds.png" id="10_brmi1"]
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="11_pkp7q"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="12_0q1j1"]
-[ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://scenes/time_dilatation_shader.gdshader" id="13_yq6wr"]
+[ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://Shaders/time_dilatation_shader.gdshader" id="13_yq6wr"]
 [ext_resource type="Script" uid="uid://c6h5bnvum7hb" path="res://scripts/global.gd" id="14_103p8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
