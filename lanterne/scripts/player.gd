@@ -107,6 +107,7 @@ func die() -> void:
 	# Réinitialise la sauvegarde de usure au respawn
 	gm.lantern_usure_saved = 100.0
 	gm.is_lanterne_saved = true
+	gm.reset_combo()
 	
 	if gm.has_respawn_point and gm.respawn_scene != get_tree().current_scene.scene_file_path:
 		get_tree().change_scene_to_file.call_deferred(gm.respawn_scene)

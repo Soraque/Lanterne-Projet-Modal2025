@@ -16,5 +16,5 @@ func _on_body_entered(body: Node2D) -> void:
 		GameManager.is_lanterne_saved = body.is_lanterne
 		
 		var currentlvl = get_tree().current_scene.scene_file_path.to_int()
-		var nextlvl = FILEBEGIN + str(currentlvl + changecombien) + ".tscn"
+		var nextlvl = FILEBEGIN + str(currentlvl + changecombien) + ".scn"
 		get_tree().change_scene_to_file(nextlvl)

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # Chemin de la scène à charger lors du clic sur Start
-const LVL1_SCENE_PATH := "res://scenes/lvls/lvl_1.tscn"
+const LVL1_SCENE_PATH := "res://scenes/lvls/lvl_1.scn"
 
 
 func _on_start_pressed() -> void:

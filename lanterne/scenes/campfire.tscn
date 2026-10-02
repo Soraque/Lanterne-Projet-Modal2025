@@ -358,8 +358,8 @@ attenuation = 1.3195065
 
 [node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." unique_id=541738288]
 stream = ExtResource("14_03221")
-volume_db = -2.0
-pitch_scale = 0.3
+volume_db = 2.0
+pitch_scale = 0.5
 attenuation = 27.857557
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]

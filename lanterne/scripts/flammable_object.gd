@@ -6,7 +6,6 @@ extends StaticBody2D
 @export var destroyable := true
 @export var sanslancer := false
 @export var spawn := false
-
 @onready var sprite: Sprite2D = $sprite
 @onready var flamme: Node2D = $Flamme
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
@@ -22,11 +21,6 @@ var combustion_id := 0
 func _ready() -> void:
 	anim_initial_y = anim.position.y
 	
-	# Assure que le flux audio est bien préchargé
-	var audio = _get_audio_node()
-	if audio and audio.stream == null:
-		audio.stream = fire_sound_resource
-	
 	# Si c'est un point de spawn/feu de camp, on vérifie s'il doit être rallumé au chargement
 	if spawn:
 		var checkpoint_id = get_checkpoint_id()
@@ -39,30 +33,37 @@ func get_checkpoint_id() -> String:
 	return scene_path + "_" + name
 
 
-func _get_audio_node() -> AudioStreamPlayer2D:
-	var audio = get_node_or_null("AudioStreamPlayer2D") as AudioStreamPlayer2D
-	if not audio:
-		audio = find_child("AudioStreamPlayer2D", true, false) as AudioStreamPlayer2D
-	return audio
-
-
+# Joue le son de boucle (ex: AudioStreamPlayer2D) s'il n'est pas déjà en train de tourner
 func play_fire_sound() -> void:
-	var audio = _get_audio_node()
-	if audio:
-		if audio.stream == null:
-			audio.stream = fire_sound_resource
-		if not audio.playing:
-			audio.play()
+	var audio = get_node_or_null("AudioStreamPlayer2D") as AudioStreamPlayer2D
+	if audio and not audio.playing:
+		audio.play()
 
 
+# Joue les sons secondaires d'allumage/one-shot avec montée de fréquence en combo
+func play_ignition_sounds() -> void:
+	var audio2 = get_node_or_null("AudioStreamPlayer2D2") as AudioStreamPlayer2D
+	var audio3 = get_node_or_null("AudioStreamPlayer2D3") as AudioStreamPlayer2D
+	
+	if audio2:
+		var new_pitch = GameManager.register_ignition_combo()
+		audio2.pitch_scale = new_pitch
+		if not audio2.playing:
+			audio2.play()
+
+	if audio3 and not audio3.playing:
+		audio3.play()
+
+
+# Arrête tous les sons de feu associés lorsque la combustion se termine
 func stop_fire_sound() -> void:
-	var audio = _get_audio_node()
-	if audio and audio.playing:
-		audio.stop()
+	for node_name in ["AudioStreamPlayer2D", "AudioStreamPlayer2D2", "AudioStreamPlayer2D3"]:
+		var audio = get_node_or_null(node_name) as AudioStreamPlayer2D
+		if audio and audio.playing:
+			audio.stop()
 
 
 func rallumer_silencieux() -> void:
-	# Allume le feu de camp sans déclencher l'animation d'allumage ni superposer le son
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	anim.position.y = anim_initial_y
@@ -72,19 +73,19 @@ func rallumer_silencieux() -> void:
 		sprite.visible = false
 	anim.play("feu")
 	
-	# Ne rejoue le son QUE s'il n'est pas déjà en train de tourner
+	# Au chargement de scène, on ne relance QUE le son de boucle continu s'il est arrêté
 	play_fire_sound()
 
 
 func embrase() -> void:
 	combustion_id += 1
 	var current_id = combustion_id
-	
-	# Joue l'animation visuelle et sonore d'allumage
 	animation.play("allumage")
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	
+	# Déclenche l'allumage initial : son unique d'allumage + son de boucle
+	play_ignition_sounds()
 	play_fire_sound()
 	
 	if bouton and has_node("plateforme"):
