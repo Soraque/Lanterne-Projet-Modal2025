@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ifj067msp2nf" path="res://assets/feu/Group 6 - 3.png" id="9_kt6ch"]
 [ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_1rery"]
 [ext_resource type="Texture2D" uid="uid://4jr2pyj02j0v" path="res://assets/bouton.png" id="11_m1s75"]
+[ext_resource type="AudioStream" uid="uid://6vcbukhr00j3" path="res://assets/sonore/FIREIgn_Essence prend feu 1 (ID 1340)_LaSonotheque.fr.mp3" id="12_8bmx5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lx15h"]
 atlas = ExtResource("7_172p2")
@@ -284,6 +285,11 @@ light_mask = 2
 position = Vector2(2.3841858e-07, 2.3841858e-07)
 texture = ExtResource("11_m1s75")
 region_rect = Rect2(348, 144, 8, 32)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=512023627]
+stream = ExtResource("12_8bmx5")
+volume_db = -8.0
+attenuation = 1.3195065
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="animation_finished" from="Flamme/anim" to="." method="_on_anim_animation_finished"]

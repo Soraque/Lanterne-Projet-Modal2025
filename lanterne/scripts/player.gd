@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var lanterne_scene: PackedScene
 @onready var runparticles: CPUParticles2D = $runparticles
 @onready var wallparticles: CPUParticles2D = $wallparticles
+@onready var course_audio: AudioStreamPlayer2D = $course
 
 # --- Mouvement général ---
 const SPEED = 300.0
@@ -140,6 +141,7 @@ func _physics_process(delta: float) -> void:
 		if dash_timer <= 0.0:
 			velocity.x = vitesse_debut
 			
+		course_audio.stop()
 		move_and_slide()
 		return
 
@@ -161,6 +163,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
 		runparticles.emitting = false
 		wallparticles.emitting = false
+		course_audio.stop()
 		can_dash = false
 		dash_timer = DASH_DURATION
 		velocity.y = 0
@@ -211,6 +214,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		runparticles.emitting = false
 		wallparticles.emitting = false
+		course_audio.stop()
 		jump()
 
 	if Input.is_action_just_released("jump") and velocity.y < 0:
@@ -219,6 +223,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
 		runparticles.emitting = false
 		wallparticles.emitting = false
+		course_audio.stop()
 		var wall_normal = get_wall_normal()
 		velocity.x = wall_normal.x * WALL_JUMP_HORIZONTAL_SPEED
 		velocity.y = WALL_JUMP_VERTICAL_SPEED
@@ -242,7 +247,7 @@ func _physics_process(delta: float) -> void:
 	elif direction_h < 0:
 		animated_sprite.flip_h = true
 
-	# --- 9. Animations & Particules ---
+	# --- 9. Animations, Particules & Sons ---
 	runparticles.direction.x = 1.0 if animated_sprite.flip_h else -1.0
 
 	if is_on_floor() and dash_timer <= 0.0:
@@ -250,19 +255,22 @@ func _physics_process(delta: float) -> void:
 		if direction_h == 0:
 			animated_sprite.play("idle" + anim_str)
 			runparticles.emitting = false
+			course_audio.stop()
 		elif abs(direction_h) < 0.4:
 			animated_sprite.play("marche" + anim_str, 1.0 * abs(direction_h) / 0.4)
 			runparticles.emitting = false
+			course_audio.stop()
 		else:
 			animated_sprite.play("run" + anim_str, 1.0 * abs(direction_h))
 			runparticles.emitting = true
+			if not course_audio.playing:
+				course_audio.play()
 	else:
 		runparticles.emitting = false
+		course_audio.stop()
 		if is_on_wall():
 			wallparticles.emitting = true
 			
-			# get_wall_normal().x renvoie 1 si le mur est à GAUCHE, et -1 si le mur est à DROITE.
-			# Pour projeter les particules vers la DROITE quand le mur est à gauche :
 			wallparticles.position.x = -get_wall_normal().x * 8
 			
 			if velocity.y <= 0:

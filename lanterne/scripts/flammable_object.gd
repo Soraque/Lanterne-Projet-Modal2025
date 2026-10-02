@@ -1,4 +1,3 @@
-# flammable_object.gd
 class_name FlammableObject
 extends StaticBody2D
 
@@ -7,6 +6,7 @@ extends StaticBody2D
 @export var destroyable := true
 @export var sanslancer := false
 @export var spawn := false
+
 @onready var sprite: Sprite2D = $sprite
 @onready var flamme: Node2D = $Flamme
 @onready var collisionflamme: CollisionShape2D = $Flamme/collisionflamme
@@ -22,7 +22,12 @@ var combustion_id := 0
 func _ready() -> void:
 	anim_initial_y = anim.position.y
 	
-	# Si c'est un point de spawn/feu de camp, on vérifie s'il doit être rallumé au chargement de la scène
+	# Assure que le flux audio est bien préchargé
+	var audio = _get_audio_node()
+	if audio and audio.stream == null:
+		audio.stream = fire_sound_resource
+	
+	# Si c'est un point de spawn/feu de camp, on vérifie s'il doit être rallumé au chargement
 	if spawn:
 		var checkpoint_id = get_checkpoint_id()
 		if GameManager.is_checkpoint_active(checkpoint_id):
@@ -30,13 +35,34 @@ func _ready() -> void:
 
 
 func get_checkpoint_id() -> String:
-	# Génère une clé unique basée sur la scène et le nom du nœud (ex: "res://scenes/lvls/lvl_1.tscn_Campfire")
 	var scene_path = get_tree().current_scene.scene_file_path
 	return scene_path + "_" + name
 
 
+func _get_audio_node() -> AudioStreamPlayer2D:
+	var audio = get_node_or_null("AudioStreamPlayer2D") as AudioStreamPlayer2D
+	if not audio:
+		audio = find_child("AudioStreamPlayer2D", true, false) as AudioStreamPlayer2D
+	return audio
+
+
+func play_fire_sound() -> void:
+	var audio = _get_audio_node()
+	if audio:
+		if audio.stream == null:
+			audio.stream = fire_sound_resource
+		if not audio.playing:
+			audio.play()
+
+
+func stop_fire_sound() -> void:
+	var audio = _get_audio_node()
+	if audio and audio.playing:
+		audio.stop()
+
+
 func rallumer_silencieux() -> void:
-	# Allume le feu instantanément sans rejouer les animations d'allumage
+	# Allume le feu de camp sans déclencher l'animation d'allumage ni superposer le son
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	anim.position.y = anim_initial_y
@@ -45,14 +71,21 @@ func rallumer_silencieux() -> void:
 	if destroyable:
 		sprite.visible = false
 	anim.play("feu")
+	
+	# Ne rejoue le son QUE s'il n'est pas déjà en train de tourner
+	play_fire_sound()
 
 
 func embrase() -> void:
 	combustion_id += 1
 	var current_id = combustion_id
+	
+	# Joue l'animation visuelle et sonore d'allumage
 	animation.play("allumage")
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
+	
+	play_fire_sound()
 	
 	if bouton and has_node("plateforme"):
 		$plateforme.activer()
@@ -79,7 +112,7 @@ func embrase() -> void:
 		var gm = GameManager
 		var current_scene_path := get_tree().current_scene.scene_file_path
 		gm.set_respawn_point(global_position, current_scene_path)
-		gm.register_checkpoint(get_checkpoint_id()) # Sauvegarde l'activation dans le GameManager
+		gm.register_checkpoint(get_checkpoint_id())
 
 
 func _sequence_combustion(current_id: int) -> void:
@@ -99,6 +132,8 @@ func _sequence_combustion(current_id: int) -> void:
 	if current_id != combustion_id: return
 	
 	anim.visible = false
+	stop_fire_sound()
+		
 	if bouton and has_node("plateforme"):
 		$plateforme.desactiver()
 		
