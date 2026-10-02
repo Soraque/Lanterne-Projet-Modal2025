@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lanterne"
-run/main_scene="uid://cnbcvij17js7e"
+run/main_scene="uid://cwajjui7vqy1j"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 run/autoload_on_startup=false

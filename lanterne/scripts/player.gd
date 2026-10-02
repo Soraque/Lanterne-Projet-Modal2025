@@ -64,9 +64,6 @@ signal joystick_off
 
 func _ready() -> void:
 	# Téléportation au feu de camp si un checkpoint existe
-	var mat = animated_sprite.material as ShaderMaterial
-	if mat:
-		mat.set_shader_parameter("flash_modifier", 0.0)
 	
 	if GameManager.PlayerJumpOnEnter:
 		velocity.y = 6*JUMP_VELOCITY

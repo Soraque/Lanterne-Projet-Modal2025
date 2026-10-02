@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://m41ye2yy606u"]
 
+[ext_resource type="Material" uid="uid://b87kxv1gkqca2" path="res://Shaders/N&B_shader_material.tres" id="1_8bmx5"]
 [ext_resource type="Script" uid="uid://cbbl2x678u32u" path="res://scripts/flammable_object.gd" id="1_fxul5"]
 [ext_resource type="Texture2D" uid="uid://lvemktsfiwpb" path="res://assets/feu/allumage/Group 7 - 3_1.png" id="2_m1s75"]
 [ext_resource type="Texture2D" uid="uid://ovl3q4vruprs" path="res://assets/feu/allumage/Group 4 - 1_1.png" id="3_8bmx5"]
@@ -246,6 +247,7 @@ _data = {
 size = Vector2(32, 32)
 
 [node name="Bouton" type="StaticBody2D" unique_id=1821600727]
+material = ExtResource("1_8bmx5")
 collision_layer = 2
 script = ExtResource("1_fxul5")
 destroyable = false
@@ -253,9 +255,11 @@ metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
 [node name="Flamme" type="Area2D" parent="." unique_id=442774060]
 visible = false
+use_parent_material = true
 
 [node name="anim" type="AnimatedSprite2D" parent="Flamme" unique_id=1748977251]
 light_mask = 2
+use_parent_material = true
 position = Vector2(0.9999999, -8.5)
 scale = Vector2(0.8125, 0.89583325)
 sprite_frames = SubResource("SpriteFrames_clkgq")
@@ -263,11 +267,13 @@ animation = &"feu3"
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=1246040307]
 light_mask = 2
+use_parent_material = true
 shape = SubResource("RectangleShape2D_kmkd7")
 disabled = true
 
 [node name="light" parent="Flamme" unique_id=656477510 instance=ExtResource("10_1rery")]
 light_mask = 2
+use_parent_material = true
 position = Vector2(1.0000076, 2.0000076)
 energy = 0.0
 texture_scale = 7.0
@@ -277,10 +283,12 @@ libraries/ = SubResource("AnimationLibrary_m1s75")
 
 [node name="collision" type="CollisionShape2D" parent="." unique_id=1120555952]
 light_mask = 2
+use_parent_material = true
 shape = SubResource("RectangleShape2D_8bmx5")
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1875495316]
 light_mask = 2
+use_parent_material = true
 position = Vector2(2.3841858e-07, 2.3841858e-07)
 texture = ExtResource("11_m1s75")
 region_rect = Rect2(348, 144, 8, 32)
