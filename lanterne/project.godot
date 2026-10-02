@@ -14,6 +14,7 @@ config/name="Lanterne"
 run/main_scene="uid://v7svns5m00ma"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+run/autoload_on_startup=false
 
 [autoload]
 

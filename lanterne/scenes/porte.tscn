@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dg30b2fr88sfm"]
 
+[ext_resource type="Material" uid="uid://b87kxv1gkqca2" path="res://Shaders/N&B_shader_material.tres" id="1_63fia"]
 [ext_resource type="Script" uid="uid://cbbl2x678u32u" path="res://scripts/flammable_object.gd" id="1_cbvu1"]
 [ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="2_m0o0n"]
 [ext_resource type="Texture2D" uid="uid://lvemktsfiwpb" path="res://assets/feu/allumage/Group 7 - 3_1.png" id="4_8mmy4"]
@@ -245,14 +246,17 @@ _data = {
 }
 
 [node name="porte" type="StaticBody2D" unique_id=749672723]
+material = ExtResource("1_63fia")
 script = ExtResource("1_cbvu1")
 metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
 [node name="Flamme" type="Area2D" parent="." unique_id=1187537714]
 visible = false
+use_parent_material = true
 
 [node name="anim" type="AnimatedSprite2D" parent="Flamme" unique_id=101357962]
 light_mask = 2
+use_parent_material = true
 position = Vector2(1, 0)
 scale = Vector2(0.65625, 0.7916666)
 sprite_frames = SubResource("SpriteFrames_a2tin")
@@ -260,12 +264,14 @@ animation = &"feu"
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=968661200]
 light_mask = 2
+use_parent_material = true
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_s2dgo")
 disabled = true
 
 [node name="light" parent="Flamme" unique_id=656477510 instance=ExtResource("10_w22ea")]
 light_mask = 2
+use_parent_material = true
 position = Vector2(1.0000076, 2.0000076)
 scale = Vector2(1.8026316, 1.8026316)
 energy = 0.0
@@ -275,10 +281,12 @@ libraries/ = SubResource("AnimationLibrary_ew7ks")
 
 [node name="collision" type="CollisionShape2D" parent="." unique_id=851503516]
 light_mask = 2
+use_parent_material = true
 shape = SubResource("RectangleShape2D_s2dgo")
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=2097250574]
 light_mask = 2
+use_parent_material = true
 texture = ExtResource("2_m0o0n")
 region_enabled = true
 region_rect = Rect2(348, 144, 8, 32)

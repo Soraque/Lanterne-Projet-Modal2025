@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b87kxv1gkqca2"]
+
+[ext_resource type="Shader" uid="uid://br66aslol3ccc" path="res://Shaders/filtre_n&b.gdshader" id="1_m8axx"]
+
+[resource]
+shader = ExtResource("1_m8axx")
+shader_parameter/desaturation_amount = 1.0

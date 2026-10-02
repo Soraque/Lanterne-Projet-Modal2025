@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bryg1hif3f1sx"]
 
+[ext_resource type="Material" uid="uid://b87kxv1gkqca2" path="res://Shaders/N&B_shader_material.tres" id="1_73d8c"]
 [ext_resource type="Script" uid="uid://cbbl2x678u32u" path="res://scripts/flammable_object.gd" id="1_sbayf"]
 [ext_resource type="Texture2D" uid="uid://lvemktsfiwpb" path="res://assets/feu/allumage/Group 7 - 3_1.png" id="3_sbayf"]
 [ext_resource type="Texture2D" uid="uid://ovl3q4vruprs" path="res://assets/feu/allumage/Group 4 - 1_1.png" id="4_73d8c"]
@@ -271,6 +272,7 @@ radius = 15.0
 height = 64.0
 
 [node name="campfire" type="StaticBody2D" unique_id=1579677712]
+material = ExtResource("1_73d8c")
 collision_layer = 2
 script = ExtResource("1_sbayf")
 duration = -1.0
@@ -278,6 +280,7 @@ destroyable = false
 metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=988494015]
+use_parent_material = true
 position = Vector2(-1, 23)
 amount = 4
 texture = SubResource("GradientTexture2D_1v5ef")
@@ -294,9 +297,11 @@ color = Color(0.1882353, 0.1882353, 0.1882353, 0.5647059)
 
 [node name="Flamme" type="Area2D" parent="." unique_id=1342665400]
 visible = false
+use_parent_material = true
 
 [node name="anim" type="AnimatedSprite2D" parent="Flamme" unique_id=2135365278]
 light_mask = 2
+use_parent_material = true
 position = Vector2(-0.50000024, 33.5)
 scale = Vector2(0.59375, 0.6875)
 sprite_frames = SubResource("SpriteFrames_ovl18")
@@ -304,12 +309,14 @@ animation = &"feu"
 
 [node name="light" parent="Flamme" unique_id=1356797012 instance=ExtResource("5_m6xh0")]
 light_mask = 2
+use_parent_material = true
 position = Vector2(1.0000076, 2.0000076)
 scale = Vector2(1.8026316, 1.8026316)
 energy = 0.0
 base_energy = 1.67
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=1563240067]
+use_parent_material = true
 position = Vector2(0, 35)
 shape = SubResource("RectangleShape2D_s2dgo")
 disabled = true
@@ -334,17 +341,21 @@ color_ramp = SubResource("Gradient_73d8c")
 
 [node name="collision" type="CollisionShape2D" parent="." unique_id=19254757]
 light_mask = 2
+use_parent_material = true
 position = Vector2(-1.5, 17.5)
 shape = SubResource("RectangleShape2D_mg5w5")
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1234833479]
 light_mask = 2
 z_index = -1
+use_parent_material = true
 texture = ExtResource("11_sbayf")
 
 [node name="zone" type="Area2D" parent="." unique_id=1256896498]
+use_parent_material = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zone" unique_id=872948648]
+use_parent_material = true
 position = Vector2(-1, 17)
 shape = SubResource("CapsuleShape2D_s2dgo")
 
