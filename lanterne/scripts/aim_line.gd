@@ -3,9 +3,6 @@ extends Line2D
 @onready var player: CharacterBody2D = $".."
 @onready var pointeur: Polygon2D = $"../Pointeur"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	rayon.add_exception($"../CollisionShape2D")
 
 func tracer(delta: float,dir_lancer: Vector2,force_lancer = 1000,impact_vitesse_initiale = 0.2)->void:
 	clear_points()

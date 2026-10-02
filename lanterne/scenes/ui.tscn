@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://v7svns5m00ma"]
 
+[ext_resource type="Script" uid="uid://b00bo0eovc3ei" path="res://scripts/ui.gd" id="1_gdt2y"]
 [ext_resource type="Theme" uid="uid://cptu0dxjvd5dc" path="res://assets/main_theme.tres" id="1_nt7q6"]
 [ext_resource type="Texture2D" uid="uid://bjubop1dt01gn" path="res://assets/Capture d’écran 2026-09-11 à 16.58.48.png" id="2_x4jx1"]
+[ext_resource type="FontFile" uid="uid://bc5iyd1d7vqht" path="res://assets/Moria_DF.TTF" id="3_yev5y"]
 
 [sub_resource type="Curve" id="Curve_s2dgo"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25925925, 1), 0.0, 0.0, 0, 0, Vector2(0.73809516, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -12,6 +14,7 @@ offsets = PackedFloat32Array(0.012345679, 1)
 colors = PackedColorArray(0.9843137, 0.6784314, 0.5019608, 1, 0.9411765, 0.28235295, 0.07450981, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1825621296]
+script = ExtResource("1_gdt2y")
 
 [node name="CaptureD’écran20260911À16_58_48" type="Sprite2D" parent="." unique_id=307476169]
 z_index = -2
@@ -31,6 +34,8 @@ offset_right = 0.2960205
 offset_bottom = -35.280014
 grow_horizontal = 2
 theme = ExtResource("1_nt7q6")
+theme_override_colors/default_color = Color(0.9254902, 0.6156863, 0.40392157, 1)
+theme_override_fonts/normal_font = ExtResource("3_yev5y")
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "LANTERNE"
@@ -38,33 +43,35 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="." unique_id=2144967154]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1378766379]
 anchors_preset = -1
-anchor_left = 0.324
-anchor_top = 0.46500003
-anchor_right = 0.67700005
-anchor_bottom = 0.605
-offset_left = -0.24798584
-offset_top = -56.320007
-offset_right = 0.095947266
-offset_bottom = -56.04001
+anchor_left = 0.5
+anchor_top = 0.574
+anchor_right = 0.5
+anchor_bottom = 0.574
+offset_left = -182.5
+offset_top = -135.952
+offset_right = 182.5
+offset_bottom = 150.048
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=2144967154]
+layout_mode = 2
+size_flags_vertical = 3
 text = "Play"
 
-[node name="Button2" type="Button" parent="." unique_id=720743127]
-anchors_preset = -1
-anchor_left = 0.324
-anchor_top = 0.637
-anchor_right = 0.679
-anchor_bottom = 0.76900005
-offset_left = -0.24798584
-offset_top = -55.776
-offset_right = -0.20800781
-offset_bottom = -56.312042
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=720743127]
+layout_mode = 2
+size_flags_vertical = 3
 text = "Settings"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1655615368]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=680372840]
 z_index = -1
@@ -80,3 +87,7 @@ scale_amount_min = 2.0
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_s2dgo")
 color_ramp = SubResource("Gradient_x4jx1")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_exit_pressed"]

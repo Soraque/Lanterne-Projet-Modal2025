@@ -252,6 +252,14 @@ _data = {
 &"allumage": SubResource("Animation_73d8c")
 }
 
+[sub_resource type="Curve" id="Curve_sbayf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25925925, 1), 0.0, 0.0, 0, 0, Vector2(0.73809516, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_73d8c"]
+offsets = PackedFloat32Array(0.012345679, 1)
+colors = PackedColorArray(0.9843137, 0.6784314, 0.5019608, 1, 0.9411765, 0.28235295, 0.07450981, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mg5w5"]
 size = Vector2(31, 61)
 
@@ -305,6 +313,21 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Flamme" unique_id=14838440]
 libraries/ = SubResource("AnimationLibrary_tdo0i")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Flamme" unique_id=1330601590]
+light_mask = 2
+z_index = -1
+position = Vector2(0, -50)
+amount = 10
+lifetime = 4.0
+emission_shape = 3
+emission_rect_extents = Vector2(120, 100)
+gravity = Vector2(0, 0)
+initial_velocity_min = 19.8
+initial_velocity_max = 34.65
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_sbayf")
+color_ramp = SubResource("Gradient_73d8c")
 
 [node name="collision" type="CollisionShape2D" parent="." unique_id=19254757]
 light_mask = 2
