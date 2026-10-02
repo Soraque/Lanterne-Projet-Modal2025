@@ -64,13 +64,22 @@ signal joystick_off
 
 
 func _ready() -> void:
-	# Téléportation au feu de camp si un checkpoint existe
 	var mat = animated_sprite.material as ShaderMaterial
 	if mat:
 		mat.set_shader_parameter("flash_modifier", 0.0)
-	
-	if GameManager.PlayerJumpOnEnter:
-		velocity.y = 6*JUMP_VELOCITY
+		
+	if GameManager.Changinglvl:
+		# Réinitialise les états de mouvement parasites de l'ancienne scène
+		dash_timer = 0.0
+		wall_jump_lock_timer = 0.0
+		vitesse_debut = 0
+		
+		# Applique la position et la vitesse
+		global_position = GameManager.changepos
+		velocity = GameManager.vitJ
+		previous_velocity = GameManager.vitJ
+		
+		GameManager.Changinglvl = false
 
 
 func jump() -> void:
@@ -284,6 +293,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func die() -> void:
 	var gm = GameManager
+	gm.vitJ = Vector2.ZERO
 	if gm.has_respawn_point and gm.respawn_scene != get_tree().current_scene.scene_file_path:
 		get_tree().change_scene_to_file.call_deferred(gm.respawn_scene)
 	else:
