@@ -1,6 +1,6 @@
 extends Node2D
-@onready var player: CharacterBody2D = $foreground/player
-@onready var canvas_modulate_back: CanvasModulate = $background/CanvasModulate
+@onready var player: CharacterBody2D = $PlayerLayer/player
+@onready var canvas_modulate_back: CanvasModulate = $WorldViewportContainer/WorldViewport/background/CanvasModulate
 
 
 func _physics_process(delta: float) -> void:
