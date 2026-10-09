@@ -12,6 +12,10 @@ extends CharacterBody2D
 @onready var filtre_mort: ColorRect = $"../../BottomLayer/Fond_Mort"
 
 
+# --- Nœuds audio pour le saut et l'atterrissage ---
+@onready var jump_audio: AudioStreamPlayer = $jump
+@onready var land_audio: AudioStreamPlayer = $land
+
 # --- Mouvement général ---
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
@@ -125,6 +129,8 @@ func jump() -> void:
 		velocity.y = JUMP_VELOCITY
 		jump_available = false
 		jump_buffer = false
+		if jump_audio:
+			jump_audio.play()
 	else:
 		jump_buffer = true
 		get_tree().create_timer(jbuffertime).timeout.connect(on_jump_buffer_timeout)
@@ -148,6 +154,11 @@ func _physics_process(delta: float) -> void:
 			
 		course_audio.stop()
 		move_and_slide()
+		
+		# Mise à jour des états au sol / mur pour le dash
+		was_on_floor = is_on_floor()
+		was_on_wall = is_on_wall()
+		previous_velocity = velocity
 		return
 
 	# --- 2. Gravité & Sol ---
@@ -235,6 +246,9 @@ func _physics_process(delta: float) -> void:
 		wall_jump_lock_timer = WALL_JUMP_LOCK_TIME
 		jump_buffer = false
 		jump_available = false
+		if jump_audio:
+			pass
+			#jump_audio.play()
 
 	# --- 7. Déplacement horizontal ---
 	if wall_jump_lock_timer > 0.0:
@@ -293,9 +307,16 @@ func _physics_process(delta: float) -> void:
 				if animated_sprite.animation != "fall" + anim_str and animated_sprite.animation != "chute longue":
 					animated_sprite.play("fall" + anim_str)
 	
+	# --- 10. Déplacement de la physique ---
 	move_and_slide()
+
+	# --- 11. Détection de l'atterrissage (Placée APRES move_and_slide) ---
+	if is_on_floor() and not was_on_floor:
+		if land_audio:
+			land_audio.play()
+		print("ouais")
 	
-	# --- 10. Actualisation usure lanterne ---
+	# --- 12. Actualisation usure lanterne ---
 	if lantern_usure > 0:
 		lantern_usure -= delta * 5
 	elif not is_dying:
@@ -303,7 +324,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		lantern_usure = 0
 	
-	# --- 11. Lumière lanterne ---
+	# --- 13. Lumière lanterne ---
 	var coef = get_coef_usure()
 	if coef > 0.1:
 		lumiere.set_texture_scale(1.5 + 6.5 * (coef - 0.1))
@@ -314,7 +335,7 @@ func _physics_process(delta: float) -> void:
 	if collision_boost_cooldown > 0:
 		collision_boost_cooldown -= delta
 
-	# --- 12. Collision Wall Boost ---
+	# --- 14. Collision Wall Boost ---
 	var collision_count = get_slide_collision_count()
 	if collision_count > 0:
 		for i in range(collision_count):

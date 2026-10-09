@@ -3,6 +3,12 @@ extends CanvasLayer
 # Chemin de la scène à charger lors du clic sur Start
 const LVL1_SCENE_PATH := "res://scenes/lvls/lvl_1.scn"
 
+@onready var start_button: Button = $VBoxContainer/Button
+
+func _ready() -> void:
+	# Donne le focus UI au premier bouton dès le lancement du menu
+	start_button.grab_focus()
+
 
 func _on_start_pressed() -> void:
 	# Change la scène vers le niveau 1
