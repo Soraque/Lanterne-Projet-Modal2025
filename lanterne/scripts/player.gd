@@ -8,13 +8,16 @@ extends CharacterBody2D
 @export var lanterne_scene: PackedScene
 @onready var runparticles: CPUParticles2D = $runparticles
 @onready var wallparticles: CPUParticles2D = $wallparticles
-@onready var course_audio: AudioStreamPlayer2D = $course
 @onready var filtre_mort: ColorRect = $"../../UpperLayer/Fond_Mort"
 
-
-# --- Nœuds audio pour le saut et l'atterrissage ---
-@onready var jump_audio: AudioStreamPlayer = $jump
-@onready var land_audio: AudioStreamPlayer = $land
+# --- Sons ---
+@onready var jump_audio: AudioStreamPlayer = $sons/saut
+@onready var course_audio: AudioStreamPlayer2D = $sons/course
+@onready var land_audio: AudioStreamPlayer = $sons/land
+@onready var slowdown_audio: AudioStreamPlayer = $sons/slowdown
+@onready var dash_audio: AudioStreamPlayer = $sons/dash
+@onready var break_audio: AudioStreamPlayer = $sons/break
+@onready var music_audio: AudioStreamPlayer = $sons/music
 
 # --- Mouvement général ---
 const SPEED = 300.0
@@ -64,8 +67,8 @@ var invincible_time = 1.0
 @export var mort_duree := 5.0
 @export var mort_recuperation := 1.0
 var mort_progress := 0.0                # 0.0 = vivant, 1.0 = mort
-var is_dying := false                   # true tant que le joueur est en danger
-var is_dead := false                    # true dès que die() est lancée
+var is_dying := false                    # true tant que le joueur est en danger
+var is_dead := false                     # true dès que die() est lancée
 
 # --- Boost lors des collisions ---
 var was_on_floor = false
@@ -113,16 +116,27 @@ func _ready() -> void:
 		lantern_usure = 100.0
 		is_lanterne = true
 
+
 func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	
+	# Arrête la musique de tension et joue le son de cassure
+	if music_audio and music_audio.playing:
+		music_audio.stop()
+		
+	if break_audio:
+		break_audio.play()
+		
 	var gm = GameManager
 	gm.vitJ = Vector2.ZERO
 	# Réinitialise la sauvegarde de usure au respawn
 	gm.lantern_usure_saved = 100.0
 	gm.is_lanterne_saved = true
 	gm.reset_combo()
+	
+	await get_tree().create_timer(1).timeout
 	
 	if gm.has_respawn_point and gm.respawn_scene != get_tree().current_scene.scene_file_path:
 		get_tree().change_scene_to_file.call_deferred(gm.respawn_scene)
@@ -192,6 +206,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0
 		wall_jump_lock_timer = 0
 		
+		if dash_audio:
+			dash_audio.play()
+		
 		if is_on_wall() and not is_on_floor():
 			vitesse_debut = 0
 			looking_direction = get_wall_normal().x / abs(get_wall_normal().x)
@@ -205,24 +222,28 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("dash" + anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
 
-	# --- 4. Lancer de la lanterne ---
+	# --- 4. Lancer de la lanterne & Visée ralentie ---
 	if is_lanterne:
 		if input_lancer.length() > 0.4:
 			direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
 			if not lantern_ready:
 				joystick_on.emit()
+				if slowdown_audio and not slowdown_audio.playing:
+					slowdown_audio.play()
 			lantern_ready = true
 		elif lantern_ready:
 			joystick_off.emit()
 			aim_line.clear_points()
 			pointeur.visible = false
 			
+			if slowdown_audio and slowdown_audio.playing:
+				slowdown_audio.stop()
+			
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
 			direction_lancer = Vector2.ZERO
-	
 
 	# --- 5. État lanterne ---
 	if is_lanterne:
@@ -253,8 +274,7 @@ func _physics_process(delta: float) -> void:
 		jump_buffer = false
 		jump_available = false
 		if jump_audio:
-			pass
-			#jump_audio.play()
+			jump_audio.play()
 
 	# --- 7. Déplacement horizontal ---
 	if wall_jump_lock_timer > 0.0:
@@ -316,7 +336,7 @@ func _physics_process(delta: float) -> void:
 	# --- 10. Déplacement de la physique ---
 	move_and_slide()
 
-	# --- 11. Détection de l'atterrissage (Placée APRES move_and_slide) ---
+	# --- 11. Détection de l'atterrissage ---
 	if is_on_floor() and not was_on_floor:
 		if land_audio:
 			land_audio.play()
@@ -328,13 +348,15 @@ func _physics_process(delta: float) -> void:
 	# --- 12 bis. Mort lente ---
 	_update_mort_lente(delta)
 	
+	# --- 12 ter. Gestion de la musique selon l'usure ---
+	_update_music_volume()
+	
 	# --- 13. Lumière lanterne ---
 	var coef = get_coef_usure()
 	if coef > 0.1:
 		lumiere.set_texture_scale(1.5 + 6.5 * (coef - 0.1))
 	else:
 		lumiere.base_energy = coef * 10
-
 
 	if collision_boost_cooldown > 0:
 		collision_boost_cooldown -= delta
@@ -371,6 +393,7 @@ func _start_extinction() -> void:
 	await tween.finished
 	await die()
 
+
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "fall" + anim_str:
 		animated_sprite.play("chute longue" + anim_str)
@@ -382,6 +405,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func get_coef_usure() -> float:
 	var x = lantern_usure / 100.0
 	return (400 * x**3 - 600 * x**2 + 319 * x) / 119.0
+
 
 func _update_mort_lente(delta: float) -> void:
 	if is_dead:
@@ -401,6 +425,26 @@ func _update_mort_lente(delta: float) -> void:
 		die()
 
 
+func _update_music_volume() -> void:
+	if is_dead or not music_audio:
+		return
+
+	# Si la lanterne est à plus de 50%, la musique est coupée/silencieuse
+	if lantern_usure > 50.0:
+		if music_audio.playing:
+			music_audio.stop()
+	else:
+		# Lancement de la musique si ce n'est pas déjà fait
+		if not music_audio.playing:
+			music_audio.play()
+
+		# Progression de 0.0 (à 50% d'usure) à 1.0 (à 0% d'usure)
+		var progress = (30.0 - lantern_usure) / 30.0
+		
+		# Fondu logarithmique en décibels (-30 dB très faible à 0 dB fort)
+		music_audio.volume_db = lerpf(-30.0, 0.0, progress)
+
+
 func _est_en_danger() -> bool:
 	# Avec la lanterne : seule l'usure compte.
 	if is_lanterne:
@@ -415,12 +459,12 @@ func _feu_actif_present() -> bool:
 			return true
 	return false
 
+
 func allumer_lanterne(value: float) -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "lantern_usure", value, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	print("aie")
 	if body is TileMapLayer or body is TileMap:
 		die()
