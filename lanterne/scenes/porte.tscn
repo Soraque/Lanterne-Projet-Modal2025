@@ -246,8 +246,8 @@ _data = {
 }
 
 [node name="porte" type="StaticBody2D" unique_id=749672723]
-scale = Vector2(1.5, 1.5)
 material = ExtResource("1_63fia")
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_cbvu1")
 metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
@@ -274,7 +274,6 @@ disabled = true
 light_mask = 2
 use_parent_material = true
 position = Vector2(1.0000076, 2.0000076)
-scale = Vector2(1.8026316, 1.8026316)
 energy = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Flamme" unique_id=1286412477]

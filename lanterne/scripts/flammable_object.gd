@@ -78,6 +78,7 @@ func rallumer_silencieux() -> void:
 
 
 func embrase() -> void:
+	
 	combustion_id += 1
 	var current_id = combustion_id
 	animation.play("allumage")

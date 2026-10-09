@@ -28,6 +28,7 @@ texture_scale = 4.75
 script = ExtResource("1_ah2g6")
 
 [node name="rayon lumiere" type="Area2D" parent="." unique_id=1318925805]
+scale = Vector2(0.505, 0.505)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rayon lumiere" unique_id=727728373]
 shape = SubResource("CircleShape2D_ah2g6")

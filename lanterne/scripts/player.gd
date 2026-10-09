@@ -211,7 +211,6 @@ func _physics_process(delta: float) -> void:
 			lantern_ready = false
 			direction_lancer = Vector2.ZERO
 	
-	Engine.time_scale = Global.time_dilatation
 
 	# --- 5. État lanterne ---
 	if is_lanterne:

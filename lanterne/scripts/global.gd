@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 
 
 func _on_player_joystick_on():
+	print("on")
 	if tween_time and tween_time.is_running():
 		tween_time.kill()
 	
