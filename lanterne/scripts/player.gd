@@ -54,6 +54,7 @@ var direction_lancer = Vector2.ZERO
 var anim_str = ""
 var force_lancer = 1000
 var impact_vitesse_initiale = 0.2
+var lantern_duration = 10 #secondes
 
 # --- Dégâts / Invincibilité ---
 var isInvincible = false
@@ -322,7 +323,7 @@ func _physics_process(delta: float) -> void:
 	
 	# --- 12. Actualisation usure lanterne ---
 	if lantern_usure > 0.0:
-		lantern_usure = maxf(lantern_usure - delta * 5.0, 0.0)
+		lantern_usure = maxf(lantern_usure - delta * 100/lantern_duration, 0.0)
 
 	# --- 12 bis. Mort lente ---
 	_update_mort_lente(delta)
