@@ -981,4 +981,9 @@ pitch_scale = 0.9
 stream = ExtResource("16_a8ls1")
 volume_db = -15.0
 
+[node name="hurtbox" type="Area2D" parent="." unique_id=1366125379]
+collision_layer = 0
+collision_mask = 4
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

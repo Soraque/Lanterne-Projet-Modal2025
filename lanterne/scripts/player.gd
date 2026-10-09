@@ -417,3 +417,8 @@ func _feu_actif_present() -> bool:
 func allumer_lanterne(value: float) -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "lantern_usure", value, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if body is TileMapLayer:
+		die()
