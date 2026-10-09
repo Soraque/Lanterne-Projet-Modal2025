@@ -887,6 +887,9 @@ point_count = 4
 [sub_resource type="Gradient" id="Gradient_f1ej7"]
 colors = PackedColorArray(1, 1, 1, 1, 0.46423507, 0.46423507, 0.46423507, 1)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8ls1"]
+radius = 8.0
+
 [node name="player" type="CharacterBody2D" unique_id=1012986859 groups=["player"]]
 script = ExtResource("1_g2els")
 
@@ -982,8 +985,11 @@ stream = ExtResource("16_a8ls1")
 volume_db = -15.0
 
 [node name="hurtbox" type="Area2D" parent="." unique_id=1366125379]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=1326588704]
+shape = SubResource("CapsuleShape2D_a8ls1")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
