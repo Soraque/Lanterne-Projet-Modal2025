@@ -216,7 +216,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("7_ok5a0")]
 light_mask = 2
 z_index = 1
-position = Vector2(-181, 16)
+position = Vector2(-182, -8)
 lanterne_scene = ExtResource("8_3d0uf")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("bounds_rect", "player")]
@@ -234,7 +234,7 @@ player = NodePath("..")
 [node name="ReferenceRect" type="ReferenceRect" parent="PlayerLayer/player/Camera2D" unique_id=2082722526]
 offset_left = -336.0
 offset_top = -1040.0
-offset_right = 3946.0
+offset_right = 6782.0
 offset_bottom = 193.0
 
 [node name="PlayerCanvaModulate" type="CanvasModulate" parent="PlayerLayer/player" unique_id=2047828107]
@@ -278,9 +278,19 @@ light_mask = 2
 position = Vector2(1459, -16)
 spawn = true
 
-[node name="Campfire4" parent="World/foreground/ForegroundContent/Campfire4" unique_id=1349936299 instance=ExtResource("3_33fmo")]
+[node name="Campfire5" parent="World/foreground/ForegroundContent" unique_id=1349936299 instance=ExtResource("3_33fmo")]
 light_mask = 2
-position = Vector2(1123, -96)
+position = Vector2(2582, -112)
+spawn = true
+
+[node name="Campfire6" parent="World/foreground/ForegroundContent" unique_id=735045975 instance=ExtResource("3_33fmo")]
+light_mask = 2
+position = Vector2(3577, -528)
+spawn = true
+
+[node name="Campfire7" parent="World/foreground/ForegroundContent" unique_id=107773656 instance=ExtResource("3_33fmo")]
+light_mask = 2
+position = Vector2(6624, -528)
 spawn = true
 
 [node name="ennemy2" parent="World/foreground/ForegroundContent" unique_id=396322971 instance=ExtResource("9_5piho")]
@@ -328,24 +338,6 @@ position = Vector2(1574, 66)
 [node name="ennemy16" parent="World/foreground/ForegroundContent" unique_id=609298554 instance=ExtResource("9_5piho")]
 position = Vector2(1608, 66)
 
-[node name="ennemy21" parent="World/foreground/ForegroundContent" unique_id=541535495 instance=ExtResource("9_5piho")]
-position = Vector2(2071, 18)
-
-[node name="ennemy22" parent="World/foreground/ForegroundContent" unique_id=1774585366 instance=ExtResource("9_5piho")]
-position = Vector2(2103, 18)
-
-[node name="ennemy23" parent="World/foreground/ForegroundContent" unique_id=693097522 instance=ExtResource("9_5piho")]
-position = Vector2(2135, 18)
-
-[node name="ennemy24" parent="World/foreground/ForegroundContent" unique_id=897370820 instance=ExtResource("9_5piho")]
-position = Vector2(2169, 18)
-
-[node name="ennemy25" parent="World/foreground/ForegroundContent" unique_id=822333623 instance=ExtResource("9_5piho")]
-position = Vector2(2203, 18)
-
-[node name="ennemy26" parent="World/foreground/ForegroundContent" unique_id=1035900607 instance=ExtResource("9_5piho")]
-position = Vector2(2235, 18)
-
 [node name="ennemy17" parent="World/foreground/ForegroundContent" unique_id=1232200364 instance=ExtResource("9_5piho")]
 position = Vector2(1644, 66)
 
@@ -364,26 +356,51 @@ position = Vector2(1679, 66)
 [node name="porte" parent="World/foreground/ForegroundContent" unique_id=749672723 instance=ExtResource("4_nqwoy")]
 position = Vector2(1894, 8)
 
+[node name="porte3" parent="World/foreground/ForegroundContent" unique_id=1440775598 instance=ExtResource("4_nqwoy")]
+position = Vector2(1894.0001, -88)
+
+[node name="porte4" parent="World/foreground/ForegroundContent" unique_id=2019818349 instance=ExtResource("4_nqwoy")]
+position = Vector2(1894, -40)
+
 [node name="RichTextLabel" type="RichTextLabel" parent="World/foreground/ForegroundContent" unique_id=1698813421]
 light_mask = 2
 offset_left = 512.0
 offset_top = -54.0
 offset_right = 717.0
 offset_bottom = -28.0
+theme_override_fonts/normal_font = ExtResource("15_nqwoy")
+theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
-text = "[fade start=4 length=23][color=#a0ffe0]La lumière s'amenuise[/color][/fade]"
+text = "[fade start=4 length=23][color=#a0ffe0]Tqa lumière faiblit[/color][/fade]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="World/foreground/ForegroundContent" unique_id=431702425]
+light_mask = 2
+offset_left = 3623.0
+offset_top = -533.0
+offset_right = 3828.0
+offset_bottom = -507.0
+theme_override_fonts/normal_font = ExtResource("15_nqwoy")
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[fade start=4 length=23][color=#a0ffe0]Tu n'as plus le temps[/color][/fade]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="World/foreground/ForegroundContent" unique_id=773491332]
+light_mask = 2
+offset_left = 5092.0
+offset_top = -533.0
+offset_right = 5297.0
+offset_bottom = -507.0
+theme_override_fonts/normal_font = ExtResource("15_nqwoy")
+theme_override_font_sizes/normal_font_size = 21
+theme_override_font_sizes/bold_font_size = 21
+theme_override_font_sizes/bold_italics_font_size = 21
+theme_override_font_sizes/italics_font_size = 21
+theme_override_font_sizes/mono_font_size = 21
+bbcode_enabled = true
+text = "[fade start=4 length=40][color=#a0ffe0]Tu ne dois pas perdre la lumière[/color][/fade]"
 
 [node name="porte2" parent="World/foreground/ForegroundContent" unique_id=334411809 instance=ExtResource("4_nqwoy")]
 position = Vector2(2326, -88)
-
-[node name="ennemy" parent="World/foreground/ForegroundContent" unique_id=581687343 instance=ExtResource("9_5piho")]
-position = Vector2(2269, 18)
-
-[node name="ennemy28" parent="World/foreground/ForegroundContent" unique_id=101606598 instance=ExtResource("9_5piho")]
-position = Vector2(2303, 18)
-
-[node name="campfire" parent="World/foreground" unique_id=104053640 instance=ExtResource("3_33fmo")]
-position = Vector2(3722, -528)
 
 [node name="background" type="CanvasLayer" parent="World" unique_id=93682746]
 follow_viewport_enabled = true
