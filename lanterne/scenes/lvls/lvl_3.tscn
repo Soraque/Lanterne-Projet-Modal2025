@@ -408,16 +408,18 @@ follow_viewport_enabled = true
 [node name="BackgroundContent" type="Node2D" parent="World/background" unique_id=2032727252]
 material = ExtResource("12_rcnel")
 
-[node name="parallaxe" type="Node2D" parent="World/background/BackgroundContent" unique_id=100871159]
+[node name="parallaxe" type="Node2D" parent="World/background/BackgroundContent" unique_id=1911150497]
 use_parent_material = true
 
-[node name="background_parallaxe#Parallax2D3" type="Parallax2D" parent="World/background/BackgroundContent/parallaxe" unique_id=1947356580]
+[node name="background_parallaxe#Parallax2D3" type="Parallax2D" parent="World/background/BackgroundContent/parallaxe" unique_id=1042408104]
 light_mask = 3
 z_index = -2
 use_parent_material = true
 scroll_scale = Vector2(0.05, 0.05)
+repeat_size = Vector2(720, 0)
+repeat_times = 25
 
-[node name="background_parallaxe_Parallax2D3#Sprite2D" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/background_parallaxe#Parallax2D3" unique_id=1221363425]
+[node name="background_parallaxe_Parallax2D3#Sprite2D" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/background_parallaxe#Parallax2D3" unique_id=1083404585]
 light_mask = 3
 use_parent_material = true
 position = Vector2(314, 139)
@@ -425,46 +427,36 @@ rotation = 3.1415925
 scale = Vector2(2, -2)
 texture = ExtResource("10_odplt")
 
-[node name="background_parallaxe_Parallax2D3#Sprite2D2" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/background_parallaxe#Parallax2D3" unique_id=686694509]
-light_mask = 3
-use_parent_material = true
-position = Vector2(1034, 138)
-rotation = 3.1415925
-scale = Vector2(2, -2)
-texture = ExtResource("10_odplt")
-
-[node name="background_parallaxe#Parallax2D2" type="Parallax2D" parent="World/background/BackgroundContent/parallaxe" unique_id=1682942649]
+[node name="background_parallaxe#Parallax2D2" type="Parallax2D" parent="World/background/BackgroundContent/parallaxe" unique_id=1022796799]
 z_index = -1
 use_parent_material = true
 scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1080, 0)
+repeat_times = 16
 
-[node name="background_parallaxe_Parallax2D2#Sprite2D" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/background_parallaxe#Parallax2D2" unique_id=1754900195]
+[node name="background_parallaxe_Parallax2D2#Sprite2D" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/background_parallaxe#Parallax2D2" unique_id=945223755]
 use_parent_material = true
 position = Vector2(283, 213)
 scale = Vector2(3, 3)
 texture = ExtResource("10_odplt")
 
-[node name="background_parallaxe_Parallax2D2#Sprite2D2" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/background_parallaxe#Parallax2D2" unique_id=975179414]
-use_parent_material = true
-position = Vector2(1362, 213.00002)
-scale = Vector2(3, 3)
-texture = ExtResource("10_odplt")
-
-[node name="Parallax2D" type="Parallax2D" parent="World/background/BackgroundContent/parallaxe" unique_id=326453050]
+[node name="Parallax2D" type="Parallax2D" parent="World/background/BackgroundContent/parallaxe" unique_id=1100699023]
 z_index = -3
 use_parent_material = true
 scroll_scale = Vector2(0.01, 0.01)
 scroll_offset = Vector2(600, 317)
+repeat_size = Vector2(720, 0)
+repeat_times = 19
 
-[node name="background_parallaxe_Parallax2D#Sprite2D2" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/Parallax2D" unique_id=2008337614]
+[node name="background_parallaxe_Parallax2D#Sprite2D2" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/Parallax2D" unique_id=250908331]
 use_parent_material = true
 position = Vector2(-32.5, -229.84305)
-scale = Vector2(2.0027778, 2.0027778)
+scale = Vector2(2, 2)
 texture = ExtResource("11_ly84p")
 region_enabled = true
 region_rect = Rect2(0, 67, 360, 113)
 
-[node name="background_parallaxe_Parallax2D#Sprite2D" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/Parallax2D" unique_id=1472894545]
+[node name="background_parallaxe_Parallax2D#Sprite2D" type="Sprite2D" parent="World/background/BackgroundContent/parallaxe/Parallax2D" unique_id=269420186]
 use_parent_material = true
 position = Vector2(-32.5, 62.15695)
 scale = Vector2(2, 2)
@@ -478,6 +470,7 @@ color = Color(0.8, 0.5333333, 0.48000002, 1)
 layer = 100
 
 [node name="Fond_Mort" type="ColorRect" parent="UpperLayer" unique_id=668761689]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
