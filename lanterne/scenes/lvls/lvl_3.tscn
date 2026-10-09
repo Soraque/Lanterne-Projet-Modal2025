@@ -370,7 +370,7 @@ offset_right = 717.0
 offset_bottom = -28.0
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
-text = "[fade start=4 length=23][color=#a0ffe0]Tqa lumière faiblit[/color][/fade]"
+text = "[fade start=4 length=23][color=#a0ffe0]Ta lumière faiblit[/color][/fade]"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="World/foreground/ForegroundContent" unique_id=431702425]
 light_mask = 2
@@ -475,6 +475,7 @@ color = Color(0.8, 0.5333333, 0.48000002, 1)
 layer = 100
 
 [node name="Fond_Mort" type="ColorRect" parent="UpperLayer" unique_id=668761689]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
