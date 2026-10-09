@@ -19,7 +19,7 @@ var active_checkpoints: Array[String] = []
 var combo_count: int = 0
 var combo_timer: float = 0.0
 const COMBO_TIMEOUT: float = 4.0
-const NOTE_DEPART: float = 0.8
+const NOTE_DEPART: float = 0.4
 
 # Table des fréquences transposée de manière proportionnelle pour rester juste
 const PITCH_SCALE_STEPS: Array[float] = [

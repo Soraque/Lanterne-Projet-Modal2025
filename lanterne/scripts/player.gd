@@ -320,7 +320,6 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and not was_on_floor:
 		if land_audio:
 			land_audio.play()
-		print("ouais")
 	
 	# --- 12. Actualisation usure lanterne ---
 	if lantern_usure > 0.0:
