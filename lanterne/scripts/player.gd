@@ -439,7 +439,7 @@ func _update_music_volume() -> void:
 			music_audio.play()
 
 		# Progression de 0.0 (à 50% d'usure) à 1.0 (à 0% d'usure)
-		var progress = (50.0 - lantern_usure) / 50.0
+		var progress = (30.0 - lantern_usure) / 30.0
 		
 		# Fondu logarithmique en décibels (-30 dB très faible à 0 dB fort)
 		music_audio.volume_db = lerpf(-30.0, 0.0, progress)

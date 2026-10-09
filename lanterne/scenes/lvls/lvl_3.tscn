@@ -368,7 +368,6 @@ offset_left = 512.0
 offset_top = -54.0
 offset_right = 717.0
 offset_bottom = -28.0
-theme_override_fonts/normal_font = ExtResource("15_nqwoy")
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "[fade start=4 length=23][color=#a0ffe0]Tqa lumière faiblit[/color][/fade]"
@@ -379,7 +378,6 @@ offset_left = 3623.0
 offset_top = -533.0
 offset_right = 3828.0
 offset_bottom = -507.0
-theme_override_fonts/normal_font = ExtResource("15_nqwoy")
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "[fade start=4 length=23][color=#a0ffe0]Tu n'as plus le temps[/color][/fade]"
@@ -390,7 +388,6 @@ offset_left = 5092.0
 offset_top = -533.0
 offset_right = 5297.0
 offset_bottom = -507.0
-theme_override_fonts/normal_font = ExtResource("15_nqwoy")
 theme_override_font_sizes/normal_font_size = 21
 theme_override_font_sizes/bold_font_size = 21
 theme_override_font_sizes/bold_italics_font_size = 21
