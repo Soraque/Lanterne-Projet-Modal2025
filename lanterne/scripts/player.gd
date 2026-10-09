@@ -9,6 +9,8 @@ extends CharacterBody2D
 @onready var runparticles: CPUParticles2D = $runparticles
 @onready var wallparticles: CPUParticles2D = $wallparticles
 @onready var course_audio: AudioStreamPlayer2D = $course
+@onready var filtre_mort: ColorRect = $"../../BottomLayer/Fond_Mort"
+
 
 # --- Mouvement général ---
 const SPEED = 300.0
@@ -52,6 +54,9 @@ var impact_vitesse_initiale = 0.2
 # --- Dégâts / Invincibilité ---
 var isInvincible = false
 var invincible_time = 1.0
+
+# --- Mort ---
+var is_dying := false
 
 # --- Boost lors des collisions ---
 var was_on_floor = false
@@ -184,7 +189,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 4. Lancer de la lanterne ---
 	if is_lanterne:
-		if input_lancer.length() > 0.2:
+		if input_lancer.length() > 0.4:
 			direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
 			if not lantern_ready:
@@ -293,8 +298,10 @@ func _physics_process(delta: float) -> void:
 	# --- 10. Actualisation usure lanterne ---
 	if lantern_usure > 0:
 		lantern_usure -= delta * 5
+	elif not is_dying:
+		_start_extinction()
 	else:
-		is_lanterne = false
+		lantern_usure = 0
 	
 	# --- 11. Lumière lanterne ---
 	var coef = get_coef_usure()
@@ -331,6 +338,13 @@ func lancer_lanterne() -> void:
 func on_jump_buffer_timeout() -> void:
 	jump_buffer = false
 
+
+func _start_extinction() -> void:
+	is_dying = true
+	var tween := create_tween()
+	tween.tween_property(filtre_mort, "color:a", 1.0, 5.0)
+	await tween.finished
+	await die()
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "fall" + anim_str:
