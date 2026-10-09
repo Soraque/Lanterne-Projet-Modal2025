@@ -20,22 +20,78 @@ var combustion_id := 0
 
 func _ready() -> void:
 	anim_initial_y = anim.position.y
+	
+	# Si c'est un point de spawn/feu de camp, on vérifie s'il doit être rallumé au chargement
+	if spawn:
+		var checkpoint_id = get_checkpoint_id()
+		if GameManager.is_checkpoint_active(checkpoint_id):
+			rallumer_silencieux()
+
+
+func get_checkpoint_id() -> String:
+	var scene_path = get_tree().current_scene.scene_file_path
+	return scene_path + "_" + name
+
+
+# Joue le son de boucle (ex: AudioStreamPlayer2D) s'il n'est pas déjà en train de tourner
+func play_fire_sound() -> void:
+	var audio = get_node_or_null("AudioStreamPlayer2D") as AudioStreamPlayer2D
+	if audio and not audio.playing:
+		audio.play()
+
+
+# Joue les sons secondaires d'allumage/one-shot avec montée de fréquence en combo
+func play_ignition_sounds() -> void:
+	var audio2 = get_node_or_null("AudioStreamPlayer2D2") as AudioStreamPlayer2D
+	var audio3 = get_node_or_null("AudioStreamPlayer2D3") as AudioStreamPlayer2D
+	
+	if audio2:
+		var new_pitch = GameManager.register_ignition_combo()
+		audio2.pitch_scale = new_pitch
+		if not audio2.playing:
+			audio2.play()
+
+	if audio3 and not audio3.playing:
+		audio3.play()
+
+
+# Arrête tous les sons de feu associés lorsque la combustion se termine
+func stop_fire_sound() -> void:
+	for node_name in ["AudioStreamPlayer2D", "AudioStreamPlayer2D2", "AudioStreamPlayer2D3"]:
+		var audio = get_node_or_null(node_name) as AudioStreamPlayer2D
+		if audio and audio.playing:
+			audio.stop()
+
+
+func rallumer_silencieux() -> void:
+	collision.set_deferred("disabled", true)
+	collisionflamme.set_deferred("disabled", false)
+	anim.position.y = anim_initial_y
+	anim.visible = true
+	flamme.visible = true
+	if destroyable:
+		sprite.visible = false
+	anim.play("feu")
+	
+	# Au chargement de scène, on ne relance QUE le son de boucle continu s'il est arrêté
+	play_fire_sound()
 
 
 func embrase() -> void:
-	# Chaque appel génère un nouvel ID unique qui annule tout 'await' en cours
 	combustion_id += 1
-	
 	var current_id = combustion_id
 	animation.play("allumage")
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	
+	# Déclenche l'allumage initial : son unique d'allumage + son de boucle
+	play_ignition_sounds()
+	play_fire_sound()
+	
 	if bouton and has_node("plateforme"):
 		$plateforme.activer()
 	
-	# Réinitialisation forcée du visuel
-	anim.stop() # Arrête l'animation en cours
+	anim.stop()
 	anim.position.y = anim_initial_y
 	anim.visible = true
 	flamme.visible = true
@@ -43,14 +99,13 @@ func embrase() -> void:
 	if destroyable:
 		sprite.visible = false
 		
-	# Jouer l'animation depuis la frame 0
 	anim.play("allumage")
 	
-	# On attend la fin de l'allumage manuellement pour ne pas dépendre du signal
 	await anim.animation_finished
-	if current_id != combustion_id: return # Si rallumé entre temps, on abandonne ce thread
+	if current_id != combustion_id: return
 	
-	if duration != -1: _sequence_combustion(current_id)
+	if duration != -1: 
+		_sequence_combustion(current_id)
 	else: 
 		anim.play("feu")
 	
@@ -58,6 +113,7 @@ func embrase() -> void:
 		var gm = GameManager
 		var current_scene_path := get_tree().current_scene.scene_file_path
 		gm.set_respawn_point(global_position, current_scene_path)
+		gm.register_checkpoint(get_checkpoint_id())
 
 
 func _sequence_combustion(current_id: int) -> void:
@@ -76,8 +132,9 @@ func _sequence_combustion(current_id: int) -> void:
 	await get_tree().create_timer(step_time).timeout
 	if current_id != combustion_id: return
 	
-	# Extinction (uniquement si le timer n'a pas été interrompu par un nouveau lancer)
 	anim.visible = false
+	stop_fire_sound()
+		
 	if bouton and has_node("plateforme"):
 		$plateforme.desactiver()
 		
@@ -94,6 +151,7 @@ func _on_flamme_body_entered(body: Node2D) -> void:
 		body.lantern_usure += 0.1
 		if spawn:
 			body.allumer_lanterne(100)
+
 
 func _on_zone_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.is_lanterne and not flamme.visible: 

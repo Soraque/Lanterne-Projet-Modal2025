@@ -5,7 +5,7 @@ extends Line2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	rayon.add_exception($"../CollisionShape2D")
+	pass
 
 func tracer(delta: float,dir_lancer: Vector2,force_lancer = 1000,impact_vitesse_initiale = 0.2)->void:
 	clear_points()

@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://jfvrqflgf5wo" path="res://scenes/ennemy.tscn" id="9_s5vkl"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="12_h8j34"]
 [ext_resource type="Script" uid="uid://c6h5bnvum7hb" path="res://scripts/global.gd" id="13_rv0fw"]
-[ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://scenes/time_dilatation_shader.gdshader" id="13_upgc2"]
+[ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://Shaders/time_dilatation_shader.gdshader" id="13_upgc2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
 texture = ExtResource("2_0k3uw")

@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="10_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://b1kp8646re6q2" path="res://assets/character/WallSlide/Male_Hero_Montée_WallSlide_sans_lanterne.png" id="11_f1ej7"]
 [ext_resource type="Script" uid="uid://b0nvbxjnqqcc" path="res://scripts/aim_line.gd" id="13_jej6c"]
+[ext_resource type="AudioStream" uid="uid://bkfw1rqd6452f" path="res://assets/sonore/FEETHmn_Pas cours en chaussure sur beton (ID 0514)_LaSonotheque.fr.mp3" id="14_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://b5g1t48dvkkla" path="res://assets/sonore/8d82b5_TLOZ_Ocarina_Of_Time_Adult_Link_Jump_Sound_Effect.mp3" id="15_oprun"]
+[ext_resource type="AudioStream" uid="uid://4hmo88rcfelb" path="res://assets/sonore/freesound_community-land2-43790.mp3" id="16_a8ls1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
 atlas = ExtResource("5_ur7pv")
@@ -877,13 +880,20 @@ animations = [{
 radius = 8.0
 height = 32.0
 
-[node name="player" type="CharacterBody2D" unique_id=1012986859]
+[sub_resource type="Curve" id="Curve_jej6c"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.49574474, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_f1ej7"]
+colors = PackedColorArray(1, 1, 1, 1, 0.46423507, 0.46423507, 0.46423507, 1)
+
+[node name="player" type="CharacterBody2D" unique_id=1012986859 groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1062298467]
 light_mask = 2
 sprite_frames = SubResource("SpriteFrames_u8vuu")
-animation = &"wall_slide_jump_sans_lanterne"
+animation = &"wall_slide_grosse_chute"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1991956763]
@@ -894,15 +904,16 @@ wait_time = 0.606
 one_shot = true
 
 [node name="Fire_light" parent="." unique_id=656477510 instance=ExtResource("10_y4r1p")]
+light_mask = 2
 color = Color(1, 0.6784314, 0.5568628, 1)
 
 [node name="Aim_line" type="Line2D" parent="." unique_id=1517530146]
 light_mask = 4
 width = 2.0
-default_color = Color(1, 0.27380127, 0.21500143, 1)
 script = ExtResource("13_jej6c")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=2064235577]
+visible = false
 position = Vector2(-34, -26)
 target_position = Vector2(148, 68)
 collision_mask = 3
@@ -914,5 +925,60 @@ color = Color(1, 0, 0, 1)
 offset = Vector2(20, 0)
 polygon = PackedVector2Array(-18.000002, 5, -21, 5, -21, 4, -22.000002, 4, -22.000002, 3, -23.000002, 3, -23.000002, 2.000001, -24, 2.000001, -24, -1.0000001, -23.000002, -1.0000001, -23.000002, -2, -22.000002, -2, -22.000002, -3, -21, -3, -21, -4, -18.000002, -4, -18.000002, -3, -17, -3, -17, -2, -16.000002, -2, -16.000002, -1.0000001, -15.000001, -1.0000001, -15.000001, 2.000001, -16.000002, 2.000001, -16.000002, 3, -17, 3, -17, 4, -18.000002, 4)
 uv = PackedVector2Array(-19.000002, 4, -22, 4, -22, 3, -23.000002, 3, -23.000002, 2, -24.000002, 2, -24.000002, 1.000001, -25, 1.000001, -25, -2, -24.000002, -2, -24.000002, -3, -23.000002, -3, -23.000002, -3.9999998, -22, -3.9999998, -22, -5, -19.000002, -5, -19.000002, -3.9999998, -18, -3.9999998, -18, -3, -17.000002, -3, -17.000002, -2, -16.000002, -2, -16.000002, 1.000001, -17.000002, 1.000001, -17.000002, 2, -18, 2, -18, 3, -19.000002, 3)
+
+[node name="runparticles" type="CPUParticles2D" parent="." unique_id=504848922]
+visible = false
+light_mask = 2
+z_index = -2
+position = Vector2(-5, 15)
+amount = 4
+lifetime = 0.22
+emission_shape = 3
+emission_rect_extents = Vector2(3, 3)
+direction = Vector2(-1, 0)
+spread = 31.21
+gravity = Vector2(0, -20)
+initial_velocity_min = 19.8
+initial_velocity_max = 34.65
+angle_min = 180.0
+angle_max = 180.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_jej6c")
+color_ramp = SubResource("Gradient_f1ej7")
+
+[node name="wallparticles" type="CPUParticles2D" parent="." unique_id=1513057521]
+visible = false
+light_mask = 2
+z_index = -2
+position = Vector2(8, -28)
+amount = 4
+lifetime = 0.22
+emission_shape = 3
+emission_rect_extents = Vector2(3, 3)
+direction = Vector2(0, -1)
+spread = 31.21
+gravity = Vector2(0, -20)
+initial_velocity_min = 19.8
+initial_velocity_max = 34.65
+angle_min = 180.0
+angle_max = 180.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_jej6c")
+color_ramp = SubResource("Gradient_f1ej7")
+
+[node name="course" type="AudioStreamPlayer2D" parent="." unique_id=860444874]
+stream = ExtResource("14_f1ej7")
+pitch_scale = 1.4
+
+[node name="jump" type="AudioStreamPlayer" parent="." unique_id=1170274707]
+stream = ExtResource("15_oprun")
+volume_db = -30.0
+pitch_scale = 0.9
+
+[node name="land" type="AudioStreamPlayer" parent="." unique_id=1341874401]
+stream = ExtResource("16_a8ls1")
+volume_db = -15.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
