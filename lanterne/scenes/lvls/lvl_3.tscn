@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://jfvrqflgf5wo" path="res://scenes/ennemy.tscn" id="9_5piho"]
 [ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="10_0qwrp"]
 [ext_resource type="Texture2D" uid="uid://00rnssqg8td1" path="res://assets/tileset/clouds.png" id="10_odplt"]
+[ext_resource type="Texture2D" uid="uid://rsqhgof4qtbh" path="res://assets/tileset/tile_set_aleatorio.png" id="11_33fmo"]
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="11_ly84p"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="12_5lv1a"]
 [ext_resource type="Material" uid="uid://b87kxv1gkqca2" path="res://Shaders/N&B_shader_material.tres" id="12_rcnel"]
@@ -140,9 +141,47 @@ texture = ExtResource("10_0qwrp")
 22:11/0 = 0
 24:11/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nqwoy"]
+texture = ExtResource("11_33fmo")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+3:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 0, 8, 0, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 0, 8, 0, 8, 8, -8, 8)
+5:0/0 = 0
+5:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 0, 8, 0, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+4:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 0, 8, 0, 8, 8, -8, 8)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+3:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, 8, 0, -8, 8, -8, 8, 8)
+5:2/0 = 0
+5:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, -8, 0, 8, -8, 8, -8, -8)
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+4:3/0 = 0
+4:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(8, 0, -8, 0, -8, -8, 8, -8)
+0:4/0 = 0
+2:4/0 = 0
+4:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_s2dgo"]
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 4
+physics_layer_1/collision_mask = 4
 sources/0 = SubResource("TileSetAtlasSource_ljibk")
+sources/1 = SubResource("TileSetAtlasSource_nqwoy")
 
 [node name="lvl_3" type="Node2D" unique_id=19222889]
 script = ExtResource("1_rcnel")
@@ -154,9 +193,6 @@ metadata/_custom_type_script = "uid://bg3yg1v1ill4h"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=989161551]
 position = Vector2(133, 283)
 shape = SubResource("WorldBoundaryShape2D_rsyu2")
-
-[node name="killzone#CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1149683389]
-position = Vector2(0, 400)
 
 [node name="Overall" type="CanvasLayer" parent="." unique_id=436792102]
 layer = 10
