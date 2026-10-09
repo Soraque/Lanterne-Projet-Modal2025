@@ -16,7 +16,7 @@ extends StaticBody2D
 
 var anim_initial_y: float
 var combustion_id := 0
-
+const propagation_delay = 0.5
 
 func _ready() -> void:
 	anim_initial_y = anim.position.y
@@ -64,7 +64,6 @@ func stop_fire_sound() -> void:
 
 
 func rallumer_silencieux() -> void:
-	_set_burning(true)
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	anim.position.y = anim_initial_y
@@ -82,8 +81,8 @@ func embrase() -> void:
 	
 	combustion_id += 1
 	var current_id = combustion_id
-	_set_burning(true)
 	animation.play("allumage")
+	_propagate()
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	
@@ -135,7 +134,6 @@ func _sequence_combustion(current_id: int) -> void:
 	await get_tree().create_timer(step_time).timeout
 	if current_id != combustion_id: return
 	
-	_set_burning(false)
 	anim.visible = false
 	stop_fire_sound()
 		
@@ -162,9 +160,20 @@ func _on_zone_body_entered(body: Node2D) -> void:
 		embrase()
 		if spawn:
 			body.allumer_lanterne(100)
+			
+func _propagate():
+	await get_tree().create_timer(propagation_delay).timeout
+	print("propagation check")
+# On utilise l'area2D qui nous sert de détection des flammable objects aux alentours
+	var ma_zone := get_node_or_null("propagation_area") as Area2D
+	print(ma_zone)
+	if not ma_zone:
+		return
 
-func _set_burning(value: bool) -> void:
-	if value:
-		add_to_group("feu_allume")
-	else:
-		remove_from_group("feu_allume")
+	var voisins = ma_zone.get_overlapping_bodies()
+	
+	for corps in voisins:
+		print("corps trouvé", corps)
+		if corps is FlammableObject and corps != self and not corps.flamme.visible:
+			corps.embrase()
+	

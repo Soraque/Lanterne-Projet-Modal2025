@@ -271,6 +271,9 @@ size = Vector2(31, 61)
 radius = 15.0
 height = 64.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ravfa"]
+size = Vector2(35, 64)
+
 [node name="campfire" type="StaticBody2D" unique_id=1579677712]
 material = ExtResource("1_73d8c")
 collision_layer = 2
@@ -372,6 +375,12 @@ stream = ExtResource("14_03221")
 volume_db = 2.0
 pitch_scale = 0.5
 attenuation = 27.857557
+
+[node name="propagation_area" type="Area2D" parent="." unique_id=1788850643]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="propagation_area" unique_id=1313811236]
+position = Vector2(-1.4999995, 17)
+shape = SubResource("RectangleShape2D_ravfa")
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="body_entered" from="zone" to="." method="_on_zone_body_entered"]

@@ -54,6 +54,7 @@ var direction_lancer = Vector2.ZERO
 var anim_str = ""
 var force_lancer = 1000
 var impact_vitesse_initiale = 0.2
+var lantern_duration = 10 #secondes
 
 # --- Dégâts / Invincibilité ---
 var isInvincible = false
@@ -322,7 +323,7 @@ func _physics_process(delta: float) -> void:
 	
 	# --- 12. Actualisation usure lanterne ---
 	if lantern_usure > 0.0:
-		lantern_usure = maxf(lantern_usure - delta * 5.0, 0.0)
+		lantern_usure = maxf(lantern_usure - delta * 100/lantern_duration, 0.0)
 
 	# --- 12 bis. Mort lente ---
 	_update_mort_lente(delta)
@@ -417,3 +418,9 @@ func _feu_actif_present() -> bool:
 func allumer_lanterne(value: float) -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "lantern_usure", value, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	print("aie")
+	if body is TileMapLayer or body is TileMap:
+		die()
