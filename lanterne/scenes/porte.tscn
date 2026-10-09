@@ -222,7 +222,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
-size = Vector2(8, 26)
+size = Vector2(8, 32)
 
 [sub_resource type="Animation" id="Animation_73d8c"]
 resource_name = "allumage"
@@ -244,6 +244,9 @@ tracks/0/keys = {
 _data = {
 &"allumage": SubResource("Animation_73d8c")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d78l5"]
+size = Vector2(10, 33.333336)
 
 [node name="porte" type="StaticBody2D" unique_id=749672723]
 material = ExtResource("1_63fia")
@@ -300,6 +303,12 @@ attenuation = 1.3195065
 stream = ExtResource("13_qo6xs")
 volume_db = -8.0
 attenuation = 5.2780275
+
+[node name="propagation_area" type="Area2D" parent="." unique_id=170947009]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="propagation_area" unique_id=728661780]
+position = Vector2(-0.33333325, 0)
+shape = SubResource("RectangleShape2D_d78l5")
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="animation_finished" from="Flamme/anim" to="." method="_on_anim_animation_finished"]
