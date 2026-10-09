@@ -9,4 +9,4 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if self and self.material:
-			self.material.set_shader_parameter("desaturation_amount", Global.time_dilatation)
+			self.material.set_shader_parameter("desaturation_amount", 1-Global.time_dilatation)

@@ -243,6 +243,7 @@ _data = {
 }
 
 [node name="porte" type="StaticBody2D" unique_id=749672723]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_cbvu1")
 metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
