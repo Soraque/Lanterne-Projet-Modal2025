@@ -64,6 +64,7 @@ func stop_fire_sound() -> void:
 
 
 func rallumer_silencieux() -> void:
+	_set_burning(true)
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
 	anim.position.y = anim_initial_y
@@ -80,6 +81,7 @@ func rallumer_silencieux() -> void:
 func embrase() -> void:
 	combustion_id += 1
 	var current_id = combustion_id
+	_set_burning(true)
 	animation.play("allumage")
 	collision.set_deferred("disabled", true)
 	collisionflamme.set_deferred("disabled", false)
@@ -132,6 +134,7 @@ func _sequence_combustion(current_id: int) -> void:
 	await get_tree().create_timer(step_time).timeout
 	if current_id != combustion_id: return
 	
+	_set_burning(false)
 	anim.visible = false
 	stop_fire_sound()
 		
@@ -158,3 +161,9 @@ func _on_zone_body_entered(body: Node2D) -> void:
 		embrase()
 		if spawn:
 			body.allumer_lanterne(100)
+
+func _set_burning(value: bool) -> void:
+	if value:
+		add_to_group("feu_allume")
+	else:
+		remove_from_group("feu_allume")

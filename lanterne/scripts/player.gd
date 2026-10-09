@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var runparticles: CPUParticles2D = $runparticles
 @onready var wallparticles: CPUParticles2D = $wallparticles
 @onready var course_audio: AudioStreamPlayer2D = $course
-@onready var filtre_mort: ColorRect = $"../../BottomLayer/Fond_Mort"
+@onready var filtre_mort: ColorRect = $"../../UpperLayer/Fond_Mort"
 
 
 # --- Nœuds audio pour le saut et l'atterrissage ---
@@ -59,8 +59,12 @@ var impact_vitesse_initiale = 0.2
 var isInvincible = false
 var invincible_time = 1.0
 
-# --- Mort ---
-var is_dying := false
+# --- Mort lente (extinction) ---
+@export var mort_duree := 5.0
+@export var mort_recuperation := 1.0
+var mort_progress := 0.0                # 0.0 = vivant, 1.0 = mort
+var is_dying := false                   # true tant que le joueur est en danger
+var is_dead := false                    # true dès que die() est lancée
 
 # --- Boost lors des collisions ---
 var was_on_floor = false
@@ -108,8 +112,10 @@ func _ready() -> void:
 		lantern_usure = 100.0
 		is_lanterne = true
 
-
 func die() -> void:
+	if is_dead:
+		return
+	is_dead = true
 	var gm = GameManager
 	gm.vitJ = Vector2.ZERO
 	# Réinitialise la sauvegarde de usure au respawn
@@ -317,12 +323,11 @@ func _physics_process(delta: float) -> void:
 		print("ouais")
 	
 	# --- 12. Actualisation usure lanterne ---
-	if lantern_usure > 0:
-		lantern_usure -= delta * 5
-	elif not is_dying:
-		_start_extinction()
-	else:
-		lantern_usure = 0
+	if lantern_usure > 0.0:
+		lantern_usure = maxf(lantern_usure - delta * 5.0, 0.0)
+
+	# --- 12 bis. Mort lente ---
+	_update_mort_lente(delta)
 	
 	# --- 13. Lumière lanterne ---
 	var coef = get_coef_usure()
@@ -379,6 +384,37 @@ func get_coef_usure() -> float:
 	var x = lantern_usure / 100.0
 	return (400 * x**3 - 600 * x**2 + 319 * x) / 119.0
 
+func _update_mort_lente(delta: float) -> void:
+	if is_dead:
+		return
+
+	is_dying = _est_en_danger()
+
+	if is_dying:
+		mort_progress += delta / mort_duree
+	else:
+		mort_progress -= delta / mort_recuperation
+	mort_progress = clampf(mort_progress, 0.0, 1.0)
+
+	filtre_mort.color.a = mort_progress
+
+	if mort_progress >= 1.0:
+		die()
+
+
+func _est_en_danger() -> bool:
+	# Avec la lanterne : seule l'usure compte.
+	if is_lanterne:
+		return lantern_usure <= 0.0
+	# Sans lanterne (lancée) : danger s'il n'y a aucun feu hors feux de camp.
+	return not _feu_actif_present()
+
+
+func _feu_actif_present() -> bool:
+	for feu in get_tree().get_nodes_in_group("feu_allume"):
+		if feu is FlammableObject and not feu.spawn:
+			return true
+	return false
 
 func allumer_lanterne(value: float) -> void:
 	var tween = create_tween()
