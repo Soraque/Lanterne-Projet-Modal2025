@@ -246,8 +246,8 @@ _data = {
 }
 
 [node name="porte" type="StaticBody2D" unique_id=749672723]
-scale = Vector2(1.5, 1.5)
 material = ExtResource("1_63fia")
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_cbvu1")
 metadata/_custom_type_script = "uid://cbbl2x678u32u"
 
@@ -292,15 +292,15 @@ texture = ExtResource("2_m0o0n")
 region_enabled = true
 region_rect = Rect2(348, 144, 8, 32)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=599527492]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=616441887]
 stream = ExtResource("12_63fia")
-volume_db = -4.0
+volume_db = -2.0
 attenuation = 1.3195065
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=1527745608]
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=919170280]
 stream = ExtResource("13_qo6xs")
-volume_db = -6.0
-attenuation = 1.3195065
+volume_db = -8.0
+attenuation = 5.2780275
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="animation_finished" from="Flamme/anim" to="." method="_on_anim_animation_finished"]
