@@ -45,7 +45,7 @@ var vitesse_debut = 0
 var looking_direction = 0
 
 # --- Saut & marges de tolérance ---
-const COYOTE_TIME = 0.2         # saut possible juste après avoir quitté le sol
+const COYOTE_TIME = 0.2          # saut possible juste après avoir quitté le sol
 const JUMP_BUFFER_TIME = 0.15    
 const WALL_COYOTE_TIME = 0.10     # wall jump possible juste après avoir quitté le mur
 const WALL_CHECK_DISTANCE = 5.0  
@@ -58,6 +58,7 @@ var _wall_col := KinematicCollision2D.new()
 
 # --- Lanterne ---
 @export var is_lanterne := true
+@onready var lightparticle: CPUParticles2D = $lightparticle
 var lantern_ready = false
 @export var lantern_usure := 100.0 # Valeur d'usure de la lanterne de 0 : éteint à 100 : complètement allumé
 var direction_lancer = Vector2.ZERO
@@ -65,6 +66,7 @@ var anim_str = ""
 var force_lancer = 1000
 var impact_vitesse_initiale = 0.2
 var lantern_duration = 10 #secondes
+var initial_light_particle_amount := 50
 
 # --- Dégâts / Invincibilité ---
 var isInvincible = false
@@ -74,8 +76,8 @@ var invincible_time = 1.0
 @export var mort_duree := 5.0
 @export var mort_recuperation := 1.0
 var mort_progress := 0.0                # 0.0 = vivant, 1.0 = mort
-var is_dying := false                    # true tant que le joueur est en danger
-var is_dead := false                     # true dès que die() est lancée
+var is_dying := false                   # true tant que le joueur est en danger
+var is_dead := false                    # true dès que die() est lancée
 
 # --- Boost lors des collisions ---
 var was_on_floor = false
@@ -96,6 +98,9 @@ func _ready() -> void:
 	
 	wallparticles.show()
 	wallparticles.emitting = false
+
+	if lightparticle:
+		initial_light_particle_amount = lightparticle.amount
 
 	var mat = animated_sprite.material as ShaderMaterial
 	if mat:
@@ -173,7 +178,6 @@ func _physics_process(delta: float) -> void:
 		course_audio.stop()
 		move_and_slide()
 		
-		# Mise à jour des états au sol / mur pour le dash
 		was_on_floor = is_on_floor()
 		was_on_wall = is_on_wall()
 		previous_velocity = velocity
@@ -256,7 +260,6 @@ func _physics_process(delta: float) -> void:
 
 	_update_wall_coyote(delta)
 
-	# Un saut mémorisé s'exécute dès que le sol OU un mur devient accessible
 	if jump_buffer_timer > 0.0:
 		if coyote_timer > 0.0:
 			jump()
@@ -341,12 +344,27 @@ func _physics_process(delta: float) -> void:
 	# --- 12 ter. Gestion de la musique selon l'usure ---
 	_update_music_volume()
 	
-	# --- 13. Lumière lanterne ---
+	# --- 13. Lumière lanterne & Particules ---
+# --- 13. Lumière lanterne & Particules ---
 	var coef = get_coef_usure()
 	if coef > 0.1:
 		lumiere.set_texture_scale(1.5 + 6.5 * (coef - 0.1))
 	else:
 		lumiere.base_energy = coef * 10
+
+	if not is_lanterne or lantern_usure <= 30.0:
+		if lightparticle.emitting:
+			lightparticle.emitting = false
+	else:
+		var ratio = clampf((lantern_usure - 30.0) / 70.0, 0.0, 1.0)
+		var target_amount = int(initial_light_particle_amount * ratio)
+		
+		# On ne met à jour l'amount que s'il change pour éviter de réinitialiser le cycle en boucle
+		if lightparticle.amount != target_amount:
+			lightparticle.amount = target_amount
+			
+		if not lightparticle.emitting:
+			lightparticle.emitting = true
 
 	if collision_boost_cooldown > 0:
 		collision_boost_cooldown -= delta
@@ -370,8 +388,6 @@ func lancer_lanterne() -> void:
 	lanterne.global_position = global_position
 	get_parent().add_child(lanterne)
 	lanterne.lancer(direction_lancer, velocity, force_lancer, impact_vitesse_initiale)
-
-
 
 
 func _start_extinction() -> void:
@@ -492,8 +508,6 @@ func _update_wall_coyote(delta: float) -> void:
 
 
 func _detect_wall() -> float:
-	# Retourne la normale x d'un mur à moins de WALL_CHECK_DISTANCE px, sinon 0.
-	# On teste d'abord le côté vers lequel regarde le joueur.
 	var facing := -1.0 if animated_sprite.flip_h else 1.0
 	for dir in [facing, -facing]:
 		if test_move(global_transform, Vector2(dir * WALL_CHECK_DISTANCE, 0.0), _wall_col):

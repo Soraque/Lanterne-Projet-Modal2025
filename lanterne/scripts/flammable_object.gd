@@ -1,6 +1,7 @@
 class_name FlammableObject
 extends StaticBody2D
 
+@export var temps_de_flamme := 10
 @export var duration := 3.0 #-1 pour infini
 @export var bouton := false
 @export var destroyable := true
@@ -165,14 +166,21 @@ func _on_flamme_body_entered(body: Node2D) -> void:
 		body.lantern_usure += 0.1
 		if spawn:
 			body.allumer_lanterne(100)
+		else:
+			var audio3 = get_node_or_null("AudioStreamPlayer3D") as AudioStreamPlayer2D			
+			if audio3:
+				var new_pitch = GameManager.register_ignition_combo()
+				audio3.pitch_scale = new_pitch
+				audio3.play()
+
 
 
 func _on_zone_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.is_lanterne and not flamme.visible: 
 		embrase()
 		if spawn:
+			body.lantern_duration = temps_de_flamme #on adapte le temps de lanterne en fonction du niveau
 			body.allumer_lanterne(100)
-			
 func _propagate():
 	await get_tree().create_timer(propagation_delay).timeout
 	print("propagation check")
