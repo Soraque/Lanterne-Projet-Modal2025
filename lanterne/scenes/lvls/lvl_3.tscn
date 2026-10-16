@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bhoni51un3cxm"]
+[gd_scene format=4 uid="uid://bknh26ojh7fmp"]
 
 [ext_resource type="Script" uid="uid://byw2g851srwgo" path="res://scripts/lvl.gd" id="1_mmbfv"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="2_fmwu4"]
@@ -19,7 +19,10 @@
 [ext_resource type="PackedScene" uid="uid://raey8fey2ncu" path="res://scenes/plateforme.tscn" id="17_kpvql"]
 [ext_resource type="Texture2D" uid="uid://00rnssqg8td1" path="res://assets/tileset/clouds.png" id="18_vxvon"]
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="19_6o7nh"]
+[ext_resource type="Texture2D" uid="uid://diptfic6l4men" path="res://assets/Cadre.png" id="20_3d0uf"]
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="20_we5qb"]
+[ext_resource type="Script" uid="uid://cw4c1epbe7rg8" path="res://scenes/lvls/fenetre_lancer.gd" id="21_5piho"]
+[ext_resource type="Script" uid="uid://lifepvjgncqg" path="res://scenes/lvls/button_quit.gd" id="22_odplt"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
@@ -395,6 +398,15 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_ljibk")
 sources/1 = SubResource("TileSetAtlasSource_nqwoy")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5piho"]
+texture = ExtResource("20_3d0uf")
+texture_margin_left = 21.0
+texture_margin_top = 21.0
+texture_margin_right = 21.0
+texture_margin_bottom = 21.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
 [node name="lvl_3" type="Node2D" unique_id=19222889]
 script = ExtResource("1_mmbfv")
 
@@ -581,7 +593,6 @@ rotation = 1.5707964
 scale = Vector2(2, 2.5)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World/foreground/ForegroundContent" unique_id=914010442]
-visible = false
 use_parent_material = true
 color = Color(0.099369265, 0.18090376, 0.24807635, 1)
 
@@ -732,6 +743,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Fenetre_lancer" type="Panel" parent="UpperLayer" unique_id=11454575]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.63
+anchor_bottom = 0.63
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+tooltip_auto_translate_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5piho")
+script = ExtResource("21_5piho")
+
+[node name="Disposition" type="MarginContainer" parent="UpperLayer/Fenetre_lancer" unique_id=940087423]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpperLayer/Fenetre_lancer/Disposition" unique_id=1159643700]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Titre" type="Label" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=645138813]
+layout_mode = 2
+text = "Lancer la Lanterne BOUM !!"
+
+[node name="Texte" type="RichTextLabel" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=1022750740]
+layout_mode = 2
+text = "OH La La, je lance ma lanterne et spoulch :!!!! ça la lance !!!"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=581236752]
+layout_mode = 2
+alignment = 2
+
+[node name="Button_quit" type="Button" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer" unique_id=1651826366]
+layout_mode = 2
+text = "Quitter"
+script = ExtResource("22_odplt")
 
 [node name="vent" type="AudioStreamPlayer" parent="." unique_id=916082848]
 stream = ExtResource("20_we5qb")
