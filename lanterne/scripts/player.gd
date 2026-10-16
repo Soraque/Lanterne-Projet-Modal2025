@@ -466,6 +466,8 @@ func jump() -> void:
 
 
 func wall_jump() -> void:
+	var can_dash = true
+	var dash_timer := 0.0
 	velocity.x = wall_normal_x * WALL_JUMP_HORIZONTAL_SPEED
 	velocity.y = WALL_JUMP_VERTICAL_SPEED
 	wall_jump_lock_timer = WALL_JUMP_LOCK_TIME
