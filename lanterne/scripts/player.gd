@@ -50,9 +50,9 @@ var jump_available = false
 var jbuffertime = 0.1
 
 # --- Lanterne ---
-@export var is_lanterne = true
+@export var is_lanterne := true
 var lantern_ready = false
-@export var lantern_usure = 100 # Valeur d'usure de la lanterne de 0 : éteint à 100 : complètement allumé
+@export var lantern_usure := 100.0 # Valeur d'usure de la lanterne de 0 : éteint à 100 : complètement allumé
 var direction_lancer = Vector2.ZERO
 var anim_str = ""
 var force_lancer = 1000
@@ -135,6 +135,8 @@ func die() -> void:
 	gm.lantern_usure_saved = 100.0
 	gm.is_lanterne_saved = true
 	gm.reset_combo()
+	var tween := create_tween()
+	tween.tween_property(filtre_mort, "color:a", 1.0, 0.1)
 	
 	await get_tree().create_timer(1).timeout
 	
@@ -145,7 +147,9 @@ func die() -> void:
 	is_lanterne = true
 
 
+
 func jump() -> void:
+	
 	if jump_available:
 		velocity.y = JUMP_VELOCITY
 		jump_available = false
@@ -224,7 +228,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 4. Lancer de la lanterne & Visée ralentie ---
 	if is_lanterne:
-		if input_lancer.length() > 0.4:
+		if Input.is_action_pressed("lancer"):
 			direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
 			if not lantern_ready:
@@ -232,14 +236,12 @@ func _physics_process(delta: float) -> void:
 				if slowdown_audio and not slowdown_audio.playing:
 					slowdown_audio.play()
 			lantern_ready = true
-		elif lantern_ready:
+		elif lantern_ready and Input.is_action_just_released("lancer") :
 			joystick_off.emit()
 			aim_line.clear_points()
 			pointeur.visible = false
-			
 			if slowdown_audio and slowdown_audio.playing:
 				slowdown_audio.stop()
-			
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
