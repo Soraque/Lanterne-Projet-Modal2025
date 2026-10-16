@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s506me0pm33k"
-path="res://.godot/imported/science etonnee.jpg-e66df878aea86a6b641668f57b624137.ctex"
+uid="uid://bjubop1dt01gn"
+path="res://.godot/imported/Capture d’écran 2026-09-11 à 16.58.48.png-8c5e139fd3aadacca6de757c1d87db0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://science etonnee.jpg"
-dest_files=["res://.godot/imported/science etonnee.jpg-e66df878aea86a6b641668f57b624137.ctex"]
+source_file="res://assets/Capture d’écran 2026-09-11 à 16.58.48.png"
+dest_files=["res://.godot/imported/Capture d’écran 2026-09-11 à 16.58.48.png-8c5e139fd3aadacca6de757c1d87db0a.ctex"]
 
 [params]
 
