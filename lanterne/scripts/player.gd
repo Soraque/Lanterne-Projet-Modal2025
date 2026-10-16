@@ -44,15 +44,22 @@ var dash_timer := 0.0
 var vitesse_debut = 0
 var looking_direction = 0
 
-# --- Saut ---
-var jump_buffer = false
-var jump_available = false
-var jbuffertime = 0.1
+# --- Saut & marges de tolérance ---
+const COYOTE_TIME = 0.2         # saut possible juste après avoir quitté le sol
+const JUMP_BUFFER_TIME = 0.15    
+const WALL_COYOTE_TIME = 0.10     # wall jump possible juste après avoir quitté le mur
+const WALL_CHECK_DISTANCE = 5.0  
+
+var coyote_timer := 0.0
+var jump_buffer_timer := 0.0
+var wall_coyote_timer := 0.0
+var wall_normal_x := 0.0          # normale x du dernier mur vu (donne le sens du rebond)
+var _wall_col := KinematicCollision2D.new()
 
 # --- Lanterne ---
-@export var is_lanterne = true
+@export var is_lanterne := true
 var lantern_ready = false
-@export var lantern_usure = 100 # Valeur d'usure de la lanterne de 0 : éteint à 100 : complètement allumé
+@export var lantern_usure := 100.0 # Valeur d'usure de la lanterne de 0 : éteint à 100 : complètement allumé
 var direction_lancer = Vector2.ZERO
 var anim_str = ""
 var force_lancer = 1000
@@ -135,6 +142,8 @@ func die() -> void:
 	gm.lantern_usure_saved = 100.0
 	gm.is_lanterne_saved = true
 	gm.reset_combo()
+	var tween := create_tween()
+	tween.tween_property(filtre_mort, "color:a", 1.0, 0.1)
 	
 	await get_tree().create_timer(1).timeout
 	
@@ -143,18 +152,6 @@ func die() -> void:
 	else:
 		get_tree().reload_current_scene.call_deferred()
 	is_lanterne = true
-
-
-func jump() -> void:
-	if jump_available:
-		velocity.y = JUMP_VELOCITY
-		jump_available = false
-		jump_buffer = false
-		if jump_audio:
-			jump_audio.play()
-	else:
-		jump_buffer = true
-		get_tree().create_timer(jbuffertime).timeout.connect(on_jump_buffer_timeout)
 
 
 func _physics_process(delta: float) -> void:
@@ -183,14 +180,12 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# --- 2. Gravité & Sol ---
-	if not is_on_floor():
-		jump_available = false
-		velocity += get_gravity() * delta
-	else:
+	if is_on_floor():
 		can_dash = true
-		jump_available = true
-		if jump_buffer:
-			jump()
+		coyote_timer = COYOTE_TIME
+	else:
+		coyote_timer -= delta
+		velocity += get_gravity() * delta
 
 	# --- Wall Jump Timer ---
 	if wall_jump_lock_timer > 0.0:
@@ -224,7 +219,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 4. Lancer de la lanterne & Visée ralentie ---
 	if is_lanterne:
-		if input_lancer.length() > 0.4:
+		if Input.is_action_pressed("lancer"):
 			direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
 			if not lantern_ready:
@@ -232,14 +227,12 @@ func _physics_process(delta: float) -> void:
 				if slowdown_audio and not slowdown_audio.playing:
 					slowdown_audio.play()
 			lantern_ready = true
-		elif lantern_ready:
+		elif lantern_ready and Input.is_action_just_released("lancer") :
 			joystick_off.emit()
 			aim_line.clear_points()
 			pointeur.visible = false
-			
 			if slowdown_audio and slowdown_audio.playing:
 				slowdown_audio.stop()
-			
 			lancer_lanterne()
 			is_lanterne = false
 			lantern_ready = false
@@ -253,28 +246,25 @@ func _physics_process(delta: float) -> void:
 		anim_str = "_sans_lanterne"
 		lumiere.visible = false
 
-	# --- 6. Saut & Wall Jump ---
+	# --- 6. Saut & Wall Jump (avec marges) ---
+	jump_buffer_timer -= delta
 	if Input.is_action_just_pressed("jump"):
+		jump_buffer_timer = JUMP_BUFFER_TIME
 		runparticles.emitting = false
 		wallparticles.emitting = false
 		course_audio.stop()
-		jump()
+
+	_update_wall_coyote(delta)
+
+	# Un saut mémorisé s'exécute dès que le sol OU un mur devient accessible
+	if jump_buffer_timer > 0.0:
+		if coyote_timer > 0.0:
+			jump()
+		elif wall_coyote_timer > 0.0:
+			wall_jump()
 
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= 0.3
-
-	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
-		runparticles.emitting = false
-		wallparticles.emitting = false
-		course_audio.stop()
-		var wall_normal = get_wall_normal()
-		velocity.x = wall_normal.x * WALL_JUMP_HORIZONTAL_SPEED
-		velocity.y = WALL_JUMP_VERTICAL_SPEED
-		wall_jump_lock_timer = WALL_JUMP_LOCK_TIME
-		jump_buffer = false
-		jump_available = false
-		if jump_audio:
-			jump_audio.play()
 
 	# --- 7. Déplacement horizontal ---
 	if wall_jump_lock_timer > 0.0:
@@ -382,8 +372,6 @@ func lancer_lanterne() -> void:
 	lanterne.lancer(direction_lancer, velocity, force_lancer, impact_vitesse_initiale)
 
 
-func on_jump_buffer_timeout() -> void:
-	jump_buffer = false
 
 
 func _start_extinction() -> void:
@@ -429,19 +417,19 @@ func _update_music_volume() -> void:
 	if is_dead or not music_audio:
 		return
 
-	# Si la lanterne est à plus de 50%, la musique est coupée/silencieuse
-	if lantern_usure > 50.0:
+	# Si la lanterne est au-dessus de 30 %, on coupe la musique
+	if lantern_usure > 70.0:
 		if music_audio.playing:
 			music_audio.stop()
 	else:
-		# Lancement de la musique si ce n'est pas déjà fait
+		# Dès que l'usure passe sous les 30 %, on lance la musique
 		if not music_audio.playing:
 			music_audio.play()
 
-		# Progression de 0.0 (à 50% d'usure) à 1.0 (à 0% d'usure)
-		var progress = (30.0 - lantern_usure) / 30.0
+		# Progression de 0.0 (à 30% d'usure) à 1.0 (à 0% d'usure)
+		var progress := clampf((70.0 - lantern_usure) / 70.0, 0.0, 1.0)
 		
-		# Fondu logarithmique en décibels (-30 dB très faible à 0 dB fort)
+		# Fondu logarithmique de -30 dB (faible) à 0 dB (fort)
 		music_audio.volume_db = lerpf(-30.0, 0.0, progress)
 
 
@@ -468,3 +456,46 @@ func allumer_lanterne(value: float) -> void:
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer or body is TileMap:
 		die()
+
+func jump() -> void:
+	velocity.y = JUMP_VELOCITY
+	coyote_timer = 0.0          # pas de double saut avec la marge
+	jump_buffer_timer = 0.0
+	if jump_audio:
+		jump_audio.play()
+
+
+func wall_jump() -> void:
+	velocity.x = wall_normal_x * WALL_JUMP_HORIZONTAL_SPEED
+	velocity.y = WALL_JUMP_VERTICAL_SPEED
+	wall_jump_lock_timer = WALL_JUMP_LOCK_TIME
+	wall_coyote_timer = 0.0
+	jump_buffer_timer = 0.0
+	if jump_audio:
+		jump_audio.play()
+
+
+func _update_wall_coyote(delta: float) -> void:
+	wall_coyote_timer -= delta
+	if is_on_floor():
+		return
+	var n := _detect_wall()
+	if n == 0.0:
+		return
+	# Pas de rafraîchissement si le joueur s'éloigne déjà du mur :
+	# évite un second wall jump juste après le premier.
+	if velocity.x * n <= 0.0:
+		wall_normal_x = n
+		wall_coyote_timer = WALL_COYOTE_TIME
+
+
+func _detect_wall() -> float:
+	# Retourne la normale x d'un mur à moins de WALL_CHECK_DISTANCE px, sinon 0.
+	# On teste d'abord le côté vers lequel regarde le joueur.
+	var facing := -1.0 if animated_sprite.flip_h else 1.0
+	for dir in [facing, -facing]:
+		if test_move(global_transform, Vector2(dir * WALL_CHECK_DISTANCE, 0.0), _wall_col):
+			var n := _wall_col.get_normal()
+			if absf(n.x) > 0.7:   # un vrai mur, pas un sol ou un plafond
+				return n.x
+	return 0.0
