@@ -429,19 +429,19 @@ func _update_music_volume() -> void:
 	if is_dead or not music_audio:
 		return
 
-	# Si la lanterne est à plus de 50%, la musique est coupée/silencieuse
-	if lantern_usure > 50.0:
+	# Si la lanterne est au-dessus de 30 %, on coupe la musique
+	if lantern_usure > 70.0:
 		if music_audio.playing:
 			music_audio.stop()
 	else:
-		# Lancement de la musique si ce n'est pas déjà fait
+		# Dès que l'usure passe sous les 30 %, on lance la musique
 		if not music_audio.playing:
 			music_audio.play()
 
-		# Progression de 0.0 (à 50% d'usure) à 1.0 (à 0% d'usure)
-		var progress = (30.0 - lantern_usure) / 30.0
+		# Progression de 0.0 (à 30% d'usure) à 1.0 (à 0% d'usure)
+		var progress := clampf((70.0 - lantern_usure) / 70.0, 0.0, 1.0)
 		
-		# Fondu logarithmique en décibels (-30 dB très faible à 0 dB fort)
+		# Fondu logarithmique de -30 dB (faible) à 0 dB (fort)
 		music_audio.volume_db = lerpf(-30.0, 0.0, progress)
 
 
