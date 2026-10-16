@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bhoni51un3cxm"]
+[gd_scene format=4 uid="uid://bknh26ojh7fmp"]
 
 [ext_resource type="Script" uid="uid://byw2g851srwgo" path="res://scripts/lvl.gd" id="1_rcnel"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="2_fmwu4"]
