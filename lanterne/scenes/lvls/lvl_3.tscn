@@ -218,7 +218,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("7_ok5a0")]
 light_mask = 2
 z_index = 1
-position = Vector2(-182, -8)
+position = Vector2(50, -1420)
 lanterne_scene = ExtResource("8_3d0uf")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("bounds_rect", "player")]
@@ -230,14 +230,8 @@ zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("8_a2gcl")
-bounds_rect = NodePath("ReferenceRect")
+bounds_rect = NodePath("")
 player = NodePath("..")
-
-[node name="ReferenceRect" type="ReferenceRect" parent="PlayerLayer/player/Camera2D" unique_id=2082722526]
-offset_left = -336.0
-offset_top = -1040.0
-offset_right = 6782.0
-offset_bottom = 193.0
 
 [node name="PlayerCanvaModulate" type="CanvasModulate" parent="PlayerLayer/player" unique_id=2047828107]
 color = Color(0.099369265, 0.18090376, 0.24807635, 1)
