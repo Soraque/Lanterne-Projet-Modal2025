@@ -45,7 +45,7 @@ var vitesse_debut = 0
 var looking_direction = 0
 
 # --- Saut & marges de tolérance ---
-const COYOTE_TIME = 0.2          # saut possible juste après avoir quitté le sol
+const COYOTE_TIME = 0.02       # saut possible juste après avoir quitté le sol
 const JUMP_BUFFER_TIME = 0.15    
 const WALL_COYOTE_TIME = 0.10     # wall jump possible juste après avoir quitté le mur
 const WALL_CHECK_DISTANCE = 5.0  
@@ -57,16 +57,21 @@ var wall_normal_x := 0.0          # normale x du dernier mur vu (donne le sens d
 var _wall_col := KinematicCollision2D.new()
 
 # --- Lanterne ---
+const LANCER_DURATION = 2.0
+
 @export var is_lanterne := true
 @onready var lightparticle: CPUParticles2D = $lightparticle
 var lantern_ready = false
 @export var lantern_usure := 100.0 # Valeur d'usure de la lanterne de 0 : éteint à 100 : complètement allumé
 var direction_lancer = Vector2.ZERO
+var force_lancer_lanterne = false
+var lancer_timer := 0.0
 var anim_str = ""
 var force_lancer = 1000
 var impact_vitesse_initiale = 0.2
 var lantern_duration = 10 #secondes
 var initial_light_particle_amount := 50
+
 
 # --- Dégâts / Invincibilité ---
 var isInvincible = false
@@ -109,6 +114,7 @@ func _ready() -> void:
 	if GameManager.Changinglvl:
 		# Réinitialise les états de mouvement parasites de l'ancienne scène
 		dash_timer = 0.0
+		lancer_timer = 0.0
 		wall_jump_lock_timer = 0.0
 		vitesse_debut = 0
 		
@@ -174,6 +180,7 @@ func _physics_process(delta: float) -> void:
 		
 		if dash_timer <= 0.0:
 			velocity.x = vitesse_debut
+	
 			
 		course_audio.stop()
 		move_and_slide()
@@ -198,6 +205,7 @@ func _physics_process(delta: float) -> void:
 	# --- 3. Déclenchement du Dash ---
 	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
 		runparticles.emitting = false
+		force_lancer_lanterne = true
 		wallparticles.emitting = false
 		course_audio.stop()
 		can_dash = false
@@ -220,18 +228,26 @@ func _physics_process(delta: float) -> void:
 		
 		animated_sprite.play("dash" + anim_str)
 		dash_cd_timer.start(DASH_COOLDOWN)
-
+	
+	if lantern_ready:
+		if lancer_timer <= 0.0:
+			force_lancer_lanterne = true
+			lancer_timer = 0.0
+		else:
+			lancer_timer-=delta / Engine.time_scale
 	# --- 4. Lancer de la lanterne & Visée ralentie ---
 	if is_lanterne:
 		if Input.is_action_pressed("lancer"):
 			direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
 			if not lantern_ready:
+				lancer_timer = LANCER_DURATION
 				joystick_on.emit()
 				if slowdown_audio and not slowdown_audio.playing:
 					slowdown_audio.play()
 			lantern_ready = true
-		elif lantern_ready and Input.is_action_just_released("lancer") :
+		if lantern_ready and (force_lancer_lanterne or Input.is_action_just_released("lancer")):
+			force_lancer_lanterne = false
 			joystick_off.emit()
 			aim_line.clear_points()
 			pointeur.visible = false
