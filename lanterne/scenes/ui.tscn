@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://v7svns5m00ma"]
+[gd_scene format=4 uid="uid://v7svns5m00ma"]
 
 [ext_resource type="Script" uid="uid://b00bo0eovc3ei" path="res://scripts/ui.gd" id="1_gdt2y"]
 [ext_resource type="Theme" uid="uid://cptu0dxjvd5dc" path="res://assets/main_theme.tres" id="1_nt7q6"]
 [ext_resource type="Texture2D" uid="uid://bjubop1dt01gn" path="res://assets/Capture d’écran 2026-09-11 à 16.58.48.png" id="2_x4jx1"]
-[ext_resource type="FontFile" uid="uid://bc5iyd1d7vqht" path="res://assets/Moria_DF.TTF" id="3_yev5y"]
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="5_8dubc"]
 [ext_resource type="AudioStream" uid="uid://ccj51s00ejy1d" path="res://assets/sonore/FIREBurn_Grand feu de branches 1 (ID 0987)_LaSonotheque.fr.mp3" id="5_wm3ai"]
 

@@ -445,7 +445,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(61, -1375)
+position = Vector2(84, -1452)
 lanterne_scene = ExtResource("6_nreht")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("player")]
