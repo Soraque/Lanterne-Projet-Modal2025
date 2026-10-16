@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://dr2u2ruoyhbc2" path="res://assets/ui elements/generic_button_circle_outline.png" id="19_5lv1a"]
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="19_6o7nh"]
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="20_we5qb"]
+[ext_resource type="Texture2D" uid="uid://j7uf25oisr6v" path="res://assets/ui elements/generic_button_trigger_b_outline.png" id="23_5ae7g"]
+[ext_resource type="Texture2D" uid="uid://dp3geljhw1k16" path="res://assets/ui elements/generic_button_trigger_b_fill.png" id="24_4nrf2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
@@ -643,7 +645,6 @@ position = Vector2(2470, -1731)
 scale = Vector2(1.5, 2)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World/foreground/ForegroundContent" unique_id=914010442]
-visible = false
 use_parent_material = true
 color = Color(0.099369265, 0.18090376, 0.24807635, 1)
 
