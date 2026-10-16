@@ -468,3 +468,48 @@ func allumer_lanterne(value: float) -> void:
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer or body is TileMap:
 		die()
+
+func jump() -> void:
+	velocity.y = JUMP_VELOCITY
+	coyote_timer = 0.0          # pas de double saut avec la marge
+	jump_buffer_timer = 0.0
+	if jump_audio:
+		jump_audio.play()
+
+
+func wall_jump() -> void:
+	can_dash = true
+	dash_timer = 0.0
+	velocity.x = wall_normal_x * WALL_JUMP_HORIZONTAL_SPEED
+	velocity.y = WALL_JUMP_VERTICAL_SPEED
+	wall_jump_lock_timer = WALL_JUMP_LOCK_TIME
+	wall_coyote_timer = 0.0
+	jump_buffer_timer = 0.0
+	if jump_audio:
+		jump_audio.play()
+
+
+func _update_wall_coyote(delta: float) -> void:
+	wall_coyote_timer -= delta
+	if is_on_floor():
+		return
+	var n := _detect_wall()
+	if n == 0.0:
+		return
+	# Pas de rafraîchissement si le joueur s'éloigne déjà du mur :
+	# évite un second wall jump juste après le premier.
+	if velocity.x * n <= 0.0:
+		wall_normal_x = n
+		wall_coyote_timer = WALL_COYOTE_TIME
+
+
+func _detect_wall() -> float:
+	# Retourne la normale x d'un mur à moins de WALL_CHECK_DISTANCE px, sinon 0.
+	# On teste d'abord le côté vers lequel regarde le joueur.
+	var facing := -1.0 if animated_sprite.flip_h else 1.0
+	for dir in [facing, -facing]:
+		if test_move(global_transform, Vector2(dir * WALL_CHECK_DISTANCE, 0.0), _wall_col):
+			var n := _wall_col.get_normal()
+			if absf(n.x) > 0.7:   # un vrai mur, pas un sol ou un plafond
+				return n.x
+	return 0.0
