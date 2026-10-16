@@ -531,6 +531,12 @@ position = Vector2(3625, -928)
 sanslancer = true
 spawn = true
 
+[node name="Campfire11" parent="World/foreground/ForegroundContent/campfires" unique_id=1934343854 instance=ExtResource("10_0tyk0")]
+light_mask = 2
+position = Vector2(5255, -1184)
+sanslancer = true
+spawn = true
+
 [node name="Campfire10" parent="World/foreground/ForegroundContent/campfires" unique_id=1582900885 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(3701, -1504)
@@ -856,7 +862,7 @@ position = Vector2(5640, -1623.0001)
 scale = Vector2(0.041666668, 0.041666668)
 texture = ExtResource("15_3dp17")
 
-[node name="porte" parent="World/foreground/ForegroundContent" unique_id=1220056732 instance=ExtResource("14_mige7")]
+[node name="porte" parent="World/foreground/ForegroundContent" unique_id=1338423587 instance=ExtResource("14_mige7")]
 position = Vector2(2443, -1968)
 scale = Vector2(1.5, 2)
 
