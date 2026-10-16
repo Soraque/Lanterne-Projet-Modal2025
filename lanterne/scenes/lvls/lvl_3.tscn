@@ -1,14 +1,6 @@
 [gd_scene format=4 uid="uid://bhoni51un3cxm"]
 
 [ext_resource type="Script" uid="uid://byw2g851srwgo" path="res://scripts/lvl.gd" id="1_rcnel"]
-[ext_resource type="PackedScene" uid="uid://bryg1hif3f1sx" path="res://scenes/campfire.tscn" id="3_33fmo"]
-[ext_resource type="PackedScene" uid="uid://dg30b2fr88sfm" path="res://scenes/porte.tscn" id="4_nqwoy"]
-[ext_resource type="PackedScene" uid="uid://jfvrqflgf5wo" path="res://scenes/ennemy.tscn" id="9_5piho"]
-[ext_resource type="FontFile" uid="uid://bc5iyd1d7vqht" path="res://assets/Moria_DF.TTF" id="15_cowf5"]
-[ext_resource type="Texture2D" uid="uid://desq6fqb4kba2" path="res://assets/ui elements/generic_stick_down.png" id="16_5piho"]
-[ext_resource type="Texture2D" uid="uid://f4igbttm3yp7" path="res://assets/ui elements/generic_button_circle_fill.png" id="17_odplt"]
-[ext_resource type="Script" uid="uid://dt6ifljqgc1ib" path="res://scripts/generic_button_circle_fill.gd" id="18_ly84p"]
-[ext_resource type="Texture2D" uid="uid://dr2u2ruoyhbc2" path="res://assets/ui elements/generic_button_circle_outline.png" id="19_5lv1a"]
 [ext_resource type="Script" uid="uid://bg3yg1v1ill4h" path="res://scripts/killzone.gd" id="2_fmwu4"]
 [ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://Shaders/time_dilatation_shader.gdshader" id="3_cla6a"]
 [ext_resource type="Script" uid="uid://ds8k8pwmtpyu6" path="res://scripts/grey_filter.gd" id="4_jx024"]
@@ -22,10 +14,15 @@
 [ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="12_7g6dg"]
 [ext_resource type="Texture2D" uid="uid://rsqhgof4qtbh" path="res://assets/tileset/tile_set_aleatorio.png" id="13_vetd0"]
 [ext_resource type="PackedScene" uid="uid://dg30b2fr88sfm" path="res://scenes/porte.tscn" id="14_mige7"]
-[ext_resource type="Texture2D" uid="uid://dgo3pw72d3asj" path="res://assets/science etonnee.jpg" id="15_3dp17"]
+[ext_resource type="Texture2D" uid="uid://b8fpxhei0njwa" path="res://assets/science etonnee.jpg" id="15_3dp17"]
+[ext_resource type="FontFile" uid="uid://bc5iyd1d7vqht" path="res://assets/Moria_DF.TTF" id="15_cowf5"]
+[ext_resource type="Texture2D" uid="uid://desq6fqb4kba2" path="res://assets/ui elements/generic_stick_down.png" id="16_5piho"]
 [ext_resource type="PackedScene" uid="uid://m41ye2yy606u" path="res://scenes/bouton.tscn" id="16_b85fj"]
 [ext_resource type="PackedScene" uid="uid://raey8fey2ncu" path="res://scenes/plateforme.tscn" id="17_kpvql"]
+[ext_resource type="Texture2D" uid="uid://f4igbttm3yp7" path="res://assets/ui elements/generic_button_circle_fill.png" id="17_odplt"]
+[ext_resource type="Script" uid="uid://dt6ifljqgc1ib" path="res://scripts/generic_button_circle_fill.gd" id="18_ly84p"]
 [ext_resource type="Texture2D" uid="uid://00rnssqg8td1" path="res://assets/tileset/clouds.png" id="18_vxvon"]
+[ext_resource type="Texture2D" uid="uid://dr2u2ruoyhbc2" path="res://assets/ui elements/generic_button_circle_outline.png" id="19_5lv1a"]
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="19_6o7nh"]
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="20_we5qb"]
 
@@ -607,120 +604,120 @@ spawn = true
 
 [node name="Obstacles" type="Node" parent="World/foreground/ForegroundContent" unique_id=1613715365]
 
-[node name="Campfire3" parent="World/foreground/ForegroundContent" unique_id=1579677712 instance=ExtResource("3_33fmo")]
+[node name="Campfire3" parent="World/foreground/ForegroundContent" unique_id=618116649 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(342, -16)
 spawn = true
 
-[node name="Campfire4" parent="World/foreground/ForegroundContent" unique_id=1293889451 instance=ExtResource("3_33fmo")]
+[node name="Campfire4" parent="World/foreground/ForegroundContent" unique_id=2080106753 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(1459, -16)
 spawn = true
 
-[node name="Campfire5" parent="World/foreground/ForegroundContent" unique_id=1349936299 instance=ExtResource("3_33fmo")]
+[node name="Campfire5" parent="World/foreground/ForegroundContent" unique_id=1529880923 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(2582, -112)
 spawn = true
 
-[node name="Campfire6" parent="World/foreground/ForegroundContent" unique_id=735045975 instance=ExtResource("3_33fmo")]
+[node name="Campfire6" parent="World/foreground/ForegroundContent" unique_id=64234581 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(3577, -528)
 spawn = true
 
-[node name="Campfire7" parent="World/foreground/ForegroundContent" unique_id=107773656 instance=ExtResource("3_33fmo")]
+[node name="Campfire7" parent="World/foreground/ForegroundContent" unique_id=2009459510 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(6624, -528)
 spawn = true
 
-[node name="Campfire8" parent="World/foreground/ForegroundContent" unique_id=543710587 instance=ExtResource("3_33fmo")]
+[node name="Campfire8" parent="World/foreground/ForegroundContent" unique_id=543710587 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(5269, -1184)
 spawn = true
 
-[node name="Campfire9" parent="World/foreground/ForegroundContent" unique_id=875695007 instance=ExtResource("3_33fmo")]
+[node name="Campfire9" parent="World/foreground/ForegroundContent" unique_id=875695007 instance=ExtResource("10_0tyk0")]
 light_mask = 2
 position = Vector2(3625, -928)
 spawn = true
 
-[node name="ennemy2" parent="World/foreground/ForegroundContent" unique_id=396322971 instance=ExtResource("9_5piho")]
+[node name="ennemy2" parent="World/foreground/ForegroundContent" unique_id=1985028140 instance=ExtResource("11_3h1k5")]
 position = Vector2(1402, 66)
 
-[node name="ennemy5" parent="World/foreground/ForegroundContent" unique_id=1856867144 instance=ExtResource("9_5piho")]
+[node name="ennemy5" parent="World/foreground/ForegroundContent" unique_id=1811115205 instance=ExtResource("11_3h1k5")]
 position = Vector2(1156, 66)
 
-[node name="ennemy6" parent="World/foreground/ForegroundContent" unique_id=563906875 instance=ExtResource("9_5piho")]
+[node name="ennemy6" parent="World/foreground/ForegroundContent" unique_id=333131908 instance=ExtResource("11_3h1k5")]
 position = Vector2(1188, 66)
 
-[node name="ennemy7" parent="World/foreground/ForegroundContent" unique_id=546653471 instance=ExtResource("9_5piho")]
+[node name="ennemy7" parent="World/foreground/ForegroundContent" unique_id=402562678 instance=ExtResource("11_3h1k5")]
 position = Vector2(1220, 66)
 
-[node name="ennemy8" parent="World/foreground/ForegroundContent" unique_id=535348898 instance=ExtResource("9_5piho")]
+[node name="ennemy8" parent="World/foreground/ForegroundContent" unique_id=17991110 instance=ExtResource("11_3h1k5")]
 position = Vector2(1254, 66)
 
-[node name="ennemy9" parent="World/foreground/ForegroundContent" unique_id=1635741441 instance=ExtResource("9_5piho")]
+[node name="ennemy9" parent="World/foreground/ForegroundContent" unique_id=1203838307 instance=ExtResource("11_3h1k5")]
 position = Vector2(1290, 66)
 
-[node name="ennemy10" parent="World/foreground/ForegroundContent" unique_id=957086591 instance=ExtResource("9_5piho")]
+[node name="ennemy10" parent="World/foreground/ForegroundContent" unique_id=801612089 instance=ExtResource("11_3h1k5")]
 position = Vector2(1364, 66)
 
-[node name="ennemy3" parent="World/foreground/ForegroundContent" unique_id=1913963567 instance=ExtResource("9_5piho")]
+[node name="ennemy3" parent="World/foreground/ForegroundContent" unique_id=2023981332 instance=ExtResource("11_3h1k5")]
 position = Vector2(1475, 66)
 
-[node name="ennemy4" parent="World/foreground/ForegroundContent" unique_id=635254142 instance=ExtResource("9_5piho")]
+[node name="ennemy4" parent="World/foreground/ForegroundContent" unique_id=1466918847 instance=ExtResource("11_3h1k5")]
 position = Vector2(1439, 66)
 
-[node name="ennemy11" parent="World/foreground/ForegroundContent" unique_id=886424352 instance=ExtResource("9_5piho")]
+[node name="ennemy11" parent="World/foreground/ForegroundContent" unique_id=985110836 instance=ExtResource("11_3h1k5")]
 position = Vector2(1325, 66)
 
-[node name="ennemy12" parent="World/foreground/ForegroundContent" unique_id=276150499 instance=ExtResource("9_5piho")]
+[node name="ennemy12" parent="World/foreground/ForegroundContent" unique_id=1647472435 instance=ExtResource("11_3h1k5")]
 position = Vector2(1756, 66)
 
-[node name="ennemy13" parent="World/foreground/ForegroundContent" unique_id=870194709 instance=ExtResource("9_5piho")]
+[node name="ennemy13" parent="World/foreground/ForegroundContent" unique_id=1389968325 instance=ExtResource("11_3h1k5")]
 position = Vector2(1510, 66)
 
-[node name="ennemy14" parent="World/foreground/ForegroundContent" unique_id=407253073 instance=ExtResource("9_5piho")]
+[node name="ennemy14" parent="World/foreground/ForegroundContent" unique_id=1333782817 instance=ExtResource("11_3h1k5")]
 position = Vector2(1542, 66)
 
-[node name="ennemy15" parent="World/foreground/ForegroundContent" unique_id=1443350125 instance=ExtResource("9_5piho")]
+[node name="ennemy15" parent="World/foreground/ForegroundContent" unique_id=564701310 instance=ExtResource("11_3h1k5")]
 position = Vector2(1574, 66)
 
-[node name="ennemy16" parent="World/foreground/ForegroundContent" unique_id=609298554 instance=ExtResource("9_5piho")]
+[node name="ennemy16" parent="World/foreground/ForegroundContent" unique_id=190386960 instance=ExtResource("11_3h1k5")]
 position = Vector2(1608, 66)
 
-[node name="ennemy17" parent="World/foreground/ForegroundContent" unique_id=1232200364 instance=ExtResource("9_5piho")]
+[node name="ennemy17" parent="World/foreground/ForegroundContent" unique_id=691823302 instance=ExtResource("11_3h1k5")]
 position = Vector2(1644, 66)
 
-[node name="ennemy18" parent="World/foreground/ForegroundContent" unique_id=71894793 instance=ExtResource("9_5piho")]
+[node name="ennemy18" parent="World/foreground/ForegroundContent" unique_id=622289982 instance=ExtResource("11_3h1k5")]
 position = Vector2(1718, 66)
 
-[node name="ennemy19" parent="World/foreground/ForegroundContent" unique_id=2028069943 instance=ExtResource("9_5piho")]
+[node name="ennemy19" parent="World/foreground/ForegroundContent" unique_id=935018662 instance=ExtResource("11_3h1k5")]
 position = Vector2(1829, 66)
 
-[node name="ennemy20" parent="World/foreground/ForegroundContent" unique_id=305628329 instance=ExtResource("9_5piho")]
+[node name="ennemy20" parent="World/foreground/ForegroundContent" unique_id=2073726241 instance=ExtResource("11_3h1k5")]
 position = Vector2(1793, 66)
 
-[node name="ennemy27" parent="World/foreground/ForegroundContent" unique_id=2055716275 instance=ExtResource("9_5piho")]
+[node name="ennemy27" parent="World/foreground/ForegroundContent" unique_id=739795118 instance=ExtResource("11_3h1k5")]
 position = Vector2(1679, 66)
 
-[node name="porte" parent="World/foreground/ForegroundContent" unique_id=749672723 instance=ExtResource("4_nqwoy")]
+[node name="porte" parent="World/foreground/ForegroundContent" unique_id=1009110220 instance=ExtResource("14_mige7")]
 position = Vector2(1894, 8)
 
-[node name="porte3" parent="World/foreground/ForegroundContent" unique_id=1440775598 instance=ExtResource("4_nqwoy")]
+[node name="porte3" parent="World/foreground/ForegroundContent" unique_id=163266539 instance=ExtResource("14_mige7")]
 position = Vector2(1894.0001, -88)
 
-[node name="porte4" parent="World/foreground/ForegroundContent" unique_id=2019818349 instance=ExtResource("4_nqwoy")]
+[node name="porte4" parent="World/foreground/ForegroundContent" unique_id=1384271295 instance=ExtResource("14_mige7")]
 position = Vector2(1894, -40)
 
-[node name="porte5" parent="World/foreground/ForegroundContent" unique_id=1540169324 instance=ExtResource("4_nqwoy")]
+[node name="porte5" parent="World/foreground/ForegroundContent" unique_id=1540169324 instance=ExtResource("14_mige7")]
 position = Vector2(5174, -1160)
 
-[node name="porte6" parent="World/foreground/ForegroundContent" unique_id=571937325 instance=ExtResource("4_nqwoy")]
+[node name="porte6" parent="World/foreground/ForegroundContent" unique_id=571937325 instance=ExtResource("14_mige7")]
 position = Vector2(5174, -1208)
 
-[node name="porte7" parent="World/foreground/ForegroundContent" unique_id=1853735992 instance=ExtResource("4_nqwoy")]
+[node name="porte7" parent="World/foreground/ForegroundContent" unique_id=1853735992 instance=ExtResource("14_mige7")]
 position = Vector2(5174, -1256)
 
-[node name="porte8" parent="World/foreground/ForegroundContent" unique_id=378905047 instance=ExtResource("4_nqwoy")]
+[node name="porte8" parent="World/foreground/ForegroundContent" unique_id=378905047 instance=ExtResource("14_mige7")]
 position = Vector2(5174, -1304)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="World/foreground/ForegroundContent" unique_id=1698813421]
@@ -795,10 +792,10 @@ position = Vector2(130, -186)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 
-[node name="campfire" parent="World/foreground/ForegroundContent" unique_id=1248623842 instance=ExtResource("3_33fmo")]
+[node name="campfire" parent="World/foreground/ForegroundContent" unique_id=1248623842 instance=ExtResource("10_0tyk0")]
 position = Vector2(1802, -1520)
 
-[node name="campfire2" parent="World/foreground/ForegroundContent" unique_id=1494050110 instance=ExtResource("3_33fmo")]
+[node name="campfire2" parent="World/foreground/ForegroundContent" unique_id=1494050110 instance=ExtResource("10_0tyk0")]
 position = Vector2(65, -1408)
 
 [node name="GenericStickDown" type="Sprite2D" parent="World/foreground/ForegroundContent" unique_id=627146556]
