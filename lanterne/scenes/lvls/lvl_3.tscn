@@ -16,7 +16,9 @@
 [ext_resource type="Material" uid="uid://b87kxv1gkqca2" path="res://Shaders/N&B_shader_material.tres" id="12_rcnel"]
 [ext_resource type="Shader" uid="uid://bj6vm755iw2xn" path="res://Shaders/time_dilatation_shader.gdshader" id="13_2skmk"]
 [ext_resource type="Script" uid="uid://ds8k8pwmtpyu6" path="res://scripts/grey_filter.gd" id="13_a2gcl"]
+[ext_resource type="FontFile" uid="uid://bc5iyd1d7vqht" path="res://assets/Moria_DF.TTF" id="15_nqwoy"]
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="17_nqwoy"]
+[ext_resource type="Texture2D" uid="uid://dgo3pw72d3asj" path="res://assets/science etonnee.jpg" id="20_ok5a0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
@@ -382,22 +384,12 @@ position = Vector2(1793, 66)
 [node name="ennemy27" parent="World/foreground/ForegroundContent" unique_id=2055716275 instance=ExtResource("9_5piho")]
 position = Vector2(1679, 66)
 
-[node name="porte" parent="World/foreground/ForegroundContent" unique_id=749672723 instance=ExtResource("4_nqwoy")]
-position = Vector2(1894, 8)
-
-[node name="porte3" parent="World/foreground/ForegroundContent" unique_id=1440775598 instance=ExtResource("4_nqwoy")]
-position = Vector2(1894.0001, -88)
-
-[node name="porte4" parent="World/foreground/ForegroundContent" unique_id=2019818349 instance=ExtResource("4_nqwoy")]
-position = Vector2(1894, -40)
-
 [node name="RichTextLabel" type="RichTextLabel" parent="World/foreground/ForegroundContent" unique_id=1698813421]
 light_mask = 2
 offset_left = 512.0
 offset_top = -54.0
 offset_right = 717.0
 offset_bottom = -28.0
-theme_override_fonts/normal_font = ExtResource("15_nqwoy")
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "[fade start=4 length=23][color=#a0ffe0]Ta lumière faiblit[/color][/fade]"
@@ -438,29 +430,27 @@ texture = ExtResource("20_ok5a0")
 [node name="boutons" type="Node2D" parent="World/foreground/ForegroundContent" unique_id=1214831683]
 position = Vector2(164, -1185)
 
-[node name="Bouton" parent="World/foreground/ForegroundContent/boutons" unique_id=1821600727 instance=ExtResource("15_e3vry")]
+[node name="Bouton" type="Node2D" parent="World/foreground/ForegroundContent/boutons" unique_id=1821600727]
 position = Vector2(21, -33)
 scale = Vector2(2, 2)
-bouton = true
+metadata/bouton = true
 
-[node name="plateforme" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=754697394 instance=ExtResource("16_ok5a0")]
+[node name="plateforme" type="Node2D" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=754697394]
 position = Vector2(83.5, 30)
 scale = Vector2(0.5, 0.5)
 
-[node name="plateforme2" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=1508520161 instance=ExtResource("16_ok5a0")]
+[node name="plateforme2" type="Node2D" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=1508520161]
 position = Vector2(166.5, -10)
 scale = Vector2(0.5, 0.5)
 
-[node name="plateforme3" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=1759068803 instance=ExtResource("16_ok5a0")]
+[node name="plateforme3" type="Node2D" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=1759068803]
 position = Vector2(170.5, -96.5)
 scale = Vector2(0.5, 0.5)
 
-[node name="plateforme4" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=241409124 instance=ExtResource("16_ok5a0")]
+[node name="plateforme4" type="Node2D" parent="World/foreground/ForegroundContent/boutons/Bouton" unique_id=241409124]
 position = Vector2(130, -186)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
-[node name="porte2" parent="World/foreground/ForegroundContent" unique_id=334411809 instance=ExtResource("4_nqwoy")]
-position = Vector2(2326, -88)
 
 [node name="campfire" parent="World/foreground/ForegroundContent" unique_id=1248623842 instance=ExtResource("3_33fmo")]
 position = Vector2(1802, -1520)
