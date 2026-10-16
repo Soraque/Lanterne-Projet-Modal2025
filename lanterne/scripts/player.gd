@@ -133,6 +133,8 @@ func _ready() -> void:
 		global_position = GameManager.respawn_position
 		lantern_usure = 100.0
 		is_lanterne = true
+	var tween := create_tween()
+	tween.tween_property(filtre_mort, "color:a", 0.0, 1)
 
 
 func die() -> void:
@@ -155,7 +157,6 @@ func die() -> void:
 	gm.reset_combo()
 	var tween := create_tween()
 	tween.tween_property(filtre_mort, "color:a", 1.0, 0.1)
-	
 	await get_tree().create_timer(1).timeout
 	
 	if gm.has_respawn_point and gm.respawn_scene != get_tree().current_scene.scene_file_path:
@@ -165,8 +166,10 @@ func die() -> void:
 	is_lanterne = true
 
 
+
 func _physics_process(delta: float) -> void:
 	var direction_h := Input.get_axis("left", "right")
+	looking_direction = -int(animated_sprite.flip_h) * 2 + 1
 	var input_lancer := Input.get_vector("lancer left", "lancer right", "lancer up", "lancer down")
 
 	# --- 1. Dash en cours ---
@@ -204,6 +207,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 3. Déclenchement du Dash ---
 	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
+		
 		runparticles.emitting = false
 		force_lancer_lanterne = true
 		wallparticles.emitting = false
@@ -238,9 +242,12 @@ func _physics_process(delta: float) -> void:
 	# --- 4. Lancer de la lanterne & Visée ralentie ---
 	if is_lanterne:
 		if Input.is_action_pressed("lancer"):
-			direction_lancer = input_lancer.normalized()
+			print(direction_lancer)
+			if input_lancer.length() >0.7:
+				direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
 			if not lantern_ready:
+				direction_lancer = Vector2(looking_direction,0)
 				lancer_timer = LANCER_DURATION
 				joystick_on.emit()
 				if slowdown_audio and not slowdown_audio.playing:

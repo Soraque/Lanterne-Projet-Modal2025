@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="20_we5qb"]
 [ext_resource type="Script" uid="uid://cw4c1epbe7rg8" path="res://scenes/lvls/fenetre_lancer.gd" id="21_5piho"]
 [ext_resource type="Script" uid="uid://lifepvjgncqg" path="res://scenes/lvls/button_quit.gd" id="22_odplt"]
+[ext_resource type="PackedScene" uid="uid://h7f404ebuh81" path="res://scenes/Power_up.tscn" id="23_unhf7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
@@ -856,6 +857,13 @@ z_index = 3
 position = Vector2(5640, -1623.0001)
 scale = Vector2(0.041666668, 0.041666668)
 texture = ExtResource("15_3dp17")
+
+[node name="porte" parent="World/foreground/ForegroundContent" unique_id=818435304 instance=ExtResource("14_mige7")]
+position = Vector2(2443, -1968)
+scale = Vector2(1.5, 2)
+
+[node name="Power_up" parent="World/foreground/ForegroundContent" unique_id=1297966546 instance=ExtResource("23_unhf7")]
+visible = false
 
 [node name="background" type="CanvasLayer" parent="World" unique_id=93682746]
 follow_viewport_enabled = true

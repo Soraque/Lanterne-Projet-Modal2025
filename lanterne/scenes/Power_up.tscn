@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://h7f404ebuh81"]
+
+[ext_resource type="Script" uid="uid://r84gdnxehu6x" path="res://scenes/power_up.gd" id="1_5y2x1"]
+[ext_resource type="Texture2D" uid="uid://2eylneouip7" path="res://assets/Boule_de_feu.png" id="1_oy2o1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5y2x1"]
+radius = 13.0
+height = 36.0
+
+[node name="Power_up" type="Node2D" unique_id=1297966546]
+script = ExtResource("1_5y2x1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1663067582]
+texture = ExtResource("1_oy2o1")
+
+[node name="zone" type="Area2D" parent="." unique_id=1640539323]
+use_parent_material = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zone" unique_id=1432870666]
+use_parent_material = true
+position = Vector2(-1, 1)
+shape = SubResource("CapsuleShape2D_5y2x1")
+
+[connection signal="body_entered" from="zone" to="." method="_on_zone_body_entered"]
