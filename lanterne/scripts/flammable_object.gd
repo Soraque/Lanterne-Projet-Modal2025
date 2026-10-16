@@ -148,9 +148,9 @@ func _sequence_combustion(current_id: int) -> void:
 	if bouton and has_node("plateforme2"):
 		$plateforme2.desactiver()
 	if bouton and has_node("plateforme3"):
-		$plateforme2.desactiver()
+		$plateforme3.desactiver()
 	if bouton and has_node("plateforme4"):
-		$plateforme2.desactiver()
+		$plateforme4.desactiver()
 		
 	if destroyable:
 		queue_free()
