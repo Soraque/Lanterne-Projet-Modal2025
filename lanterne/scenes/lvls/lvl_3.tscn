@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://dr2u2ruoyhbc2" path="res://assets/ui elements/generic_button_circle_outline.png" id="19_5lv1a"]
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="19_6o7nh"]
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="20_we5qb"]
+[ext_resource type="Texture2D" uid="uid://j7uf25oisr6v" path="res://assets/ui elements/generic_button_trigger_b_outline.png" id="23_5ae7g"]
+[ext_resource type="Texture2D" uid="uid://dp3geljhw1k16" path="res://assets/ui elements/generic_button_trigger_b_fill.png" id="24_4nrf2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
@@ -433,7 +435,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(89, -1395)
+position = Vector2(5069, -1179)
 lanterne_scene = ExtResource("6_nreht")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("player")]
@@ -446,12 +448,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("7_rubt8")
 player = NodePath("..")
-
-[node name="ReferenceRect" type="ReferenceRect" parent="PlayerLayer/player/Camera2D" unique_id=2082722526]
-offset_left = -336.0
-offset_top = -2168.0
-offset_right = 6782.0
-offset_bottom = 193.0
 
 [node name="PlayerCanvaModulate" type="CanvasModulate" parent="PlayerLayer/player" unique_id=2047828107]
 color = Color(0.099369265, 0.18090376, 0.24807635, 1)
@@ -593,7 +589,6 @@ rotation = 1.5707964
 scale = Vector2(2, 2.5)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World/foreground/ForegroundContent" unique_id=914010442]
-visible = false
 use_parent_material = true
 color = Color(0.099369265, 0.18090376, 0.24807635, 1)
 
@@ -866,6 +861,27 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 46
 text = "="
 scroll_active = false
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="World/foreground/ForegroundContent" unique_id=238994742]
+light_mask = 7
+z_index = 1
+offset_left = 4993.0
+offset_top = -1221.0
+offset_right = 5033.0
+offset_bottom = -1181.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "R"
+
+[node name="GenericButtonTriggerBOutline" type="Sprite2D" parent="World/foreground/ForegroundContent" unique_id=964019373]
+position = Vector2(4996.0005, -1208.0001)
+scale = Vector2(0.515625, 0.53125)
+texture = ExtResource("23_5ae7g")
+
+[node name="GenericButtonTriggerBFill" type="Sprite2D" parent="World/foreground/ForegroundContent/GenericButtonTriggerBOutline" unique_id=432601952]
+position = Vector2(-0.48632813, 0.00024414063)
+scale = Vector2(1.0454564, 0.9999982)
+texture = ExtResource("24_4nrf2")
+script = ExtResource("18_ly84p")
 
 [node name="background" type="CanvasLayer" parent="World" unique_id=93682746]
 follow_viewport_enabled = true
