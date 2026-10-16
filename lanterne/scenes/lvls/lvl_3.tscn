@@ -224,7 +224,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("7_ok5a0")]
 light_mask = 2
 z_index = 1
-position = Vector2(-193, 14)
+position = Vector2(50, -1420)
 lanterne_scene = ExtResource("8_3d0uf")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("bounds_rect", "player")]
@@ -236,7 +236,7 @@ zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("8_a2gcl")
-bounds_rect = NodePath("ReferenceRect")
+bounds_rect = NodePath("")
 player = NodePath("..")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="PlayerLayer/player/Camera2D" unique_id=2082722526]
