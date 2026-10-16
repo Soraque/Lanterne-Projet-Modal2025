@@ -202,6 +202,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 3. Déclenchement du Dash ---
 	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
+		
 		runparticles.emitting = false
 		force_lancer_lanterne = true
 		wallparticles.emitting = false

@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="20_we5qb"]
 [ext_resource type="Script" uid="uid://cw4c1epbe7rg8" path="res://scenes/lvls/fenetre_lancer.gd" id="21_5piho"]
 [ext_resource type="Script" uid="uid://lifepvjgncqg" path="res://scenes/lvls/button_quit.gd" id="22_odplt"]
+[ext_resource type="PackedScene" uid="uid://h7f404ebuh81" path="res://scenes/Power_up.tscn" id="23_unhf7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
@@ -445,7 +446,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(84, -1452)
+position = Vector2(-166, -130)
 lanterne_scene = ExtResource("6_nreht")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("player")]
@@ -808,6 +809,9 @@ texture = ExtResource("15_3dp17")
 [node name="porte" parent="World/foreground/ForegroundContent" unique_id=818435304 instance=ExtResource("14_mige7")]
 position = Vector2(2443, -1968)
 scale = Vector2(1.5, 2)
+
+[node name="Power_up" parent="World/foreground/ForegroundContent" unique_id=1297966546 instance=ExtResource("23_unhf7")]
+visible = false
 
 [node name="background" type="CanvasLayer" parent="World" unique_id=93682746]
 follow_viewport_enabled = true
