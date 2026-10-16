@@ -92,6 +92,12 @@ func embrase() -> void:
 	
 	if bouton and has_node("plateforme"):
 		$plateforme.activer()
+	if bouton and has_node("plateforme2"):
+		$plateforme2.activer()
+	if bouton and has_node("plateforme3"):
+		$plateforme3.activer()
+	if bouton and has_node("plateforme4"):
+		$plateforme4.activer()
 	
 	anim.stop()
 	anim.position.y = anim_initial_y
@@ -139,6 +145,12 @@ func _sequence_combustion(current_id: int) -> void:
 		
 	if bouton and has_node("plateforme"):
 		$plateforme.desactiver()
+	if bouton and has_node("plateforme2"):
+		$plateforme2.desactiver()
+	if bouton and has_node("plateforme3"):
+		$plateforme2.desactiver()
+	if bouton and has_node("plateforme4"):
+		$plateforme2.desactiver()
 		
 	if destroyable:
 		queue_free()
