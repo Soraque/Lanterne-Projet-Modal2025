@@ -889,7 +889,8 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vecto
 point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_f1ej7"]
-colors = PackedColorArray(1, 1, 1, 1, 0.46423507, 0.46423507, 0.46423507, 1)
+offsets = PackedFloat32Array(0.012765957, 1)
+colors = PackedColorArray(1, 0.25490198, 0, 1, 1, 0.7764706, 0.25490198, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8ls1"]
 radius = 8.0
@@ -951,6 +952,25 @@ angle_min = 180.0
 angle_max = 180.0
 scale_amount_min = 2.0
 scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_jej6c")
+color_ramp = SubResource("Gradient_f1ej7")
+
+[node name="lightparticle" type="CPUParticles2D" parent="." unique_id=896645348]
+light_mask = 2
+z_index = -2
+position = Vector2(-1, -10)
+amount = 30
+lifetime = 0.4
+emission_shape = 1
+emission_sphere_radius = 25.0
+direction = Vector2(0, -1)
+spread = 31.21
+gravity = Vector2(0, -20)
+initial_velocity_min = 2.0
+initial_velocity_max = 10.0
+angle_min = 180.0
+angle_max = 180.0
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_jej6c")
 color_ramp = SubResource("Gradient_f1ej7")
 
