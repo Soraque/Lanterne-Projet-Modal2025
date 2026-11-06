@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://h7f404ebuh81"]
+[gd_scene format=3 uid="uid://gnhynfh67toi"]
 
 [ext_resource type="Script" uid="uid://r84gdnxehu6x" path="res://scripts/power_up.gd" id="1_5y2x1"]
 [ext_resource type="Texture2D" uid="uid://2eylneouip7" path="res://assets/Boule_de_feu.png" id="1_oy2o1"]

@@ -65,7 +65,7 @@ var _wall_col := KinematicCollision2D.new()
 # --- Lanterne ---
 const LANCER_DURATION = 2.0
 
-var dblq_lancer := false
+var dblq_lancer := true
 @export var is_lanterne := true
 @onready var lightparticle: CPUParticles2D = $lightparticle
 var lantern_ready = false
