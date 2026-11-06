@@ -32,7 +32,7 @@ const AIR_CONTROL = 7000.0
 
 # --- Wall Jump ---
 const WALL_JUMP_HORIZONTAL_SPEED = 500.0
-const WALL_JUMP_VERTICAL_SPEED = -350.0
+const WALL_JUMP_VERTICAL_SPEED = -450.0
 const WALL_JUMP_LOCK_TIME = 0.18
 
 var wall_jump_lock_timer := 0.0
