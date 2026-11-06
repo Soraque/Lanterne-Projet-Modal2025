@@ -185,7 +185,7 @@ func die() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var direction_h := 0
+	var direction_h := 0.0
 	if not GameManager.soleilallume : direction_h = Input.get_axis("left", "right")
 	looking_direction = -int(animated_sprite.flip_h) * 2 + 1
 	var input_lancer := Input.get_vector("lancer left", "lancer right", "lancer up", "lancer down")

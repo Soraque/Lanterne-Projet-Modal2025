@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://biwuv0rwnoenk" path="res://scenes/lvls/soleil.tscn" id="26_w1nud"]
 [ext_resource type="Texture2D" uid="uid://2eylneouip7" path="res://assets/Boule_de_feu.png" id="30_w1nud"]
 [ext_resource type="Texture2D" uid="uid://cljr2fhbj2q7m" path="res://assets/ui elements/Vent.png" id="33_qib1r"]
+[ext_resource type="Script" uid="uid://b6yv1wcqcdd0c" path="res://scenes/lvls/fenetre_dash.gd" id="34_cw8dt"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
@@ -461,7 +462,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(5255, -1244)
+position = Vector2(5254, -1245)
 lanterne_scene = ExtResource("6_nreht")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497]
@@ -507,7 +508,7 @@ use_parent_material = true
 position = Vector2(5105, -1157)
 script = ExtResource("11_0iwt5")
 
-[node name="Sprite2D2" type="Sprite2D" parent="World/foreground/ForegroundContent/PowerUp/Dash" unique_id=276436478]
+[node name="Sprite2D" type="Sprite2D" parent="World/foreground/ForegroundContent/PowerUp/Dash" unique_id=276436478]
 light_mask = 2
 use_parent_material = true
 scale = Vector2(0.045, 0.045)
@@ -1418,7 +1419,7 @@ grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 tooltip_auto_translate_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5piho")
-script = ExtResource("21_5piho")
+script = ExtResource("34_cw8dt")
 
 [node name="Disposition" type="MarginContainer" parent="UpperLayer/Fenetre_dash" unique_id=1170071917]
 layout_mode = 1
