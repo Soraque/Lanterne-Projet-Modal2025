@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # Chemin de la scène à charger lors du clic sur Start
-const LVL1_SCENE_PATH := "res://scenes/lvls/lvl_3.tscn"
+const LVL1_SCENE_PATH := "res://scenes/lvls/lvl_3.scn"
 
 @onready var start_button: Button = $VBoxContainer/Button
 
