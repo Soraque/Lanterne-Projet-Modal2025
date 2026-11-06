@@ -20,5 +20,5 @@ func _on_zone_body_entered(body: Node2D) -> void:
 		_focus_precedent = get_viewport().gui_get_focus_owner()
 		button_quit.grab_focus.call_deferred()
 		button_quit._focus_precedent = _focus_precedent
-	player.dblq_lacer
+	player.dblq_lancer=true
 	fenetre_lancer.afficher()
