@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://dfe776k42whrv" path="res://assets/sonore/break.mp3" id="19_60mlk"]
 [ext_resource type="AudioStream" uid="uid://coyxwmj1f7c8g" path="res://assets/sonore/freesound_gamestudio-skill-attack-combo-music-note-1-384970.mp3" id="19_i4ail"]
 [ext_resource type="AudioStream" uid="uid://bbh7e6fgdhaue" path="res://assets/sonore/saut.mp3" id="20_60mlk"]
+[ext_resource type="AudioStream" uid="uid://c6xlevwerenra" path="res://assets/horloge_neon_2-8s.wav" id="22_a38lo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
 atlas = ExtResource("5_ur7pv")
@@ -896,6 +897,7 @@ colors = PackedColorArray(0.24948451, 0.24948435, 0.24948435, 1, 1, 1, 1, 1)
 colors = PackedColorArray(0.76862746, 0.15686275, 0, 1, 1, 0.6431373, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_f1ej7"]
+offsets = PackedFloat32Array(0.012765957, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.42557132, 0.42557135, 0.42557132, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8ls1"]
@@ -1054,6 +1056,12 @@ stream = ExtResource("19_60mlk")
 [node name="saut" type="AudioStreamPlayer" parent="sons" unique_id=274615943]
 stream = ExtResource("20_60mlk")
 volume_db = 4.0
+
+[node name="horloge" type="AudioStreamPlayer2D" parent="sons" unique_id=1839635051]
+visible = false
+stream = ExtResource("22_a38lo")
+volume_db = -6.0
+pitch_scale = 1.5
 
 [node name="hurtbox" type="Area2D" parent="." unique_id=1366125379]
 collision_layer = 4
