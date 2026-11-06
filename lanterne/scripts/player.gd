@@ -20,6 +20,8 @@ extends CharacterBody2D
 @onready var break_audio: AudioStreamPlayer = $sons/break
 @onready var music_audio: AudioStreamPlayer = $sons/music
 @onready var lightup: AudioStreamPlayer = $sons/lightup
+@onready var horloge: AudioStreamPlayer2D = $sons/horloge
+
 
 # --- Mouvement général ---
 const SPEED = 300.0
@@ -248,11 +250,11 @@ func _physics_process(delta: float) -> void:
 	# --- 4. Lancer de la lanterne & Visée ralentie ---
 	if is_lanterne:
 		if Input.is_action_pressed("lancer"):
-			print(direction_lancer)
 			if input_lancer.length() >0.7:
 				direction_lancer = input_lancer.normalized()
 			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
 			if not lantern_ready:
+				horloge.play()
 				direction_lancer = Vector2(looking_direction,0)
 				lancer_timer = LANCER_DURATION
 				joystick_on.emit()
