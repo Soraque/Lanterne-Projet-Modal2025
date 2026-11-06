@@ -217,7 +217,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
 		
 		runparticles.emitting = false
-		force_lancer_lanterne = true
+		if lantern_ready:
+			force_lancer_lanterne = true
 		wallparticles.emitting = false
 		course_audio.stop()
 		can_dash = false
