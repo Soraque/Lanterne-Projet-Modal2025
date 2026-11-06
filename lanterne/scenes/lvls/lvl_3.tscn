@@ -446,7 +446,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(1411, -45)
+position = Vector2(-177, -83)
 lanterne_scene = ExtResource("6_nreht")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("player")]
@@ -482,7 +482,7 @@ use_parent_material = true
 
 [node name="Lancer" parent="World/foreground/ForegroundContent/PowerUp" unique_id=1297966546 instance=ExtResource("10_unhf7")]
 use_parent_material = true
-position = Vector2(1526, 14)
+position = Vector2(1558, 7)
 
 [node name="campfires" type="Node2D" parent="World/foreground/ForegroundContent" unique_id=1591011675]
 use_parent_material = true
@@ -950,6 +950,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Fenetre_lancer" type="Panel" parent="UpperLayer" unique_id=11454575]
+visible = false
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
