@@ -1,6 +1,6 @@
 extends Label
 var number
-var total = "20"
+var total = "16"
 var text_label = "1/"+total
 const pos_init = Vector2(-20,-16)
 # Called when the node enters the scene tree for the first time.
