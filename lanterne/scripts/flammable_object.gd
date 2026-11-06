@@ -15,7 +15,6 @@ extends StaticBody2D
 @onready var light: PointLight2D = $Flamme/light
 @onready var animation: AnimationPlayer = $Flamme/AnimationPlayer
 
-
 var anim_initial_y: float
 var combustion_id := 0
 const propagation_delay = 0.5
@@ -80,7 +79,6 @@ func rallumer_silencieux() -> void:
 
 
 func embrase() -> void:
-	
 	combustion_id += 1
 	var current_id = combustion_id
 	animation.play("allumage")
@@ -111,6 +109,10 @@ func embrase() -> void:
 		
 	anim.play("allumage")
 	
+	# --- Séquence spéciale si l'objet est le soleil ---
+	if name == "soleil":
+		_declencher_victoire_soleil()
+
 	await anim.animation_finished
 	if current_id != combustion_id: return
 	
@@ -124,6 +126,43 @@ func embrase() -> void:
 		var current_scene_path := get_tree().current_scene.scene_file_path
 		gm.set_respawn_point(global_position, current_scene_path)
 		gm.register_checkpoint(get_checkpoint_id())
+
+
+func _declencher_victoire_soleil() -> void:
+	GameManager.soleilallume = true
+	GameManager.fin()
+	var tween = create_tween().set_parallel(true)
+	
+	# 1. Le soleil perd son modulate pour redevenir blanc de manière fluide
+	tween.tween_property(self.sprite, "modulate", Color.WHITE, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# 2. Tout s'éclaircit (recherche d'un CanvasModulate global ou dans la scène)
+	var canvas_mod = get_tree().current_scene.get_node_or_null("World/background/BackgroundContent/CanvasModulate")
+	if canvas_mod:
+		tween.tween_property(canvas_mod, "color", Color.WHITE, 3.0)
+
+	# 3. Dézoom lent et généreux de la caméra du joueur
+	for player_node in get_tree().get_nodes_in_group("player"): # ou adaptation selon votre structure
+		var cam = player_node.get_node_or_null("Camera2D") as Camera2D
+		if cam:
+			tween.tween_property(cam, "zoom", Vector2(1, 1), 4.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	# 4. Sons en progression harmonique (lecture successive de plusieurs pistes audio si présentes)
+	var audio_victoire = get_node_or_null("AudioStreamPlayer2D2") as AudioStreamPlayer2D
+	if audio_victoire:
+		# Joue une mélodie / accords harmoniques en modifiant les pitchs séquentiellement
+		audio_victoire.pitch_scale = 0.5
+		audio_victoire.play()
+		
+		var t = create_tween()
+		t.tween_interval(0.5)
+		t.tween_callback(func(): audio_victoire.pitch_scale = 0.75; audio_victoire.play())
+		t.tween_interval(0.5)
+		t.tween_callback(func(): audio_victoire.pitch_scale = 1.0; audio_victoire.play())
+		t.tween_interval(0.6)
+		t.tween_callback(func(): audio_victoire.pitch_scale = 1.25; audio_victoire.play())
+		t.tween_interval(0.7)
+		t.tween_callback(func(): audio_victoire.pitch_scale = 1.5; audio_victoire.play())
 
 
 func _sequence_combustion(current_id: int) -> void:
@@ -173,27 +212,24 @@ func _on_flamme_body_entered(body: Node2D) -> void:
 		body.lantern_usure += 0.1
 
 
-
 func _on_zone_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.is_lanterne and not flamme.visible: 
 		embrase()
 		if spawn:
-			body.lantern_duration = temps_de_flamme #on adapte le temps de lanterne en fonction du niveau
+			body.lantern_duration = temps_de_flamme 
 			body.allumer_lanterne(100)
+
+
 func _propagate():
 	await get_tree().create_timer(propagation_delay).timeout
-# On utilise l'area2D qui nous sert de détection des flammable objects aux alentours
 	var ma_zone := get_node_or_null("propagation_area") as Area2D
-	print(ma_zone)
 	if not ma_zone:
 		return
 
 	var voisins = ma_zone.get_overlapping_bodies()
-	
 	for corps in voisins:
 		if corps is FlammableObject and corps != self and not corps.flamme.visible:
 			corps.embrase()
-	
 
 
 func _on_zone_body_exited(body: Node2D) -> void:
