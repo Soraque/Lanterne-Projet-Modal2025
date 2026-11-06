@@ -3,7 +3,7 @@ extends Button
 @export var duree_fermeture: float = 0.12
 
 var tween_fermeture: Tween
-var _focus_precedent : Control
+
 
 func _ready() -> void:
 	# Le bouton doit rester actif pendant la pause.
@@ -11,13 +11,11 @@ func _ready() -> void:
 
 	pressed.connect(fermer_fenetre)
 
+
 func fermer_fenetre() -> void:
 	# Empêche plusieurs clics pendant l'animation.
 	if not disabled:
 		disabled = true
-	
-	if is_instance_valid(_focus_precedent):
-		_focus_precedent.grab_focus()
 
 	var fenetre := get_parent().get_parent().get_parent().get_parent()
 
