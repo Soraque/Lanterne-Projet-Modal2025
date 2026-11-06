@@ -34,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://biwuv0rwnoenk" path="res://scenes/lvls/soleil.tscn" id="26_w1nud"]
 [ext_resource type="Texture2D" uid="uid://2eylneouip7" path="res://assets/Boule_de_feu.png" id="30_w1nud"]
 [ext_resource type="Texture2D" uid="uid://cljr2fhbj2q7m" path="res://assets/ui elements/Vent.png" id="33_qib1r"]
-[ext_resource type="Script" uid="uid://b6yv1wcqcdd0c" path="res://scenes/lvls/fenetre_dash.gd" id="34_cw8dt"]
+[ext_resource type="Script" uid="uid://b6yv1wcqcdd0c" path="res://scripts/fenetre_dash.gd" id="34_cw8dt"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
 
