@@ -185,9 +185,14 @@ func die() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var direction_h := Input.get_axis("left", "right")
+	var direction_h := 0
+	if not GameManager.soleilallume : direction_h = Input.get_axis("left", "right")
 	looking_direction = -int(animated_sprite.flip_h) * 2 + 1
 	var input_lancer := Input.get_vector("lancer left", "lancer right", "lancer up", "lancer down")
+
+	if GameManager.soleilallume: 
+		mort_duree = 10000000
+		velocity.x = 0
 
 	# --- 1. Dash en cours ---
 	if dash_timer > 0.0:
@@ -224,7 +229,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 3. Déclenchement du Dash ---
 	if dblq_dash:
-		if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
+		if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash and not GameManager.soleilallume:
 			
 			runparticles.emitting = false
 			if lantern_ready:
@@ -261,7 +266,7 @@ func _physics_process(delta: float) -> void:
 				lancer_timer-=delta / Engine.time_scale
 		# --- 4. Lancer de la lanterne & Visée ralentie ---
 		if is_lanterne:
-			if Input.is_action_pressed("lancer"):
+			if Input.is_action_pressed("lancer") and not GameManager.soleilallume:
 				if input_lancer.length() >0.7:
 					direction_lancer = input_lancer.normalized()
 				aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
@@ -296,7 +301,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 6. Saut & Wall Jump (avec marges) ---
 	jump_buffer_timer -= delta
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and not GameManager.soleilallume:
 		jump_buffer_timer = JUMP_BUFFER_TIME
 		runparticles.emitting = false
 		wallparticles.emitting = false
@@ -316,10 +321,10 @@ func _physics_process(delta: float) -> void:
 	# --- 7. Déplacement horizontal ---
 	if wall_jump_lock_timer > 0.0:
 		pass
-	elif direction_h != 0:
+	elif direction_h != 0 and not GameManager.soleilallume:
 		var accel = ACCELERATION if is_on_floor() else AIR_CONTROL
 		velocity.x = move_toward(velocity.x, direction_h * SPEED, accel * delta)
-	else:
+	elif  not GameManager.soleilallume:
 		var friction = FRICTION if is_on_floor() else AIR_CONTROL * 0.5
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 
@@ -429,11 +434,12 @@ func lancer_lanterne() -> void:
 
 
 func _start_extinction() -> void:
-	is_dying = true
-	var tween := create_tween()
-	tween.tween_property(filtre_mort, "color:a", 1.0, 5.0)
-	await tween.finished
-	await die()
+	if not GameManager.soleilallume:
+		is_dying = true
+		var tween := create_tween()
+		tween.tween_property(filtre_mort, "color:a", 1.0, 5.0)
+		await tween.finished
+		await die()
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

@@ -39,8 +39,9 @@ func _process(delta: float) -> void:
 	var eased = _get_eased(delta)
 	if n_b_shader_material:
 		n_b_shader_material.set_shader_parameter("desaturation_amount", eased)
-	for i in canvas_modulates.size():
-		canvas_modulates[i].color = _base_tints[i].lerp(_target_tints[i], eased)
+	if not GameManager.soleilallume:
+		for i in canvas_modulates.size():
+			canvas_modulates[i].color = _base_tints[i].lerp(_target_tints[i], eased)
 
 
 func _on_player_joystick_on():
