@@ -35,6 +35,7 @@ const WALL_JUMP_HORIZONTAL_SPEED = 500.0
 const WALL_JUMP_VERTICAL_SPEED = -450.0
 const WALL_JUMP_LOCK_TIME = 0.18
 
+
 var wall_jump_lock_timer := 0.0
 var wall_jump_direction := 0
 
@@ -43,6 +44,7 @@ const DASH_SPEED = 900.0
 const DASH_DURATION = 0.09
 const DASH_COOLDOWN = 0.35
 
+var dblq_dash := false
 var can_dash = true
 var dash_timer := 0.0
 var vitesse_debut = 0
@@ -63,6 +65,7 @@ var _wall_col := KinematicCollision2D.new()
 # --- Lanterne ---
 const LANCER_DURATION = 2.0
 
+var dblq_lancer := false
 @export var is_lanterne := true
 @onready var lightparticle: CPUParticles2D = $lightparticle
 var lantern_ready = false
@@ -214,65 +217,67 @@ func _physics_process(delta: float) -> void:
 		wall_jump_lock_timer -= delta
 
 	# --- 3. Déclenchement du Dash ---
-	if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
-		
-		runparticles.emitting = false
-		force_lancer_lanterne = true
-		wallparticles.emitting = false
-		course_audio.stop()
-		can_dash = false
-		dash_timer = DASH_DURATION
-		velocity.y = 0
-		wall_jump_lock_timer = 0
-		
-		if dash_audio:
-			dash_audio.play()
-		
-		if is_on_wall() and not is_on_floor():
-			vitesse_debut = 0
-			looking_direction = get_wall_normal().x / abs(get_wall_normal().x)
-		else:
-			looking_direction = -int(animated_sprite.flip_h) * 2 + 1
-			if velocity.x * looking_direction > 0:
-				vitesse_debut = velocity.x
-			else:
-				vitesse_debut = 0
-		
-		animated_sprite.play("dash" + anim_str)
-		dash_cd_timer.start(DASH_COOLDOWN)
-	
-	if lantern_ready:
-		if lancer_timer <= 0.0:
+	if dblq_dash:
+		if Input.is_action_just_pressed("dash") and dash_cd_timer.is_stopped() and can_dash:
+			
+			runparticles.emitting = false
 			force_lancer_lanterne = true
-			lancer_timer = 0.0
-		else:
-			lancer_timer-=delta / Engine.time_scale
-	# --- 4. Lancer de la lanterne & Visée ralentie ---
-	if is_lanterne:
-		if Input.is_action_pressed("lancer"):
-			if input_lancer.length() >0.7:
-				direction_lancer = input_lancer.normalized()
-			aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
-			if not lantern_ready:
-				horloge.play()
-				direction_lancer = Vector2(looking_direction,0)
-				lancer_timer = LANCER_DURATION
-				joystick_on.emit()
-				if slowdown_audio and not slowdown_audio.playing:
-					slowdown_audio.play()
-			lantern_ready = true
-		if lantern_ready and (force_lancer_lanterne or Input.is_action_just_released("lancer")):
-			horloge.stop()
-			force_lancer_lanterne = false
-			joystick_off.emit()
-			aim_line.clear_points()
-			pointeur.visible = false
-			if slowdown_audio and slowdown_audio.playing:
-				slowdown_audio.stop()
-			lancer_lanterne()
-			is_lanterne = false
-			lantern_ready = false
-			direction_lancer = Vector2.ZERO
+			wallparticles.emitting = false
+			course_audio.stop()
+			can_dash = false
+			dash_timer = DASH_DURATION
+			velocity.y = 0
+			wall_jump_lock_timer = 0
+			
+			if dash_audio:
+				dash_audio.play()
+			
+			if is_on_wall() and not is_on_floor():
+				vitesse_debut = 0
+				looking_direction = get_wall_normal().x / abs(get_wall_normal().x)
+			else:
+				looking_direction = -int(animated_sprite.flip_h) * 2 + 1
+				if velocity.x * looking_direction > 0:
+					vitesse_debut = velocity.x
+				else:
+					vitesse_debut = 0
+			
+			animated_sprite.play("dash" + anim_str)
+			dash_cd_timer.start(DASH_COOLDOWN)
+	
+	if dblq_lancer:
+		if lantern_ready:
+			if lancer_timer <= 0.0:
+				force_lancer_lanterne = true
+				lancer_timer = 0.0
+			else:
+				lancer_timer-=delta / Engine.time_scale
+		# --- 4. Lancer de la lanterne & Visée ralentie ---
+		if is_lanterne:
+			if Input.is_action_pressed("lancer"):
+				if input_lancer.length() >0.7:
+					direction_lancer = input_lancer.normalized()
+				aim_line.tracer(delta / Engine.time_scale, direction_lancer, force_lancer, impact_vitesse_initiale)
+				if not lantern_ready:
+					horloge.play()
+					direction_lancer = Vector2(looking_direction,0)
+					lancer_timer = LANCER_DURATION
+					joystick_on.emit()
+					if slowdown_audio and not slowdown_audio.playing:
+						slowdown_audio.play()
+				lantern_ready = true
+			if lantern_ready and (force_lancer_lanterne or Input.is_action_just_released("lancer")):
+				horloge.stop()
+				force_lancer_lanterne = false
+				joystick_off.emit()
+				aim_line.clear_points()
+				pointeur.visible = false
+				if slowdown_audio and slowdown_audio.playing:
+					slowdown_audio.stop()
+				lancer_lanterne()
+				is_lanterne = false
+				lantern_ready = false
+				direction_lancer = Vector2.ZERO
 
 	# --- 5. État lanterne ---
 	if is_lanterne:

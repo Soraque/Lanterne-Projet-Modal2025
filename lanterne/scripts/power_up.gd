@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var fenetre_lancer: Panel = $"../../../../../UpperLayer/Fenetre_lancer"
 @onready var button_quit: Button = $"../../../../../UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer/Button_quit"
+@onready var player: CharacterBody2D = $"../../../../../PlayerLayer/player"
 
 var _focus_precedent: Control
 # Called when the node enters the scene tree for the first time.
@@ -19,4 +20,5 @@ func _on_zone_body_entered(body: Node2D) -> void:
 		_focus_precedent = get_viewport().gui_get_focus_owner()
 		button_quit.grab_focus.call_deferred()
 		button_quit._focus_precedent = _focus_precedent
+	player.dblq_lacer
 	fenetre_lancer.afficher()
