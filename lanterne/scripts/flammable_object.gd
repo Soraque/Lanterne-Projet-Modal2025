@@ -18,6 +18,7 @@ extends StaticBody2D
 var anim_initial_y: float
 var combustion_id := 0
 const propagation_delay = 0.5
+signal campfire_lit
 
 func _ready() -> void:
 	anim_initial_y = anim.position.y
@@ -79,6 +80,7 @@ func rallumer_silencieux() -> void:
 
 
 func embrase() -> void:
+	campfire_lit.emit()
 	combustion_id += 1
 	var current_id = combustion_id
 	animation.play("allumage")

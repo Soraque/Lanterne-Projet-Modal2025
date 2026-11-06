@@ -8,6 +8,8 @@ var vitJ : Vector2 = Vector2.ZERO
 var Changinglvl = false
 var changepos : Vector2
 var soleilallume: bool = false
+var dblq_lancer = false
+var dblq_dash = false
 
 # Conservation de l'état de la lanterne
 var lantern_usure_saved: float = 100.0
