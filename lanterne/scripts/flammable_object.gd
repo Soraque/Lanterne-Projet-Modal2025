@@ -167,9 +167,8 @@ func _on_flamme_body_entered(body: Node2D) -> void:
 			body.is_on_spawn = true
 			body.allumer_lanterne(100)
 		else:
-			if not body.is_lanterne:
-				body.lightparticle_2.emitting = true
-				body.lightup.play()
+			body.lightparticle_2.emitting = true
+			body.lightup.play()
 		body.is_lanterne = true
 		body.lantern_usure += 0.1
 
