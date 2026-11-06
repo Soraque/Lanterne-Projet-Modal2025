@@ -32,7 +32,7 @@ const AIR_CONTROL = 7000.0
 
 # --- Wall Jump ---
 const WALL_JUMP_HORIZONTAL_SPEED = 500.0
-const WALL_JUMP_VERTICAL_SPEED = -350.0
+const WALL_JUMP_VERTICAL_SPEED = -450.0
 const WALL_JUMP_LOCK_TIME = 0.18
 
 var wall_jump_lock_timer := 0.0
@@ -263,6 +263,7 @@ func _physics_process(delta: float) -> void:
 					slowdown_audio.play()
 			lantern_ready = true
 		if lantern_ready and (force_lancer_lanterne or Input.is_action_just_released("lancer")):
+			horloge.stop()
 			force_lancer_lanterne = false
 			joystick_off.emit()
 			aim_line.clear_points()
