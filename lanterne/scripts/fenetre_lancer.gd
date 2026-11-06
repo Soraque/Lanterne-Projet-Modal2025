@@ -2,6 +2,8 @@ extends Panel
 
 @export var duree_animation: float = 0.18
 @export var decalage_vertical: float = 20.0
+@onready var lancer: Node2D = $"../../World/foreground/ForegroundContent/PowerUp/Lancer"
+@onready var sprite_2d_2: Sprite2D = $"../../World/foreground/ForegroundContent/PowerUp/Lancer/Sprite2D2"
 
 var position_finale: Vector2
 var tween_animation: Tween
@@ -12,6 +14,9 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
 
+func fermer():
+	lancer.process_mode = Node.PROCESS_MODE_DISABLED
+	sprite_2d_2.hide()
 
 func afficher() -> void:
 	# Évite de relancer l'animation si la fenêtre est déjà ouverte.

@@ -40,7 +40,7 @@ func fermer_fenetre() -> void:
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 
 	await tween_fermeture.finished
-
+	fenetre.fermer()
 	fenetre.hide()
 
 	# Réinitialise la fenêtre pour sa prochaine apparition.
