@@ -6,11 +6,11 @@
 [ext_resource type="Script" uid="uid://ds8k8pwmtpyu6" path="res://scripts/grey_filter.gd" id="4_jx024"]
 [ext_resource type="PackedScene" uid="uid://d12orr23b0dpt" path="res://scenes/player.tscn" id="5_8yjtl"]
 [ext_resource type="PackedScene" uid="uid://bong1qn8o3kk8" path="res://scenes/lanterne.tscn" id="6_nreht"]
-[ext_resource type="Script" uid="uid://bc8team0xihdq" path="res://scripts/camera_2d.gd" id="7_rubt8"]
 [ext_resource type="Script" uid="uid://c6h5bnvum7hb" path="res://scripts/global.gd" id="8_qs5pc"]
 [ext_resource type="Material" uid="uid://b87kxv1gkqca2" path="res://Shaders/N&B_shader_material.tres" id="9_sakku"]
 [ext_resource type="PackedScene" uid="uid://bryg1hif3f1sx" path="res://scenes/campfire.tscn" id="10_0tyk0"]
-[ext_resource type="PackedScene" uid="uid://h7f404ebuh81" path="res://scenes/Power_up.tscn" id="10_unhf7"]
+[ext_resource type="PackedScene" uid="uid://gnhynfh67toi" path="res://scenes/power_up.tscn" id="10_unhf7"]
+[ext_resource type="Script" uid="uid://dys3an22gg3em" path="res://scripts/power_up_dash.gd" id="11_0iwt5"]
 [ext_resource type="PackedScene" uid="uid://jfvrqflgf5wo" path="res://scenes/ennemy.tscn" id="11_3h1k5"]
 [ext_resource type="Texture2D" uid="uid://dnvhqe2ilyjj4" path="res://assets/tileset/Tileset.png" id="12_7g6dg"]
 [ext_resource type="Texture2D" uid="uid://rsqhgof4qtbh" path="res://assets/tileset/tile_set_aleatorio.png" id="13_vetd0"]
@@ -27,10 +27,11 @@
 [ext_resource type="Texture2D" uid="uid://kkbqmcno15ys" path="res://assets/tileset/background_sky.png" id="19_6o7nh"]
 [ext_resource type="Texture2D" uid="uid://diptfic6l4men" path="res://assets/Cadre.png" id="20_3d0uf"]
 [ext_resource type="AudioStream" uid="uid://b1fpruhjognqg" path="res://assets/sonore/ambiant.mp3" id="20_we5qb"]
-[ext_resource type="Script" uid="uid://cw4c1epbe7rg8" path="res://scripts/fenetre_lancer.gd" id="21_5piho"]
+[ext_resource type="Script" uid="uid://cw4c1epbe7rg8" path="res://scripts/fenetre.gd" id="21_5piho"]
 [ext_resource type="Script" uid="uid://lifepvjgncqg" path="res://scripts/button_quit.gd" id="22_odplt"]
 [ext_resource type="Texture2D" uid="uid://j7uf25oisr6v" path="res://assets/ui elements/generic_button_trigger_b_outline.png" id="23_vkb15"]
 [ext_resource type="Texture2D" uid="uid://dp3geljhw1k16" path="res://assets/ui elements/generic_button_trigger_b_fill.png" id="24_12c7q"]
+[ext_resource type="PackedScene" uid="uid://biwuv0rwnoenk" path="res://scenes/lvls/soleil.tscn" id="26_w1nud"]
 [ext_resource type="Texture2D" uid="uid://2eylneouip7" path="res://assets/Boule_de_feu.png" id="30_w1nud"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rsyu2"]
@@ -38,6 +39,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4nwc7"]
 shader = ExtResource("3_cla6a")
 shader_parameter/desaturation_amount = 0.0
+
+[sub_resource type="GDScript" id="GDScript_12c7q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljibk"]
 texture = ExtResource("12_7g6dg")
@@ -407,6 +410,11 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_ljibk")
 sources/1 = SubResource("TileSetAtlasSource_nqwoy")
 
+[sub_resource type="GDScript" id="GDScript_w1nud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2dgo"]
+size = Vector2(1378, 917.5)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5piho"]
 texture = ExtResource("20_3d0uf")
 texture_margin_left = 21.0
@@ -449,21 +457,18 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(-266, 14)
+position = Vector2(5255, -1244)
 lanterne_scene = ExtResource("6_nreht")
 
-[node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497 node_paths=PackedStringArray("player")]
+[node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497]
 light_mask = 3
 visibility_layer = 3
 position = Vector2(1, -2)
-offset = Vector2(0, -52.785)
+offset = Vector2(0, -50)
 zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-script = ExtResource("7_rubt8")
-player = NodePath("..")
-target_offset_y = 0.0
-target_offset_x = 0.0
+script = SubResource("GDScript_12c7q")
 
 [node name="PlayerCanvaModulate" type="CanvasModulate" parent="PlayerLayer/player" unique_id=2047828107]
 color = Color(0.099369265, 0.18090376, 0.24807635, 1)
@@ -486,6 +491,11 @@ use_parent_material = true
 [node name="Lancer" parent="World/foreground/ForegroundContent/PowerUp" unique_id=1297966546 instance=ExtResource("10_unhf7")]
 use_parent_material = true
 position = Vector2(1558, 7)
+
+[node name="Dash" parent="World/foreground/ForegroundContent/PowerUp" unique_id=113964263 instance=ExtResource("10_unhf7")]
+use_parent_material = true
+position = Vector2(5102, -1190)
+script = ExtResource("11_0iwt5")
 
 [node name="campfires" type="Node2D" parent="World/foreground/ForegroundContent" unique_id=1591011675]
 use_parent_material = true
@@ -582,6 +592,9 @@ light_mask = 2
 position = Vector2(-178, -15)
 sanslancer = true
 spawn = true
+
+[node name="campfire last" parent="World/foreground/ForegroundContent/campfires" unique_id=1842233485 instance=ExtResource("10_0tyk0")]
+position = Vector2(9998, -3072)
 
 [node name="Layer0" type="TileMapLayer" parent="World/foreground/ForegroundContent" unique_id=1701004936]
 light_mask = 2
@@ -916,6 +929,7 @@ position = Vector2(6569, -2082)
 scale = Vector2(1.5, 2)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World/foreground/ForegroundContent" unique_id=914010442]
+visible = false
 use_parent_material = true
 color = Color(0.099369265, 0.18090376, 0.24807635, 1)
 
@@ -1178,6 +1192,9 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 22
 text = "R "
 
+[node name="soleil" parent="World/foreground/ForegroundContent" unique_id=36448053 instance=ExtResource("26_w1nud")]
+position = Vector2(10743, -3474)
+
 [node name="background" type="CanvasLayer" parent="World" unique_id=93682746]
 follow_viewport_enabled = true
 
@@ -1219,6 +1236,7 @@ texture = ExtResource("18_vxvon")
 [node name="Parallax2D" type="Parallax2D" parent="World/background/BackgroundContent/parallaxe" unique_id=1100699023]
 z_index = -3
 use_parent_material = true
+scale = Vector2(1.4, 1.4)
 scroll_scale = Vector2(0.01, 0.01)
 scroll_offset = Vector2(600, 317)
 repeat_size = Vector2(720, 0)
@@ -1241,6 +1259,14 @@ texture = ExtResource("19_6o7nh")
 [node name="CanvasModulate" type="CanvasModulate" parent="World/background/BackgroundContent" unique_id=1009182526]
 use_parent_material = true
 color = Color(0.9819017, 0.94781905, 0.94044185, 1)
+
+[node name="zone_dezoom_cam" type="Area2D" parent="World" unique_id=832845876]
+position = Vector2(10188, -3111)
+script = SubResource("GDScript_w1nud")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/zone_dezoom_cam" unique_id=422415946]
+position = Vector2(535, -353.25)
+shape = SubResource("RectangleShape2D_s2dgo")
 
 [node name="UpperLayer" type="CanvasLayer" parent="." unique_id=1639803199]
 layer = 100
@@ -1370,8 +1396,127 @@ position = Vector2(282.00534, 33.122658)
 scale = Vector2(0.34895834, 0.36458334)
 texture = ExtResource("16_5piho")
 
+[node name="Fenetre_dash" type="Panel" parent="UpperLayer" unique_id=1484274473]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.63
+anchor_bottom = 0.63
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+tooltip_auto_translate_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5piho")
+script = ExtResource("21_5piho")
+
+[node name="Disposition" type="MarginContainer" parent="UpperLayer/Fenetre_dash" unique_id=1170071917]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpperLayer/Fenetre_dash/Disposition" unique_id=1103445635]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Sprite2D" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1801463920]
+position = Vector2(70.00533, 17.78933)
+scale = Vector2(2.411289, 2.3934321)
+texture = ExtResource("30_w1nud")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1504629616]
+position = Vector2(468.672, 20.455994)
+scale = Vector2(2.411289, 2.3934321)
+texture = ExtResource("30_w1nud")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=2115598183]
+position = Vector2(126.25805, 246.32774)
+scale = Vector2(0.24605162, 0.24158736)
+texture = ExtResource("17_odplt")
+flip_h = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1728074703]
+position = Vector2(148.95, 225.123)
+scale = Vector2(0.23168658, 0.23317438)
+texture = ExtResource("19_5lv1a")
+flip_h = true
+
+[node name="Sprite2D8" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=91067588]
+position = Vector2(170.799, 246.426)
+scale = Vector2(0.23168658, 0.23317438)
+texture = ExtResource("19_5lv1a")
+flip_h = true
+
+[node name="Sprite2D7" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=415667420]
+position = Vector2(149.734, 266.999)
+scale = Vector2(0.23168658, 0.23317438)
+texture = ExtResource("19_5lv1a")
+flip_h = true
+
+[node name="Sprite2D5" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1692231001]
+position = Vector2(468.672, 20.455994)
+scale = Vector2(2.411289, 2.3934321)
+texture = ExtResource("30_w1nud")
+flip_h = true
+
+[node name="Titre" type="Label" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=998650391]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 21
+text = "Le pouvoir de la flamme"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Texte" type="RichTextLabel" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1613596617]
+layout_mode = 2
+text = "Le feu de ta lanterne n’est pas qu’une lumière : lance-le, et il embrase tout sur son passage. Portes, pièges, obstacles… les flammes ouvriront ta route.
+Mais gare : une flamme perdue l’est pour toujours. Rejoins le brasier que tu as allumé et reprends ta lanterne avant qu’il ne s’éteigne… ou l’obscurité t’engloutira."
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1907846184]
+layout_mode = 2
+
+[node name="Texte" type="RichTextLabel" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/HBoxContainer" unique_id=678715622]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pour Lancer : "
+vertical_alignment = 1
+
+[node name="Texte2" type="RichTextLabel" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/HBoxContainer" unique_id=689693227]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 31
+text = "          +"
+vertical_alignment = 1
+
+[node name="Texte3" type="RichTextLabel" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/HBoxContainer" unique_id=1789137572]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 18
+text = " L"
+vertical_alignment = 1
+
+[node name="Button_quit" type="Button" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/HBoxContainer" unique_id=2105194453]
+layout_mode = 2
+text = "Quitter"
+script = ExtResource("22_odplt")
+
+[node name="GenericStickDown" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/HBoxContainer" unique_id=1468235784]
+position = Vector2(282.00534, 33.122658)
+scale = Vector2(0.34895834, 0.36458334)
+texture = ExtResource("16_5piho")
+
 [node name="vent" type="AudioStreamPlayer" parent="." unique_id=916082848]
 stream = ExtResource("20_we5qb")
 
 [connection signal="joystick_off" from="PlayerLayer/player" to="World" method="_on_player_joystick_off"]
 [connection signal="joystick_on" from="PlayerLayer/player" to="World" method="_on_player_joystick_on"]
+[connection signal="body_entered" from="World/zone_dezoom_cam" to="." method="_on_zone_dezoom_cam_body_entered"]
+[connection signal="body_exited" from="World/zone_dezoom_cam" to="." method="_on_zone_dezoom_cam_body_exited"]
