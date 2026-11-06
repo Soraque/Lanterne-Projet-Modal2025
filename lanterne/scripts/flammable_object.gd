@@ -162,16 +162,14 @@ func _sequence_combustion(current_id: int) -> void:
 
 func _on_flamme_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and "is_lanterne" in body:
-		body.is_lanterne = true
-		body.lantern_usure += 0.1
 		if spawn:
 			body.allumer_lanterne(100)
 		else:
-			var audio3 = get_node_or_null("AudioStreamPlayer3D") as AudioStreamPlayer2D			
-			if audio3:
-				var new_pitch = GameManager.register_ignition_combo()
-				audio3.pitch_scale = new_pitch
-				audio3.play()
+			if not body.is_lanterne:
+				body.lightparticle_2.emitting = true
+				body.lightup.play()
+		body.is_lanterne = true
+		body.lantern_usure += 0.1
 
 
 
@@ -183,7 +181,6 @@ func _on_zone_body_entered(body: Node2D) -> void:
 			body.allumer_lanterne(100)
 func _propagate():
 	await get_tree().create_timer(propagation_delay).timeout
-	print("propagation check")
 # On utilise l'area2D qui nous sert de détection des flammable objects aux alentours
 	var ma_zone := get_node_or_null("propagation_area") as Area2D
 	print(ma_zone)
@@ -193,7 +190,6 @@ func _propagate():
 	var voisins = ma_zone.get_overlapping_bodies()
 	
 	for corps in voisins:
-		print("corps trouvé", corps)
 		if corps is FlammableObject and corps != self and not corps.flamme.visible:
 			corps.embrase()
 	

@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var runparticles: CPUParticles2D = $runparticles
 @onready var wallparticles: CPUParticles2D = $wallparticles
 @onready var filtre_mort: ColorRect = $"../../UpperLayer/Fond_Mort"
+@onready var lightparticle_2: CPUParticles2D = $lightparticle2
 
 # --- Sons ---
 @onready var jump_audio: AudioStreamPlayer = $sons/saut
@@ -18,6 +19,7 @@ extends CharacterBody2D
 @onready var dash_audio: AudioStreamPlayer = $sons/dash
 @onready var break_audio: AudioStreamPlayer = $sons/break
 @onready var music_audio: AudioStreamPlayer = $sons/music
+@onready var lightup: AudioStreamPlayer = $sons/lightup
 
 # --- Mouvement général ---
 const SPEED = 300.0
@@ -367,7 +369,6 @@ func _physics_process(delta: float) -> void:
 	# --- 12 ter. Gestion de la musique selon l'usure ---
 	_update_music_volume()
 	
-	# --- 13. Lumière lanterne & Particules ---
 # --- 13. Lumière lanterne & Particules ---
 	var coef = get_coef_usure()
 	if coef > 0.1:
@@ -376,21 +377,16 @@ func _physics_process(delta: float) -> void:
 		lumiere.base_energy = coef * 10
 
 	if not is_lanterne or lantern_usure <= 30.0:
-		if lightparticle.emitting:
-			lightparticle.emitting = false
+		lightparticle.emitting = false
+		lightparticle.modulate.a = 0.0
 	else:
-		var ratio = clampf((lantern_usure - 30.0) / 70.0, 0.0, 1.0)
-		var target_amount = int(initial_light_particle_amount * ratio)
-		
-		# On ne met à jour l'amount que s'il change pour éviter de réinitialiser le cycle en boucle
-		if lightparticle.amount != target_amount:
-			lightparticle.amount = target_amount
-			
 		if not lightparticle.emitting:
 			lightparticle.emitting = true
-
-	if collision_boost_cooldown > 0:
-		collision_boost_cooldown -= delta
+		
+		# Ratio d'usure entre 30% (0.0) et 100% (1.0)
+		var ratio = clampf((lantern_usure - 30.0) / 70.0, 0.0, 1.0)
+		# On ajuste la transparence en douceur au lieu de toucher à 'amount'
+		lightparticle.modulate.a = ratio
 
 	# --- 14. Collision Wall Boost ---
 	var collision_count = get_slide_collision_count()
@@ -466,10 +462,10 @@ func _update_music_volume() -> void:
 			music_audio.play()
 
 		# Progression de 0.0 (à 30% d'usure) à 1.0 (à 0% d'usure)
-		var progress := clampf((70.0 - lantern_usure) / 70.0, 0.0, 1.0)
+		var progress := clampf((30.0 - lantern_usure) / 30.0, 0.0, 1.0)
 		
 		# Fondu logarithmique de -30 dB (faible) à 0 dB (fort)
-		music_audio.volume_db = lerpf(-30.0, 0.0, progress)
+		music_audio.volume_db = lerpf(-30.0, 0.0, progress) - 13
 
 
 func _est_en_danger() -> bool:
