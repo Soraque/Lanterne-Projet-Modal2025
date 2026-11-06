@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://b4vciulyi37w7" path="res://assets/sonore/slowdonw.mp3" id="17_4r5pv"]
 [ext_resource type="AudioStream" uid="uid://d3tokgbm7i3ym" path="res://assets/sonore/dash (mp3cut.net).mp3" id="17_60mlk"]
 [ext_resource type="AudioStream" uid="uid://dfe776k42whrv" path="res://assets/sonore/break.mp3" id="19_60mlk"]
+[ext_resource type="AudioStream" uid="uid://coyxwmj1f7c8g" path="res://assets/sonore/freesound_gamestudio-skill-attack-combo-music-note-1-384970.mp3" id="19_i4ail"]
 [ext_resource type="AudioStream" uid="uid://bbh7e6fgdhaue" path="res://assets/sonore/saut.mp3" id="20_60mlk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
@@ -888,9 +889,14 @@ height = 32.0
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.49574474, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
+[sub_resource type="Gradient" id="Gradient_60mlk"]
+colors = PackedColorArray(0.24948451, 0.24948435, 0.24948435, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_i4ail"]
+colors = PackedColorArray(0.76862746, 0.15686275, 0, 1, 1, 0.6431373, 0, 1)
+
 [sub_resource type="Gradient" id="Gradient_f1ej7"]
-offsets = PackedFloat32Array(0.012765957, 1)
-colors = PackedColorArray(1, 0.25490198, 0, 1, 1, 0.7764706, 0.25490198, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.42557132, 0.42557135, 0.42557132, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8ls1"]
 radius = 8.0
@@ -953,7 +959,28 @@ angle_max = 180.0
 scale_amount_min = 2.0
 scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_jej6c")
-color_ramp = SubResource("Gradient_f1ej7")
+color_ramp = SubResource("Gradient_60mlk")
+
+[node name="lightparticle2" type="CPUParticles2D" parent="." unique_id=212252843]
+light_mask = 2
+z_index = -2
+position = Vector2(0, -4)
+emitting = false
+amount = 30
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.91
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angle_min = 180.0
+angle_max = 180.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_jej6c")
+color_ramp = SubResource("Gradient_i4ail")
 
 [node name="lightparticle" type="CPUParticles2D" parent="." unique_id=896645348]
 light_mask = 2
@@ -972,7 +999,7 @@ angle_min = 180.0
 angle_max = 180.0
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_jej6c")
-color_ramp = SubResource("Gradient_f1ej7")
+color_ramp = SubResource("Gradient_i4ail")
 
 [node name="wallparticles" type="CPUParticles2D" parent="." unique_id=1513057521]
 visible = false
@@ -999,6 +1026,7 @@ color_ramp = SubResource("Gradient_f1ej7")
 
 [node name="music" type="AudioStreamPlayer" parent="sons" unique_id=1124719224]
 stream = ExtResource("14_60mlk")
+volume_db = -80.0
 
 [node name="course" type="AudioStreamPlayer2D" parent="sons" unique_id=860444874]
 stream = ExtResource("14_f1ej7")
@@ -1014,6 +1042,11 @@ stream = ExtResource("17_4r5pv")
 [node name="dash" type="AudioStreamPlayer" parent="sons" unique_id=1181498835]
 stream = ExtResource("17_60mlk")
 volume_db = -15.0
+
+[node name="lightup" type="AudioStreamPlayer" parent="sons" unique_id=1165693149]
+stream = ExtResource("19_i4ail")
+volume_db = -17.0
+pitch_scale = 0.8
 
 [node name="break" type="AudioStreamPlayer" parent="sons" unique_id=626366854]
 stream = ExtResource("19_60mlk")
