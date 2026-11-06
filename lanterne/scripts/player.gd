@@ -132,6 +132,8 @@ func _ready() -> void:
 		global_position = GameManager.changepos
 		velocity = GameManager.vitJ
 		previous_velocity = GameManager.vitJ
+		dblq_dash = GameManager.dblq_dash
+		dblq_lancer = GameManager.dblq_lancer
 		
 		# Restaure l'état et l'usure de la lanterne
 		lantern_usure = GameManager.lantern_usure_saved
@@ -143,6 +145,8 @@ func _ready() -> void:
 		global_position = GameManager.respawn_position
 		lantern_usure = 100.0
 		is_lanterne = true
+		dblq_dash = GameManager.dblq_dash
+		dblq_lancer = GameManager.dblq_lancer
 	var tween := create_tween()
 	tween.tween_property(filtre_mort, "color:a", 0.0, 1)
 
@@ -161,6 +165,8 @@ func die() -> void:
 		
 	var gm = GameManager
 	gm.vitJ = Vector2.ZERO
+	gm.dblq_dash = dblq_dash
+	gm.dblq_lancer = dblq_lancer
 	# Réinitialise la sauvegarde de usure au respawn
 	gm.lantern_usure_saved = 100.0
 	gm.is_lanterne_saved = true
