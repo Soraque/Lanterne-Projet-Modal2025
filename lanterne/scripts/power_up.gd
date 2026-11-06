@@ -1,5 +1,6 @@
 extends Node2D
-@onready var fenetre_lancer: Panel = $"../../../../UpperLayer/Fenetre_lancer"
+
+@onready var fenetre_lancer: Panel = $"../../../../../UpperLayer/Fenetre_lancer"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

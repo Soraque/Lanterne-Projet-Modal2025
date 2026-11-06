@@ -8,7 +8,7 @@ extends Node2D
 	set(value):
 		time_dilatation = value
 		Engine.time_scale = value
-const time_dilatation_strength: float = 0.1
+const time_dilatation_strength: float = 0.01
 var tween_time: Tween
 
 ## ___Shader___
@@ -52,8 +52,8 @@ func _on_player_joystick_on():
 	tween_time = create_tween()
 	# /time_dilatation compense le ralenti
 	tween_time.set_speed_scale(1.0 / max(Engine.time_scale, 0.1))
-	tween_time.tween_property(Global, "time_dilatation", time_dilatation_strength, 0.4)\
-		.set_ease(Tween.EASE_OUT)\
+	tween_time.tween_property(Global, "time_dilatation", time_dilatation_strength, 0.2)\
+		.set_ease(Tween.EASE_IN)\
 		.set_trans(Tween.TRANS_QUAD)
 
 func _get_eased(delta):
