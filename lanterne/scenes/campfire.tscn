@@ -385,3 +385,4 @@ shape = SubResource("RectangleShape2D_ravfa")
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="body_entered" from="zone" to="." method="_on_zone_body_entered"]
+[connection signal="body_exited" from="zone" to="." method="_on_zone_body_exited"]

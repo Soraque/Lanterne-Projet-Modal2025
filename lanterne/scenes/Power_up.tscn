@@ -1,25 +1,34 @@
 [gd_scene format=3 uid="uid://h7f404ebuh81"]
 
-[ext_resource type="Script" uid="uid://r84gdnxehu6x" path="res://scenes/power_up.gd" id="1_5y2x1"]
+[ext_resource type="Script" uid="uid://r84gdnxehu6x" path="res://scripts/power_up.gd" id="1_5y2x1"]
 [ext_resource type="Texture2D" uid="uid://2eylneouip7" path="res://assets/Boule_de_feu.png" id="1_oy2o1"]
+[ext_resource type="Material" uid="uid://b87kxv1gkqca2" path="res://Shaders/N&B_shader_material.tres" id="1_usoru"]
+[ext_resource type="PackedScene" uid="uid://c5l1h0x57sh6g" path="res://scenes/fire_light.tscn" id="4_mk088"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5y2x1"]
 radius = 13.0
 height = 36.0
 
 [node name="Power_up" type="Node2D" unique_id=1297966546]
+material = ExtResource("1_usoru")
 script = ExtResource("1_5y2x1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1663067582]
-visible = false
+light_mask = 2
+use_parent_material = true
 texture = ExtResource("1_oy2o1")
 
+[node name="light" parent="." unique_id=656477510 instance=ExtResource("4_mk088")]
+light_mask = 2
+visibility_layer = 3
+use_parent_material = true
+position = Vector2(6.351593, -1.3957977)
+base_energy = 1.67
+
 [node name="zone" type="Area2D" parent="." unique_id=1640539323]
-visible = false
 use_parent_material = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zone" unique_id=1432870666]
-visible = false
 use_parent_material = true
 position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_5y2x1")

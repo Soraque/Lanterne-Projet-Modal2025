@@ -15,6 +15,7 @@ extends StaticBody2D
 @onready var light: PointLight2D = $Flamme/light
 @onready var animation: AnimationPlayer = $Flamme/AnimationPlayer
 
+
 var anim_initial_y: float
 var combustion_id := 0
 const propagation_delay = 0.5
@@ -165,6 +166,7 @@ func _on_flamme_body_entered(body: Node2D) -> void:
 		body.is_lanterne = true
 		body.lantern_usure += 0.1
 		if spawn:
+			body.is_on_spawn = true
 			body.allumer_lanterne(100)
 		else:
 			var audio3 = get_node_or_null("AudioStreamPlayer3D") as AudioStreamPlayer2D			
@@ -197,3 +199,9 @@ func _propagate():
 		if corps is FlammableObject and corps != self and not corps.flamme.visible:
 			corps.embrase()
 	
+
+
+func _on_zone_body_exited(body: Node2D) -> void:
+	if body is CharacterBody2D and "is_lanterne" in body:
+		if spawn:
+			body.is_on_spawn = false

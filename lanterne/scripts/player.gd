@@ -45,7 +45,7 @@ var vitesse_debut = 0
 var looking_direction = 0
 
 # --- Saut & marges de tolérance ---
-const COYOTE_TIME = 0.02       # saut possible juste après avoir quitté le sol
+const COYOTE_TIME = 0.1       # saut possible juste après avoir quitté le sol
 const JUMP_BUFFER_TIME = 0.15    
 const WALL_COYOTE_TIME = 0.10     # wall jump possible juste après avoir quitté le mur
 const WALL_CHECK_DISTANCE = 5.0  
@@ -71,6 +71,7 @@ var force_lancer = 1000
 var impact_vitesse_initiale = 0.2
 var lantern_duration = 10 #secondes
 var initial_light_particle_amount := 50
+var is_on_spawn := true
 
 
 # --- Dégâts / Invincibilité ---
@@ -103,6 +104,8 @@ func _ready() -> void:
 	
 	wallparticles.show()
 	wallparticles.emitting = false
+	
+	is_on_spawn = true
 
 	if lightparticle:
 		initial_light_particle_amount = lightparticle.amount
@@ -164,6 +167,7 @@ func die() -> void:
 	else:
 		get_tree().reload_current_scene.call_deferred()
 	is_lanterne = true
+	is_on_spawn = true
 
 
 
@@ -358,7 +362,7 @@ func _physics_process(delta: float) -> void:
 			land_audio.play()
 	
 	# --- 12. Actualisation usure lanterne ---
-	if lantern_usure > 0.0:
+	if not is_on_spawn and lantern_usure > 0.0:
 		lantern_usure = maxf(lantern_usure - delta * 100/lantern_duration, 0.0)
 
 	# --- 12 bis. Mort lente ---
