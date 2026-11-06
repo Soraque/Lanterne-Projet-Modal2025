@@ -262,6 +262,7 @@ func _physics_process(delta: float) -> void:
 					slowdown_audio.play()
 			lantern_ready = true
 		if lantern_ready and (force_lancer_lanterne or Input.is_action_just_released("lancer")):
+			horloge.stop()
 			force_lancer_lanterne = false
 			joystick_off.emit()
 			aim_line.clear_points()
