@@ -44,7 +44,7 @@ const DASH_SPEED = 900.0
 const DASH_DURATION = 0.09
 const DASH_COOLDOWN = 0.35
 
-var dblq_dash := false
+var dblq_dash := true
 var can_dash = true
 var dash_timer := 0.0
 var vitesse_debut = 0
@@ -65,7 +65,7 @@ var _wall_col := KinematicCollision2D.new()
 # --- Lanterne ---
 const LANCER_DURATION = 2.0
 
-var dblq_lancer := false
+var dblq_lancer := true
 @export var is_lanterne := true
 @onready var lightparticle: CPUParticles2D = $lightparticle
 var lantern_ready = false

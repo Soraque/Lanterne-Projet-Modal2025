@@ -52,7 +52,7 @@ func _on_player_joystick_on():
 	tween_time = create_tween()
 	# /time_dilatation compense le ralenti
 	tween_time.set_speed_scale(1.0 / max(Engine.time_scale, 0.1))
-	tween_time.tween_property(Global, "time_dilatation", time_dilatation_strength, 0.2)\
+	tween_time.tween_property(Global, "time_dilatation", time_dilatation_strength, 0.05)\
 		.set_ease(Tween.EASE_IN)\
 		.set_trans(Tween.TRANS_QUAD)
 
@@ -69,6 +69,4 @@ func _on_player_joystick_off():
 		
 	tween_time = create_tween()
 	tween_time.set_speed_scale(1.0 / max(Engine.time_scale, 0.1))
-	tween_time.tween_property(Global, "time_dilatation", 1.0, 0.2)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_QUAD)
+	tween_time.tween_property(Global, "time_dilatation", 1.0, 0.4)

@@ -318,6 +318,7 @@ use_parent_material = true
 position = Vector2(1.0000076, 2.0000076)
 scale = Vector2(1.8026316, 1.8026316)
 energy = 0.0
+blend_mode = 0
 base_energy = 1.67
 
 [node name="collisionflamme" type="CollisionShape2D" parent="Flamme" unique_id=1563240067]
