@@ -381,6 +381,7 @@ attenuation = 27.857557
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="propagation_area" unique_id=1313811236]
 position = Vector2(-1.4999995, 17)
+scale = Vector2(1.055, 1.055)
 shape = SubResource("RectangleShape2D_ravfa")
 
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
