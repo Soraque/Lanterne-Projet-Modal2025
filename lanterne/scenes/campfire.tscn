@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://6vcbukhr00j3" path="res://assets/sonore/FIREIgn_Essence prend feu 1 (ID 1340)_LaSonotheque.fr.mp3" id="13_tdo0i"]
 [ext_resource type="AudioStream" uid="uid://dkp6xb52yi76u" path="res://assets/sonore/koiroylers-correct-356013.mp3" id="14_03221"]
 [ext_resource type="FontFile" uid="uid://bc72ap1m0ylqw" path="res://assets/White Storm.otf" id="16_j7v34"]
+[ext_resource type="Script" uid="uid://bclbg7655wic" path="res://scenes/label_campfire.gd" id="17_sdndd"]
 
 [sub_resource type="Gradient" id="Gradient_m6xh0"]
 
@@ -386,15 +387,19 @@ scale = Vector2(1.055, 1.055)
 shape = SubResource("RectangleShape2D_ravfa")
 
 [node name="Label" type="Label" parent="." unique_id=85209405]
+light_mask = 3
+use_parent_material = true
 offset_left = -20.0
-offset_top = -36.0
+offset_top = -16.0
 offset_right = 17.0
-offset_bottom = -13.0
+offset_bottom = 7.0
 theme_override_colors/font_color = Color(0.965, 1, 0.7, 1)
 theme_override_fonts/font = ExtResource("16_j7v34")
 text = "12/25"
 horizontal_alignment = 1
+script = ExtResource("17_sdndd")
 
+[connection signal="campfire_lit" from="." to="Label" method="_on_campfire_campfire_lit"]
 [connection signal="body_entered" from="Flamme" to="." method="_on_flamme_body_entered"]
 [connection signal="body_entered" from="zone" to="." method="_on_zone_body_entered"]
 [connection signal="body_exited" from="zone" to="." method="_on_zone_body_exited"]
