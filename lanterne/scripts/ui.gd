@@ -3,7 +3,7 @@ extends CanvasLayer
 # Chemin de la scène à charger lors du clic sur Start
 const LVL1_SCENE_PATH := "res://scenes/lvls/lvl_3.tscn"
 
-@onready var start_button: Button = $VBoxContainer/Button
+@onready var start_button: Button = $Fenetre_dash/Disposition/VBoxContainer/VBoxContainer/Button
 
 
 func _ready() -> void:

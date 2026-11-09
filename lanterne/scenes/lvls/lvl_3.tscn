@@ -487,7 +487,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(-178, -69)
+position = Vector2(11392, -2833)
 lanterne_scene = ExtResource("6_nreht")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497]
@@ -1349,41 +1349,6 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="Sprite2D" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=1454678911]
-position = Vector2(70.00533, 17.78933)
-scale = Vector2(2.411289, 2.3934321)
-texture = ExtResource("30_w1nud")
-
-[node name="Sprite2D2" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=1683888568]
-position = Vector2(468.672, 20.455994)
-scale = Vector2(2.411289, 2.3934321)
-texture = ExtResource("30_w1nud")
-flip_h = true
-
-[node name="Sprite2D3" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=538766266]
-position = Vector2(126.25805, 246.32774)
-scale = Vector2(0.24605162, 0.24158736)
-texture = ExtResource("17_odplt")
-flip_h = true
-
-[node name="Sprite2D4" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=1435024530]
-position = Vector2(148.95, 225.123)
-scale = Vector2(0.23168658, 0.23317438)
-texture = ExtResource("19_5lv1a")
-flip_h = true
-
-[node name="Sprite2D8" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=146348570]
-position = Vector2(170.799, 246.426)
-scale = Vector2(0.23168658, 0.23317438)
-texture = ExtResource("19_5lv1a")
-flip_h = true
-
-[node name="Sprite2D7" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=1647607693]
-position = Vector2(149.734, 266.999)
-scale = Vector2(0.23168658, 0.23317438)
-texture = ExtResource("19_5lv1a")
-flip_h = true
-
 [node name="Titre" type="Label" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=645138813]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -1391,6 +1356,17 @@ theme_override_font_sizes/font_size = 21
 text = "Le pouvoir de la flamme"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/Titre" unique_id=1454678911]
+position = Vector2(70.00534, 17.78933)
+scale = Vector2(2.411289, 2.3934321)
+texture = ExtResource("30_w1nud")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/Titre" unique_id=1683888568]
+position = Vector2(468.672, 20.455994)
+scale = Vector2(2.411289, 2.3934321)
+texture = ExtResource("30_w1nud")
+flip_h = true
 
 [node name="Texte" type="RichTextLabel" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer" unique_id=1022750740]
 layout_mode = 2
@@ -1414,6 +1390,30 @@ theme_override_font_sizes/normal_font_size = 31
 text = "          +"
 vertical_alignment = 1
 
+[node name="Sprite2D4" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer/Texte2" unique_id=1435024530]
+position = Vector2(30.955, 11.783)
+scale = Vector2(0.23168658, 0.23317438)
+texture = ExtResource("19_5lv1a")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer/Texte2" unique_id=538766266]
+position = Vector2(12.403, 27.158)
+scale = Vector2(0.24605164, 0.24158737)
+texture = ExtResource("17_odplt")
+flip_h = true
+
+[node name="Sprite2D8" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer/Texte2" unique_id=146348570]
+position = Vector2(49.439, 27.1)
+scale = Vector2(0.23168658, 0.23317438)
+texture = ExtResource("19_5lv1a")
+flip_h = true
+
+[node name="Sprite2D7" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer/Texte2" unique_id=1647607693]
+position = Vector2(31.244, 42.994)
+scale = Vector2(0.23168658, 0.23317438)
+texture = ExtResource("19_5lv1a")
+flip_h = true
+
 [node name="Texte3" type="RichTextLabel" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer" unique_id=1204088980]
 z_index = 1
 layout_mode = 2
@@ -1428,8 +1428,8 @@ layout_mode = 2
 text = "Quitter"
 script = ExtResource("22_odplt")
 
-[node name="GenericStickDown" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer" unique_id=542958110]
-position = Vector2(282.00534, 33.122658)
+[node name="GenericStickDown" type="Sprite2D" parent="UpperLayer/Fenetre_lancer/Disposition/VBoxContainer/HBoxContainer/Button_quit" unique_id=542958110]
+position = Vector2(-125.99466, 33.12268)
 scale = Vector2(0.34895834, 0.36458334)
 texture = ExtResource("16_5piho")
 
@@ -1460,16 +1460,6 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="Sprite2D" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1801463920]
-position = Vector2(145.33867, 33.122665)
-scale = Vector2(0.081, 0.081)
-texture = ExtResource("33_qib1r")
-
-[node name="Sprite2D3" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=2085356407]
-position = Vector2(404.67203, 33.12266)
-scale = Vector2(0.081, 0.081)
-texture = ExtResource("33_qib1r")
-
 [node name="Titre" type="Label" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=998650391]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -1477,6 +1467,16 @@ theme_override_font_sizes/font_size = 21
 text = "Le souffle du vent"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/Titre" unique_id=1801463920]
+position = Vector2(145.33867, 33.122665)
+scale = Vector2(0.081, 0.081)
+texture = ExtResource("33_qib1r")
+
+[node name="Sprite2D3" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/Titre" unique_id=2085356407]
+position = Vector2(404.67206, 33.122665)
+scale = Vector2(0.081, 0.081)
+texture = ExtResource("33_qib1r")
 
 [node name="Texte" type="RichTextLabel" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer" unique_id=1613596617]
 layout_mode = 2
@@ -1511,9 +1511,9 @@ layout_mode = 2
 text = "Quitter"
 script = ExtResource("22_odplt")
 
-[node name="GenericStickDown" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/HBoxContainer" unique_id=1468235784]
-position = Vector2(242.00533, 28.455992)
-scale = Vector2(0.979, 1.002)
+[node name="GenericStickDown" type="Sprite2D" parent="UpperLayer/Fenetre_dash/Disposition/VBoxContainer/HBoxContainer/Button_quit" unique_id=1468235784]
+position = Vector2(-166.99466, 28.455994)
+scale = Vector2(0.979, 1.0020001)
 texture = ExtResource("24_12c7q")
 
 [node name="vent" type="AudioStreamPlayer" parent="." unique_id=916082848]
