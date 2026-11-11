@@ -10,6 +10,11 @@ extends CharacterBody2D
 @onready var wallparticles: CPUParticles2D = $wallparticles
 @onready var filtre_mort: ColorRect = $"../../UpperLayer/Fond_Mort"
 @onready var lightparticle_2: CPUParticles2D = $lightparticle2
+@onready var pwr_up_lancer: Node2D = $"../../World/foreground/ForegroundContent/PowerUp/Lancer"
+@onready var pwr_up_dash: Node2D = $"../../World/foreground/ForegroundContent/PowerUp/Dash"
+@onready var sprite_pwr_up_lancer: Sprite2D = $"../../World/foreground/ForegroundContent/PowerUp/Lancer/Sprite2D2"
+@onready var sprite_pwr_up_dash: Sprite2D = $"../../World/foreground/ForegroundContent/PowerUp/Dash/Sprite2D"
+
 
 # --- Sons ---
 @onready var jump_audio: AudioStreamPlayer = $sons/saut
@@ -132,8 +137,6 @@ func _ready() -> void:
 		global_position = GameManager.changepos
 		velocity = GameManager.vitJ
 		previous_velocity = GameManager.vitJ
-		dblq_dash = GameManager.dblq_dash
-		dblq_lancer = GameManager.dblq_lancer
 		
 		# Restaure l'état et l'usure de la lanterne
 		lantern_usure = GameManager.lantern_usure_saved
@@ -147,6 +150,14 @@ func _ready() -> void:
 		is_lanterne = true
 		dblq_dash = GameManager.dblq_dash
 		dblq_lancer = GameManager.dblq_lancer
+	if GameManager.dblq_dash:
+			dblq_dash = true
+			pwr_up_dash.process_mode = Node.PROCESS_MODE_DISABLED
+			sprite_pwr_up_dash.hide()
+	if GameManager.dblq_lancer:
+		dblq_lancer = true
+		pwr_up_lancer.process_mode = Node.PROCESS_MODE_DISABLED
+		sprite_pwr_up_lancer.hide()
 	var tween := create_tween()
 	tween.tween_property(filtre_mort, "color:a", 0.0, 1)
 
