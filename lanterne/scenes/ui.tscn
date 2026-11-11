@@ -180,9 +180,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_p7vwb")
 [node name="Disposition" type="MarginContainer" parent="Fenetre_dash" unique_id=1421624966]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.05
+anchor_left = 0.15
 anchor_top = 0.1
-anchor_right = 0.95
+anchor_right = 0.85
 anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2

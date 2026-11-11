@@ -487,7 +487,7 @@ follow_viewport_enabled = true
 [node name="player" parent="PlayerLayer" unique_id=1012986859 instance=ExtResource("5_8yjtl")]
 light_mask = 2
 z_index = 1
-position = Vector2(11392, -2833)
+position = Vector2(-182, -55)
 lanterne_scene = ExtResource("6_nreht")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerLayer/player" unique_id=118364497]
@@ -817,7 +817,8 @@ position = Vector2(9438, -2801)
 scale = Vector2(1.5, 2)
 
 [node name="porte27" parent="World/foreground/ForegroundContent/portes" unique_id=151906843 instance=ExtResource("14_mige7")]
-position = Vector2(4590, -1664)
+position = Vector2(4608.0005, -1663)
+rotation = 0.36292785
 scale = Vector2(1.5, 2)
 
 [node name="porte28" parent="World/foreground/ForegroundContent/portes" unique_id=142223301 instance=ExtResource("14_mige7")]
